@@ -1,6 +1,6 @@
 package com.devjoliveira.mastergymsys.service;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,22 +42,22 @@ public class StudentService {
   }
 
   @Transactional
-  public StudentRequestDTO save(StudentRequestDTO studentRequestDTO) {
+  public StudentResponseDTO save(StudentRequestDTO studentRequestDTO) {
     Student student = studentMapper.toDomain(studentRequestDTO);
     Student fromDB = studentRepository.save(student);
-    return new StudentRequestDTO(fromDB);
+    return new StudentResponseDTO(fromDB);
 
   }
 
   @Transactional
-  public StudentRequestDTO update(Long id, StudentRequestDTO studentRequestDTO) {
+  public StudentResponseDTO update(Long id, StudentRequestDTO studentRequestDTO) {
     Student fromDB = studentRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
 
     fromDB = studentMapper.toDomain(studentRequestDTO);
 
     Student updated = studentRepository.save(fromDB);
-    return new StudentRequestDTO(updated);
+    return new StudentResponseDTO(updated);
   }
 
   @Transactional
