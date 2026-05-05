@@ -1,5 +1,7 @@
 package com.devjoliveira.mastergymsys.domain;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,10 +22,10 @@ public class Attendance {
   private Long id;
 
   @Column(name = "attendance_date")
-  private String attendanceDate;
+  private LocalDateTime attendanceDate;
 
   @Column(name = "end_date")
-  private String endDate;
+  private LocalDateTime endDate;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "enrollments_id")
@@ -32,7 +34,7 @@ public class Attendance {
   @PrePersist
   public void prePersist() {
     if (attendanceDate == null) {
-      this.attendanceDate = String.valueOf(System.currentTimeMillis());
+      this.attendanceDate = LocalDateTime.now();
     }
   }
 
@@ -44,19 +46,19 @@ public class Attendance {
     this.id = id;
   }
 
-  public String getAttendanceDate() {
+  public LocalDateTime getAttendanceDate() {
     return attendanceDate;
   }
 
-  public void setAttendanceDate(String attendanceDate) {
+  public void setAttendanceDate(LocalDateTime attendanceDate) {
     this.attendanceDate = attendanceDate;
   }
 
-  public String getEndDate() {
+  public LocalDateTime getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(String endDate) {
+  public void setEndDate(LocalDateTime endDate) {
     this.endDate = endDate;
   }
 
