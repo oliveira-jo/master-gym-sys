@@ -78,4 +78,4 @@ CREATE TABLE attendances (
     enrollments_id BIGINT NOT NULL REFERENCES enrollments(id),
     attendance_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     end_date TIMESTAMP
-);
+);  

@@ -36,7 +36,7 @@ public class StudentService {
 
   @Transactional(readOnly = true)
   public StudentResponseDTO findByName(String name) {
-    return studentRepository.findByName(name)
+    return studentRepository.findByNameContainingIgnoreCase(name)
         .map(StudentResponseDTO::new)
         .orElseThrow(() -> new RuntimeException("Student not found with name: " + name));
   }
@@ -51,13 +51,27 @@ public class StudentService {
 
   @Transactional
   public StudentResponseDTO update(Long id, StudentRequestDTO studentRequestDTO) {
-    Student fromDB = studentRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+    Student fromDB = studentRepository.getReferenceById(id);
 
-    fromDB = studentMapper.toDomain(studentRequestDTO);
+    if (fromDB == null) {
+      throw new RuntimeException("Student not found with id: " + id);
+    }
 
-    Student updated = studentRepository.save(fromDB);
-    return new StudentResponseDTO(updated);
+    fromDB.setName(studentRequestDTO.name());
+    fromDB.setBirthdate(studentRequestDTO.birthdate());
+    fromDB.setGenre(studentRequestDTO.genre());
+    fromDB.setPhone(studentRequestDTO.phone());
+    fromDB.setEmail(studentRequestDTO.email());
+    fromDB.setObservations(studentRequestDTO.observations());
+    fromDB.setAddress(studentRequestDTO.address());
+    fromDB.setNumber(studentRequestDTO.number());
+    fromDB.setComplement(studentRequestDTO.complement());
+    fromDB.setCity(studentRequestDTO.city());
+    fromDB.setState(studentRequestDTO.state());
+    fromDB.setZipCode(studentRequestDTO.zipCode());
+
+    return new StudentResponseDTO(
+        studentRepository.save(fromDB));
   }
 
   @Transactional

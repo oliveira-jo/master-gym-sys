@@ -20,6 +20,8 @@ import com.devjoliveira.mastergymsys.dto.StudentRequestDTO;
 import com.devjoliveira.mastergymsys.dto.StudentResponseDTO;
 import com.devjoliveira.mastergymsys.service.StudentService;
 
+import jakarta.validation.Valid;
+
 @Controller
 @RequestMapping("/students")
 public class StudentController {
@@ -46,7 +48,7 @@ public class StudentController {
   }
 
   @PostMapping
-  public ResponseEntity<StudentResponseDTO> save(StudentRequestDTO request) {
+  public ResponseEntity<StudentResponseDTO> save(@RequestBody @Valid StudentRequestDTO request) {
     StudentResponseDTO savedStudent = studentService.save(request);
 
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -56,7 +58,8 @@ public class StudentController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<StudentResponseDTO> change(@PathVariable Long id, @RequestBody StudentRequestDTO request) {
+  public ResponseEntity<StudentResponseDTO> change(@PathVariable Long id,
+      @RequestBody @Valid StudentRequestDTO request) {
     return ResponseEntity.ok().body(studentService.update(id, request));
   }
 

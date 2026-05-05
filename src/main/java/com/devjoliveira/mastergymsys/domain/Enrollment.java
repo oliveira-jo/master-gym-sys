@@ -6,6 +6,8 @@ import com.devjoliveira.mastergymsys.domain.enums.StatusEnrollment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,11 +34,12 @@ public class Enrollment {
   @Column(name = "closing_date")
   private LocalDate closingDate;
 
+  @Enumerated(EnumType.STRING)
   @Column(name = "status")
   private StatusEnrollment status = StatusEnrollment.ACTIVE;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "student_id")
+  @JoinColumn(name = "students_id")
   private Student student;
 
   @PrePersist

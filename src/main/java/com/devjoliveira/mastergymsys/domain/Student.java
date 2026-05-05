@@ -1,6 +1,7 @@
 package com.devjoliveira.mastergymsys.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,19 +38,19 @@ public class Student {
   private String zipCode;
 
   @Column(name = "created_at")
-  private LocalDate createdAt;
+  private LocalDateTime createdAt;
 
   @Column(name = "updated_at")
-  private LocalDate updatedAt;
+  private LocalDateTime updatedAt;
 
   @PrePersist
   public void prePersist() {
-    this.createdAt = LocalDate.now();
+    this.createdAt = LocalDateTime.now();
   }
 
   @PreUpdate
   public void preUpdate() {
-    this.updatedAt = LocalDate.now();
+    this.updatedAt = LocalDateTime.now();
   }
 
   public Long getId() {
@@ -156,11 +157,11 @@ public class Student {
     this.zipCode = zipCode;
   }
 
-  public LocalDate getCreatedAt() {
+  public LocalDateTime getCreatedAt() {
     return createdAt;
   }
 
-  public LocalDate getUpdatedAt() {
+  public LocalDateTime getUpdatedAt() {
     return updatedAt;
   }
 

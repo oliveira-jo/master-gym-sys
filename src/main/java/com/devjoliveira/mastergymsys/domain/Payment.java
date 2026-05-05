@@ -1,9 +1,15 @@
 package com.devjoliveira.mastergymsys.domain;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import com.devjoliveira.mastergymsys.domain.enums.StatusPayment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,20 +27,22 @@ public class Payment {
   private Long id;
 
   @Column(name = "due_date")
-  private String dueDate;
+  private LocalDate dueDate;
 
-  private String amount;
+  private BigDecimal amount;
 
   @Column(name = "payment_date")
-  private String paymentDate;
+  private LocalDateTime paymentDate;
 
   @Column(name = "canceled_date")
-  private String canceledDate;
+  private LocalDate canceledDate;
 
+  @Enumerated(EnumType.STRING)
+  @Column(length = 20)
   private StatusPayment status = StatusPayment.OPEN;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "enrollment_id")
+  @JoinColumn(name = "enrollments_id")
   private Enrollment enrollment;
 
   public Long getId() {
@@ -45,35 +53,35 @@ public class Payment {
     this.id = id;
   }
 
-  public String getDueDate() {
+  public LocalDate getDueDate() {
     return dueDate;
   }
 
-  public void setDueDate(String dueDate) {
+  public void setDueDate(LocalDate dueDate) {
     this.dueDate = dueDate;
   }
 
-  public String getAmount() {
+  public BigDecimal getAmount() {
     return amount;
   }
 
-  public void setAmount(String amount) {
+  public void setAmount(BigDecimal amount) {
     this.amount = amount;
   }
 
-  public String getPaymentDate() {
+  public LocalDateTime getPaymentDate() {
     return paymentDate;
   }
 
-  public void setPaymentDate(String paymentDate) {
+  public void setPaymentDate(LocalDateTime paymentDate) {
     this.paymentDate = paymentDate;
   }
 
-  public String getCanceledDate() {
+  public LocalDate getCanceledDate() {
     return canceledDate;
   }
 
-  public void setCanceledDate(String canceledDate) {
+  public void setCanceledDate(LocalDate canceledDate) {
     this.canceledDate = canceledDate;
   }
 
