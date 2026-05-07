@@ -30,9 +30,7 @@ public class EnrollmentService {
 
   @Transactional(readOnly = true)
   public EnrollmentResponseDTO findById(Long id) {
-    return enrollmentRepository.findById(id)
-        .map(EnrollmentResponseDTO::new)
-        .orElseThrow(() -> new RuntimeException("Enrollment not found with id: " + id));
+    return new EnrollmentResponseDTO(searchById(id));
   }
 
   @Transactional
@@ -44,6 +42,7 @@ public class EnrollmentService {
     } catch (NumberFormatException e) {
       throw new RuntimeException("Invalid modality id: " + request.studentId(), e);
     }
+
     Student studentFromDB = studentRepository.findById(studentId)
         .orElseThrow(() -> new RuntimeException("Student not found with id: " + studentId));
 
@@ -61,8 +60,7 @@ public class EnrollmentService {
   @Transactional
   public EnrollmentResponseDTO change(Long id, EnrollmentRequestDTO request) {
 
-    Enrollment fromDB = enrollmentRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Enrollment not found with id: " + id));
+    Enrollment fromDB = searchById(id);
 
     fromDB.setEnrollmentDate(request.enrollmentDate());
     fromDB.setDueDay(request.dueDay());
@@ -76,8 +74,7 @@ public class EnrollmentService {
 
   @Transactional
   public void deleteById(Long id) {
-    Enrollment fromDB = enrollmentRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Enrollment not found with id: " + id));
+    Enrollment fromDB = searchById(id);
 
     try {
       enrollmentRepository.delete(fromDB);
@@ -86,4 +83,8 @@ public class EnrollmentService {
     }
   }
 
+  private Enrollment searchById(Long id) {
+    return enrollmentRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Enrollment not found with id: " + id));
+  }
 }

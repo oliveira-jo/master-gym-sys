@@ -30,9 +30,7 @@ public class SubscriptionService {
 
   @Transactional(readOnly = true)
   public SubscriptionResponseDTO findById(Long id) {
-    return subscriptionRepository.findById(id)
-        .map(SubscriptionResponseDTO::new)
-        .orElseThrow(() -> new RuntimeException("Subscription not found with id: " + id));
+    return new SubscriptionResponseDTO(searchById(id));
   }
 
   @Transactional
@@ -61,11 +59,7 @@ public class SubscriptionService {
 
   @Transactional
   public SubscriptionResponseDTO update(Long id, SubscriptionRequestDTO subscriptionRequestDTO) {
-    Subscription fromDB = subscriptionRepository.getReferenceById(id);
-
-    if (fromDB == null) {
-      throw new RuntimeException("Subscription not found with id: " + id);
-    }
+    Subscription fromDB = searchById(id);
 
     fromDB.setName(subscriptionRequestDTO.name());
     fromDB.setPrice(subscriptionRequestDTO.price());
@@ -75,14 +69,18 @@ public class SubscriptionService {
 
   @Transactional
   public void deleteById(Long id) {
-    Subscription fromDB = subscriptionRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Subscription not found with id: " + id));
+    Subscription fromDB = searchById(id);
 
     try {
       subscriptionRepository.delete(fromDB);
     } catch (Exception e) {
       throw new RuntimeException("Error deleting subscription with id: " + id, e);
     }
+  }
+
+  private Subscription searchById(Long id) {
+    return subscriptionRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Subscription not found with id: " + id));
   }
 
 }

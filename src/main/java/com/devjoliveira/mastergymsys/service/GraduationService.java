@@ -30,9 +30,7 @@ public class GraduationService {
 
   @Transactional(readOnly = true)
   public GraduationResponseDTO findById(Long id) {
-    return graduationRepository.findById(id)
-        .map(GraduationResponseDTO::new)
-        .orElseThrow(() -> new RuntimeException("Graduation not found with id: " + id));
+    return new GraduationResponseDTO(searchById(id));
   }
 
   @Transactional(readOnly = true)
@@ -67,11 +65,7 @@ public class GraduationService {
   @Transactional
   public GraduationResponseDTO update(Long id, GraduationRequestDTO graduationRequestDTO) {
 
-    Graduation fromDB = graduationRepository.getReferenceById(id);
-
-    if (fromDB == null) {
-      throw new RuntimeException("Graduation not found with id: " + id);
-    }
+    Graduation fromDB = searchById(id);
 
     fromDB.setName(graduationRequestDTO.name());
 
@@ -81,14 +75,18 @@ public class GraduationService {
 
   @Transactional
   public void deleteById(Long id) {
-    Graduation fromDB = graduationRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Graduation not found with id: " + id));
+    Graduation fromDB = searchById(id);
 
     try {
       graduationRepository.delete(fromDB);
     } catch (Exception e) {
       throw new RuntimeException("Error deleting graduation with id: " + id, e);
     }
+  }
+
+  private Graduation searchById(Long id) {
+    return graduationRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Graduation not found with id: " + id));
   }
 
 }

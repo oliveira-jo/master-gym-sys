@@ -26,9 +26,7 @@ public class ModalityService {
 
   @Transactional(readOnly = true)
   public ModalityResponseDTO findById(Long id) {
-    return modalityRepository.findById(id)
-        .map(ModalityResponseDTO::new)
-        .orElseThrow(() -> new RuntimeException("Modality not found with id: " + id));
+    return new ModalityResponseDTO(searchById(id));
   }
 
   @Transactional(readOnly = true)
@@ -50,11 +48,7 @@ public class ModalityService {
 
   @Transactional
   public ModalityResponseDTO update(Long id, ModalityRequestDTO modalityRequestDTO) {
-    Modality fromDB = modalityRepository.getReferenceById(id);
-
-    if (fromDB == null) {
-      throw new RuntimeException("Modality not found with id: " + id);
-    }
+    Modality fromDB = searchById(id);
 
     fromDB.setName(modalityRequestDTO.name());
 
@@ -64,14 +58,17 @@ public class ModalityService {
 
   @Transactional
   public void deleteById(Long id) {
-    Modality fromDB = modalityRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Modality not found with id: " + id));
+    Modality fromDB = searchById(id);
 
     try {
       modalityRepository.delete(fromDB);
     } catch (Exception e) {
       throw new RuntimeException("Error deleting modality with id: " + id, e);
     }
+  }
+
+  private Modality searchById(Long id) {
+    return modalityRepository.findById(id).orElseThrow(() -> new RuntimeException("Modality not found with id: " + id));
   }
 
 }

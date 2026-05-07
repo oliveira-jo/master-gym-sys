@@ -29,9 +29,7 @@ public class StudentService {
 
   @Transactional(readOnly = true)
   public StudentResponseDTO findById(Long id) {
-    return studentRepository.findById(id)
-        .map(StudentResponseDTO::new)
-        .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+    return new StudentResponseDTO(searchById(id));
   }
 
   @Transactional(readOnly = true)
@@ -51,11 +49,7 @@ public class StudentService {
 
   @Transactional
   public StudentResponseDTO update(Long id, StudentRequestDTO studentRequestDTO) {
-    Student fromDB = studentRepository.getReferenceById(id);
-
-    if (fromDB == null) {
-      throw new RuntimeException("Student not found with id: " + id);
-    }
+    Student fromDB = searchById(id);
 
     fromDB.setName(studentRequestDTO.name());
     fromDB.setBirthdate(studentRequestDTO.birthdate());
@@ -76,14 +70,17 @@ public class StudentService {
 
   @Transactional
   public void deleteById(Long id) {
-    Student fromDB = studentRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+    Student fromDB = searchById(id);
 
     try {
       studentRepository.delete(fromDB);
     } catch (Exception e) {
       throw new RuntimeException("Error deleting student with id: " + id, e);
     }
+  }
+
+  private Student searchById(Long id) {
+    return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
   }
 
 }
