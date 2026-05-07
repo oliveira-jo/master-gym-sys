@@ -28,7 +28,7 @@ public class Attendance {
   private LocalDateTime endDate;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "enrollments_id")
+  @JoinColumn(name = "enrollment_id")
   private Enrollment enrollment;
 
   @PrePersist

@@ -42,7 +42,7 @@ public class Payment {
   private StatusPayment status = StatusPayment.OPEN;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "enrollments_id")
+  @JoinColumn(name = "enrollment_id")
   private Enrollment enrollment;
 
   public Long getId() {

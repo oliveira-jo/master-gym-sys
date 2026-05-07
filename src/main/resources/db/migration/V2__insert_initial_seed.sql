@@ -8,7 +8,7 @@ INSERT INTO modalities (name) VALUES
 ('Pilates'),
 ('Yoga');
 
-INSERT INTO subscriptions (modalities_id, name, price) VALUES
+INSERT INTO subscriptions (modalitie_id, name, price) VALUES
 (1, 'Mensal', 150.00),
 (1, 'Trimestral', 400.00),
 (1, 'Anual', 1500.00),
@@ -34,13 +34,13 @@ INSERT INTO subscriptions (modalities_id, name, price) VALUES
 (8, 'Trimestral', 200.00),
 (8, 'Anual', 700.00);
 
-INSERT INTO graduations (modalities_id, name) 
+INSERT INTO graduations (modalitie_id, name) 
 SELECT id, 'Branca' FROM modalities WHERE name = 'Jiu-Jitsu';
-INSERT INTO graduations (modalities_id, name) 
+INSERT INTO graduations (modalitie_id, name) 
 SELECT id, 'Azul' FROM modalities WHERE name = 'Jiu-Jitsu';
-INSERT INTO graduations (modalities_id, name) 
+INSERT INTO graduations (modalitie_id, name) 
 SELECT id, 'Roxa' FROM modalities WHERE name = 'Jiu-Jitsu';
-INSERT INTO graduations (modalities_id, name) 
+INSERT INTO graduations (modalitie_id, name) 
 SELECT id, 'Marrom' FROM modalities WHERE name = 'Jiu-Jitsu';
-INSERT INTO graduations (modalities_id, name) 
+INSERT INTO graduations (modalitie_id, name) 
 SELECT id, 'Preta' FROM modalities WHERE name = 'Jiu-Jitsu';  

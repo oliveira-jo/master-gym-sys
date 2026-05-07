@@ -39,7 +39,7 @@ public class Enrollment {
   private StatusEnrollment status = StatusEnrollment.ACTIVE;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "students_id")
+  @JoinColumn(name = "student_id")
   private Student student;
 
   @PrePersist

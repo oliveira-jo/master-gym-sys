@@ -19,7 +19,7 @@ public class Graduation {
   private String name;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "modalities_id")
+  @JoinColumn(name = "modalitie_id")
   private Modality modality;
 
   public Long getId() {

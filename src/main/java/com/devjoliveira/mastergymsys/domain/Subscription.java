@@ -24,7 +24,7 @@ public class Subscription {
   private boolean active;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "modalities_id")
+  @JoinColumn(name = "modalitie_id")
   private Modality modality;
 
   @PrePersist

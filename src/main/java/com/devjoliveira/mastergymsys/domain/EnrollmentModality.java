@@ -3,14 +3,23 @@ package com.devjoliveira.mastergymsys.domain;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
+@Entity
 @Table(name = "enrollments_modalities")
 public class EnrollmentModality {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @Column(name = "start_date")
   private LocalDate startDate;
@@ -19,19 +28,19 @@ public class EnrollmentModality {
   private LocalDate endDate;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "enrollments_id")
+  @JoinColumn(name = "enrollment_id")
   private Enrollment enrollment;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "modalities_id")
+  @JoinColumn(name = "modalitie_id")
   private Modality modality;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "graduations_id")
+  @JoinColumn(name = "graduation_id")
   private Graduation graduation;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "subscriptions_id")
+  @JoinColumn(name = "subscription_id")
   private Subscription subscription;
 
   @PrePersist
@@ -39,6 +48,14 @@ public class EnrollmentModality {
     if (startDate == null) {
       startDate = LocalDate.now();
     }
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public LocalDate getStartDate() {
