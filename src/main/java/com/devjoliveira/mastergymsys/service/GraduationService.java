@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devjoliveira.mastergymsys.domain.Graduation;
 import com.devjoliveira.mastergymsys.domain.Modality;
+import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
 import com.devjoliveira.mastergymsys.dto.GraduationRequestDTO;
 import com.devjoliveira.mastergymsys.dto.GraduationResponseDTO;
 import com.devjoliveira.mastergymsys.repositoty.GraduationRepository;
@@ -37,7 +38,7 @@ public class GraduationService {
   public GraduationResponseDTO findByName(String name) {
     return graduationRepository.findByNameContainingIgnoreCase(name)
         .map(GraduationResponseDTO::new)
-        .orElseThrow(() -> new RuntimeException("Graduation not found with name: " + name));
+        .orElseThrow(() -> new BusinessException("Graduation not found with name: " + name));
   }
 
   @Transactional
@@ -47,11 +48,11 @@ public class GraduationService {
     try {
       modalityId = Long.valueOf(graduationRequestDTO.modalityId());
     } catch (NumberFormatException e) {
-      throw new RuntimeException("Invalid modality id: " + graduationRequestDTO.modalityId(), e);
+      throw new BusinessException("Invalid modality id: " + graduationRequestDTO.modalityId() + " : " + e);
     }
 
     Modality modalityFromDB = modalityRepository.findById(modalityId)
-        .orElseThrow(() -> new RuntimeException("Modality not found with id: " + modalityId));
+        .orElseThrow(() -> new BusinessException("Modality not found with id: " + modalityId));
 
     Graduation graduation = new Graduation();
     graduation.setName(graduationRequestDTO.name());
@@ -80,13 +81,13 @@ public class GraduationService {
     try {
       graduationRepository.delete(fromDB);
     } catch (Exception e) {
-      throw new RuntimeException("Error deleting graduation with id: " + id, e);
+      throw new BusinessException("Error deleting graduation with id: " + id + ":" + e);
     }
   }
 
   private Graduation searchById(Long id) {
     return graduationRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Graduation not found with id: " + id));
+        .orElseThrow(() -> new BusinessException("Graduation not found with id: " + id));
   }
 
 }

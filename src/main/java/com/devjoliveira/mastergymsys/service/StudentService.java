@@ -1,11 +1,14 @@
 package com.devjoliveira.mastergymsys.service;
 
-import org.springframework.data.domain.Pageable;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devjoliveira.mastergymsys.domain.Student;
+import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
 import com.devjoliveira.mastergymsys.dto.StudentRequestDTO;
 import com.devjoliveira.mastergymsys.dto.StudentResponseDTO;
 import com.devjoliveira.mastergymsys.mapper.StudentMapper;
@@ -41,8 +44,26 @@ public class StudentService {
 
   @Transactional
   public StudentResponseDTO save(StudentRequestDTO studentRequestDTO) {
-    Student student = studentMapper.toDomain(studentRequestDTO);
-    Student fromDB = studentRepository.save(student);
+
+    // Clean cpf
+    String cpfRequest = studentRequestDTO.cpf().replaceAll("\\D", "");
+
+    // Verify if already has cpf and email registered
+    Optional<Student> existStudent = studentRepository.findByCpf(cpfRequest);
+    if (existStudent.isPresent())
+      throw new BusinessException("This CPF is already registered");
+
+    existStudent = studentRepository.findByEmail(studentRequestDTO.email());
+    if (existStudent.isPresent())
+      throw new BusinessException("This Email is already registered");
+
+    // Converto dto to entity
+    Student newStudent = studentMapper.toDomain(studentRequestDTO);
+    newStudent.setCpf(cpfRequest);
+
+    // Save in Database
+    Student fromDB = studentRepository.save(newStudent);
+
     return new StudentResponseDTO(fromDB);
 
   }
@@ -56,6 +77,7 @@ public class StudentService {
     fromDB.setGenre(studentRequestDTO.genre());
     fromDB.setPhone(studentRequestDTO.phone());
     fromDB.setEmail(studentRequestDTO.email());
+    // cpf can't be update
     fromDB.setObservations(studentRequestDTO.observations());
     fromDB.setAddress(studentRequestDTO.address());
     fromDB.setNumber(studentRequestDTO.number());
@@ -75,12 +97,12 @@ public class StudentService {
     try {
       studentRepository.delete(fromDB);
     } catch (Exception e) {
-      throw new RuntimeException("Error deleting student with id: " + id, e);
+      throw new BusinessException("Error deleting student with id: " + id + " : " + e);
     }
   }
 
   private Student searchById(Long id) {
-    return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+    return studentRepository.findById(id).orElseThrow(() -> new BusinessException("Student not found with id: " + id));
   }
 
 }

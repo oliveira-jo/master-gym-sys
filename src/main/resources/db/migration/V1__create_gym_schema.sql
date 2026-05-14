@@ -5,6 +5,7 @@ CREATE TABLE students (
     genre VARCHAR(1) CHECK (genre IN ('M', 'F')),
     phone VARCHAR(30),
     email VARCHAR(150),
+    cpf VARCHAR(11),
     observations TEXT,
     address VARCHAR(255),
     number VARCHAR(20),

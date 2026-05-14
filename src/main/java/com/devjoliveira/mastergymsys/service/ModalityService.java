@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devjoliveira.mastergymsys.domain.Modality;
+import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
 import com.devjoliveira.mastergymsys.dto.ModalityRequestDTO;
 import com.devjoliveira.mastergymsys.dto.ModalityResponseDTO;
 import com.devjoliveira.mastergymsys.repositoty.ModalityRepository;
@@ -32,7 +33,7 @@ public class ModalityService {
   @Transactional(readOnly = true)
   public ModalityResponseDTO findByName(String name) {
     return modalityRepository.findByNameContainingIgnoreCase(name)
-        .orElseThrow(() -> new RuntimeException("Modality not found with name: " + name));
+        .orElseThrow(() -> new BusinessException("Modality not found with name: " + name));
   }
 
   @Transactional
@@ -63,12 +64,13 @@ public class ModalityService {
     try {
       modalityRepository.delete(fromDB);
     } catch (Exception e) {
-      throw new RuntimeException("Error deleting modality with id: " + id, e);
+      throw new BusinessException("Error deleting modality with id: " + id + ":" + e);
     }
   }
 
   private Modality searchById(Long id) {
-    return modalityRepository.findById(id).orElseThrow(() -> new RuntimeException("Modality not found with id: " + id));
+    return modalityRepository.findById(id)
+        .orElseThrow(() -> new BusinessException("Modality not found with id: " + id));
   }
 
 }

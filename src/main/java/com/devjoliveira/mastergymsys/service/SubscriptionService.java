@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devjoliveira.mastergymsys.domain.Modality;
 import com.devjoliveira.mastergymsys.domain.Subscription;
+import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
 import com.devjoliveira.mastergymsys.dto.SubscriptionRequestDTO;
 import com.devjoliveira.mastergymsys.dto.SubscriptionResponseDTO;
 import com.devjoliveira.mastergymsys.repositoty.ModalityRepository;
@@ -40,11 +41,11 @@ public class SubscriptionService {
     try {
       modalityId = Long.valueOf(subscriptionRequestDTO.modalityId());
     } catch (NumberFormatException e) {
-      throw new RuntimeException("Invalid modality id: " + subscriptionRequestDTO.modalityId(), e);
+      throw new BusinessException("Invalid modality id: " + subscriptionRequestDTO.modalityId() + ":" + e);
     }
 
     Modality modalityFromDB = modalityRepository.findById(modalityId)
-        .orElseThrow(() -> new RuntimeException("Modality not found with id: " + modalityId));
+        .orElseThrow(() -> new BusinessException("Modality not found with id: " + modalityId));
 
     Subscription sub = new Subscription();
     sub.setName(subscriptionRequestDTO.name());
@@ -74,13 +75,13 @@ public class SubscriptionService {
     try {
       subscriptionRepository.delete(fromDB);
     } catch (Exception e) {
-      throw new RuntimeException("Error deleting subscription with id: " + id, e);
+      throw new BusinessException("Error deleting subscription with id: " + id + " : " + e);
     }
   }
 
   private Subscription searchById(Long id) {
     return subscriptionRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Subscription not found with id: " + id));
+        .orElseThrow(() -> new BusinessException("Subscription not found with id: " + id));
   }
 
 }

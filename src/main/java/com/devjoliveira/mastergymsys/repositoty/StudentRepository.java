@@ -12,6 +12,10 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
   Page<Student> findAll(Pageable pageable);
 
+  Optional<Student> findByCpf(String cpf);
+
+  Optional<Student> findByEmail(String cpf);
+
   Optional<Student> findByNameContainingIgnoreCase(String name);
 
 }

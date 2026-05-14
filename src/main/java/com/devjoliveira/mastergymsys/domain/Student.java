@@ -24,7 +24,13 @@ public class Student {
   private LocalDate birthdate;
   private String genre;
   private String phone;
+
+  @Column(unique = true)
   private String email;
+
+  @Column(unique = true)
+  private String cpf;
+
   private String observations;
   private String address;
   private String number;
@@ -99,6 +105,14 @@ public class Student {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public String getCpf() {
+    return this.cpf;
+  }
+
+  public void setCpf(String cpf) {
+    this.cpf = cpf;
   }
 
   public String getObservations() {

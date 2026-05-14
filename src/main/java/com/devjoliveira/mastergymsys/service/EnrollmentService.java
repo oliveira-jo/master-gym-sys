@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devjoliveira.mastergymsys.domain.Enrollment;
 import com.devjoliveira.mastergymsys.domain.Student;
+import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
 import com.devjoliveira.mastergymsys.dto.EnrollmentRequestDTO;
 import com.devjoliveira.mastergymsys.dto.EnrollmentResponseDTO;
 import com.devjoliveira.mastergymsys.repositoty.EnrollmentRepository;
@@ -40,11 +41,11 @@ public class EnrollmentService {
     try {
       studentId = Long.valueOf(request.studentId());
     } catch (NumberFormatException e) {
-      throw new RuntimeException("Invalid modality id: " + request.studentId(), e);
+      throw new BusinessException("Invalid modality id: " + request.studentId() + ":" + e);
     }
 
     Student studentFromDB = studentRepository.findById(studentId)
-        .orElseThrow(() -> new RuntimeException("Student not found with id: " + studentId));
+        .orElseThrow(() -> new BusinessException("Student not found with id: " + studentId));
 
     Enrollment enrollment = new Enrollment();
     enrollment.setEnrollmentDate(request.enrollmentDate());
@@ -79,12 +80,12 @@ public class EnrollmentService {
     try {
       enrollmentRepository.delete(fromDB);
     } catch (Exception e) {
-      throw new RuntimeException("Error deleting enrollment with id: " + id, e);
+      throw new BusinessException("Error deleting enrollment with id: " + id + ":" + e);
     }
   }
 
   private Enrollment searchById(Long id) {
     return enrollmentRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Enrollment not found with id: " + id));
+        .orElseThrow(() -> new BusinessException("Enrollment not found with id: " + id));
   }
 }

@@ -21,6 +21,7 @@ public class StudentMapper {
     student.setGenre(studentRequestDTO.genre());
     student.setPhone(studentRequestDTO.phone());
     student.setEmail(studentRequestDTO.email());
+    student.setCpf(studentRequestDTO.cpf());
     student.setObservations(studentRequestDTO.observations());
     student.setAddress(studentRequestDTO.address());
     student.setNumber(studentRequestDTO.number());
