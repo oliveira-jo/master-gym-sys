@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devjoliveira.mastergymsys.dto.StudentFilterRequest;
 import com.devjoliveira.mastergymsys.dto.StudentRequestDTO;
 import com.devjoliveira.mastergymsys.dto.StudentResponseDTO;
 import com.devjoliveira.mastergymsys.service.StudentService;
@@ -33,18 +34,13 @@ public class StudentController {
   }
 
   @GetMapping
-  public ResponseEntity<Page<StudentResponseDTO>> findAll(Pageable pageable) {
-    return ResponseEntity.ok(studentService.findAll(pageable));
+  public ResponseEntity<Page<StudentResponseDTO>> findAll(StudentFilterRequest filter, Pageable pageable) {
+    return ResponseEntity.ok(studentService.findAll(filter, pageable));
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<StudentResponseDTO> findById(@PathVariable Long id) {
     return ResponseEntity.ok(studentService.findById(id));
-  }
-
-  @GetMapping("/search")
-  public ResponseEntity<StudentResponseDTO> searchByName(@RequestParam(defaultValue = "") String name) {
-    return ResponseEntity.ok(studentService.findByName(name));
   }
 
   @PostMapping

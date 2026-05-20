@@ -9,10 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devjoliveira.mastergymsys.domain.Student;
 import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
+import com.devjoliveira.mastergymsys.dto.StudentFilterRequest;
 import com.devjoliveira.mastergymsys.dto.StudentRequestDTO;
 import com.devjoliveira.mastergymsys.dto.StudentResponseDTO;
 import com.devjoliveira.mastergymsys.mapper.StudentMapper;
 import com.devjoliveira.mastergymsys.repositoty.StudentRepository;
+import com.devjoliveira.mastergymsys.specification.StudentSpecification;
 
 @Service
 public class StudentService {
@@ -26,20 +28,14 @@ public class StudentService {
   }
 
   @Transactional(readOnly = true)
-  public Page<StudentResponseDTO> findAll(Pageable pageable) {
-    return studentRepository.findAll(pageable).map(StudentResponseDTO::new);
+  public Page<StudentResponseDTO> findAll(StudentFilterRequest filter, Pageable pageable) {
+    return studentRepository.findAll(StudentSpecification.withFilter(filter), pageable)
+        .map(StudentResponseDTO::new);
   }
 
   @Transactional(readOnly = true)
   public StudentResponseDTO findById(Long id) {
     return new StudentResponseDTO(searchById(id));
-  }
-
-  @Transactional(readOnly = true)
-  public StudentResponseDTO findByName(String name) {
-    return studentRepository.findByNameContainingIgnoreCase(name)
-        .map(StudentResponseDTO::new)
-        .orElseThrow(() -> new RuntimeException("Student not found with name: " + name));
   }
 
   @Transactional
