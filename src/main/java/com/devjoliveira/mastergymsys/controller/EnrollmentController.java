@@ -31,6 +31,7 @@ public class EnrollmentController {
     this.enrollmentService = enrollmentService;
   }
 
+  @SuppressWarnings("null")
   @GetMapping
   public ResponseEntity<Page<EnrollmentResponseDTO>> findAll(Pageable pageable) {
     return ResponseEntity.ok(enrollmentService.findAll(pageable));

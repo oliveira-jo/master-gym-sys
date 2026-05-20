@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devjoliveira.mastergymsys.dto.StudentFilterRequest;
@@ -33,6 +32,7 @@ public class StudentController {
     this.studentService = studentService;
   }
 
+  @SuppressWarnings("null")
   @GetMapping
   public ResponseEntity<Page<StudentResponseDTO>> findAll(StudentFilterRequest filter, Pageable pageable) {
     return ResponseEntity.ok(studentService.findAll(filter, pageable));

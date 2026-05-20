@@ -32,6 +32,7 @@ public class GraduationController {
     this.graduationService = graduationService;
   }
 
+  @SuppressWarnings("null")
   @GetMapping
   public ResponseEntity<Page<GraduationResponseDTO>> findAll(Pageable pageable) {
     return ResponseEntity.ok(graduationService.findAll(pageable));

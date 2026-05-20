@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +29,7 @@ public class StudentService {
   }
 
   @Transactional(readOnly = true)
-  public Page<StudentResponseDTO> findAll(StudentFilterRequest filter, Pageable pageable) {
+  public Page<StudentResponseDTO> findAll(StudentFilterRequest filter, @NonNull Pageable pageable) {
     return studentRepository.findAll(StudentSpecification.withFilter(filter), pageable)
         .map(StudentResponseDTO::new);
   }
@@ -86,6 +87,7 @@ public class StudentService {
         studentRepository.save(fromDB));
   }
 
+  @SuppressWarnings("null")
   @Transactional
   public void deleteById(Long id) {
     Student fromDB = searchById(id);
@@ -97,6 +99,7 @@ public class StudentService {
     }
   }
 
+  @SuppressWarnings("null")
   private Student searchById(Long id) {
     return studentRepository.findById(id).orElseThrow(() -> new BusinessException("Student not found with id: " + id));
   }

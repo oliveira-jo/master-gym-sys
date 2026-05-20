@@ -2,6 +2,7 @@ package com.devjoliveira.mastergymsys.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +26,7 @@ public class EnrollmentService {
   }
 
   @Transactional(readOnly = true)
-  public Page<EnrollmentResponseDTO> findAll(Pageable pageable) {
+  public Page<EnrollmentResponseDTO> findAll(@NonNull Pageable pageable) {
     return enrollmentRepository.findAll(pageable).map(EnrollmentResponseDTO::new);
   }
 
@@ -34,6 +35,7 @@ public class EnrollmentService {
     return new EnrollmentResponseDTO(searchById(id));
   }
 
+  @SuppressWarnings("null")
   @Transactional
   public EnrollmentResponseDTO save(EnrollmentRequestDTO request) {
 
@@ -73,6 +75,7 @@ public class EnrollmentService {
 
   }
 
+  @SuppressWarnings("null")
   @Transactional
   public void deleteById(Long id) {
     Enrollment fromDB = searchById(id);
@@ -84,6 +87,7 @@ public class EnrollmentService {
     }
   }
 
+  @SuppressWarnings("null")
   private Enrollment searchById(Long id) {
     return enrollmentRepository.findById(id)
         .orElseThrow(() -> new BusinessException("Enrollment not found with id: " + id));

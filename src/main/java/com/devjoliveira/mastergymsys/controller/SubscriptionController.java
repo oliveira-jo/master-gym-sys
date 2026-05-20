@@ -31,6 +31,7 @@ public class SubscriptionController {
     this.subscriptionService = subscriptionService;
   }
 
+  @SuppressWarnings("null")
   @GetMapping
   public ResponseEntity<Page<SubscriptionResponseDTO>> findAll(Pageable pageable) {
     return ResponseEntity.ok(subscriptionService.findAll(pageable));

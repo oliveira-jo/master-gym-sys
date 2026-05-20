@@ -32,6 +32,7 @@ public class ModalityController {
     this.modalityService = modalityService;
   }
 
+  @SuppressWarnings("null")
   @GetMapping
   public ResponseEntity<Page<ModalityResponseDTO>> findAll(Pageable pageable) {
     return ResponseEntity.ok(modalityService.findAll(pageable));

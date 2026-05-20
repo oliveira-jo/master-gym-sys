@@ -2,6 +2,7 @@ package com.devjoliveira.mastergymsys.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +26,7 @@ public class SubscriptionService {
   }
 
   @Transactional(readOnly = true)
-  public Page<SubscriptionResponseDTO> findAll(Pageable pageable) {
+  public Page<SubscriptionResponseDTO> findAll(@NonNull Pageable pageable) {
     return subscriptionRepository.findAll(pageable).map(SubscriptionResponseDTO::new);
   }
 
@@ -34,6 +35,7 @@ public class SubscriptionService {
     return new SubscriptionResponseDTO(searchById(id));
   }
 
+  @SuppressWarnings("null")
   @Transactional
   public SubscriptionResponseDTO save(SubscriptionRequestDTO subscriptionRequestDTO) {
 
@@ -68,6 +70,7 @@ public class SubscriptionService {
     return new SubscriptionResponseDTO(subscriptionRepository.save(fromDB));
   }
 
+  @SuppressWarnings("null")
   @Transactional
   public void deleteById(Long id) {
     Subscription fromDB = searchById(id);
@@ -79,6 +82,7 @@ public class SubscriptionService {
     }
   }
 
+  @SuppressWarnings("null")
   private Subscription searchById(Long id) {
     return subscriptionRepository.findById(id)
         .orElseThrow(() -> new BusinessException("Subscription not found with id: " + id));

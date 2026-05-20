@@ -2,6 +2,7 @@ package com.devjoliveira.mastergymsys.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +22,7 @@ public class ModalityService {
   }
 
   @Transactional(readOnly = true)
-  public Page<ModalityResponseDTO> findAll(Pageable pageable) {
+  public Page<ModalityResponseDTO> findAll(@NonNull Pageable pageable) {
     return modalityRepository.findAll(pageable).map(ModalityResponseDTO::new);
   }
 
@@ -57,6 +58,7 @@ public class ModalityService {
         modalityRepository.save(fromDB));
   }
 
+  @SuppressWarnings("null")
   @Transactional
   public void deleteById(Long id) {
     Modality fromDB = searchById(id);
@@ -68,6 +70,7 @@ public class ModalityService {
     }
   }
 
+  @SuppressWarnings("null")
   private Modality searchById(Long id) {
     return modalityRepository.findById(id)
         .orElseThrow(() -> new BusinessException("Modality not found with id: " + id));

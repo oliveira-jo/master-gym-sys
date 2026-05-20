@@ -2,6 +2,7 @@ package com.devjoliveira.mastergymsys.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +26,7 @@ public class GraduationService {
   }
 
   @Transactional(readOnly = true)
-  public Page<GraduationResponseDTO> findAll(Pageable pageable) {
+  public Page<GraduationResponseDTO> findAll(@NonNull Pageable pageable) {
     return graduationRepository.findAll(pageable).map(GraduationResponseDTO::new);
   }
 
@@ -41,6 +42,7 @@ public class GraduationService {
         .orElseThrow(() -> new BusinessException("Graduation not found with name: " + name));
   }
 
+  @SuppressWarnings("null")
   @Transactional
   public GraduationResponseDTO save(GraduationRequestDTO graduationRequestDTO) {
 
@@ -74,6 +76,7 @@ public class GraduationService {
         graduationRepository.save(fromDB));
   }
 
+  @SuppressWarnings("null")
   @Transactional
   public void deleteById(Long id) {
     Graduation fromDB = searchById(id);
@@ -85,6 +88,7 @@ public class GraduationService {
     }
   }
 
+  @SuppressWarnings("null")
   private Graduation searchById(Long id) {
     return graduationRepository.findById(id)
         .orElseThrow(() -> new BusinessException("Graduation not found with id: " + id));
