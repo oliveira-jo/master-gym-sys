@@ -1,0 +1,595 @@
+{
+	"info": {
+		"_postman_id": "a0f701e8-1575-44e3-8525-914afcad02b4",
+		"name": "MasterGymSys",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28475730"
+	},
+	"item": [
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "Specification",
+					"item": [
+						{
+							"name": "Student by name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/students?name=Metz&page=0&size=10&sorte=name,asc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"students"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Metz"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "sorte",
+											"value": "name,asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student by email",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/students?email=Eileen_Volkman24@gmail.com&page=0&size=10&sorte=name,asc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"students"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "Eileen_Volkman24@gmail.com"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "sorte",
+											"value": "name,asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student by city",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/students?city=31388&page=0&size=10&sorte=name,asc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"students"
+									],
+									"query": [
+										{
+											"key": "city",
+											"value": "31388"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "sorte",
+											"value": "name,asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Student by state",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/students?state=rs&page=0&size=10&sorte=name,asc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"students"
+									],
+									"query": [
+										{
+											"key": "state",
+											"value": "rs"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "sorte",
+											"value": "name,asc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "All Students",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/students?page=0&size=10&sorte=name,asc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"students"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sorte",
+									"value": "name,asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"{{$randomFullName}}\",\n    \"birthdate\" : \"06/06/1990\",\n    \"genre\" : \"M\",\n    \"phone\" : \"(51)98114-9995\",\n    \"email\" : \"{{$randomEmail}}\",\n    \"cpf\": \"45546550082\",\n    \"observations\" : \"Aluno Iniciante\",\n    \"address\" : \"{{$randomStreetAddress}}\",\n    \"number\" : \"{{$randomAlphaNumeric}}\",\n    \"complement\" : \"Casa\",\n    \"city\" : \"{{$randomStreetAddress}}\",\n    \"state\" : \"RS\",\n    \"zipCode\" : \"{{$randomCountryCode}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/students"
+					},
+					"response": []
+				},
+				{
+					"name": "Student",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"{{$randomFullName}}\",\n    \"birthdate\" : \"06/06/1990\",\n    \"genre\" : \"M\",\n    \"phone\" : \"(51)98114-9999\",\n    \"email\" : \"{{$randomEmail}}\",\n    \"observations\" : \"{{$randomLoremText}}\",\n    \"address\" : \"{{$randomStreetAddress}}\",\n    \"number\" : \"{{$randomAlphaNumeric}}\",\n    \"complement\" : \"\",\n    \"city\" : \"{{$randomCity}}\",\n    \"state\" : \"{{$randomCountryCode}}\",\n    \"zipCode\" : \"{{$randomCountryCode}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/students/6"
+					},
+					"response": []
+				},
+				{
+					"name": "Student by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/students/7"
+					},
+					"response": []
+				},
+				{
+					"name": "Student by id Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/students/9"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Modality",
+			"item": [
+				{
+					"name": "All Modalities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/modalities"
+					},
+					"response": []
+				},
+				{
+					"name": "Modality by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/modalities/search?name=Musculação",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"modalities",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Musculação"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modality",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"{{$randomFullName}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/modalities"
+					},
+					"response": []
+				},
+				{
+					"name": "Modality",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Personal Musculação\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/modalities/9"
+					},
+					"response": []
+				},
+				{
+					"name": "Modalities by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/modalities/9"
+					},
+					"response": []
+				},
+				{
+					"name": "Student by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/modalities/9"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscription",
+			"item": [
+				{
+					"name": "All Subscriptions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/subscriptions?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"subscriptions"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscription by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/subscriptions/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Anual Promo\",\n    \"price\": 99.00,\n    \"modalityId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/subscriptions"
+					},
+					"response": []
+				},
+				{
+					"name": "Subscription",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Básico\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/subscriptions/9"
+					},
+					"response": []
+				},
+				{
+					"name": "Subscription by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/subscriptions/9"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Graduation",
+			"item": [
+				{
+					"name": "Graduation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"{{$randomFullName}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/graduations"
+					},
+					"response": []
+				},
+				{
+					"name": "Graduation",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Básico\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/graduations/9"
+					},
+					"response": []
+				},
+				{
+					"name": "Graduation by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/graduations/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Graduations by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/graduations/9"
+					},
+					"response": []
+				},
+				{
+					"name": "All Graduations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/graduations"
+					},
+					"response": []
+				},
+				{
+					"name": "Graduation by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/graduations/search?name=Branca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"graduations",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Branca"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Enrollment",
+			"item": [
+				{
+					"name": "Enrollment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"enrollmentDate\": \"06/05/2026\",\n    \"dueDay\": \"06\",\n    \"closingDate\": \"06/05/2027\",\n    \"studentId\": 6\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/enrollments"
+					},
+					"response": []
+				},
+				{
+					"name": "Enrollment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Básico\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/enrollments/9"
+					},
+					"response": []
+				},
+				{
+					"name": "Enrollment by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/enrollments/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Enrollments by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/enrollments/9"
+					},
+					"response": []
+				},
+				{
+					"name": "All Enrollments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/enrollments"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
