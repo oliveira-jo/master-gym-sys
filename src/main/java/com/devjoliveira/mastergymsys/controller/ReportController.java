@@ -1,0 +1,40 @@
+package com.devjoliveira.mastergymsys.controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.devjoliveira.mastergymsys.projection.MonthlyBillingProjection;
+import com.devjoliveira.mastergymsys.projection.OutstandingInvoicesProjection;
+import com.devjoliveira.mastergymsys.projection.StudentsByCityProjection;
+import com.devjoliveira.mastergymsys.repositoty.ReportRepository;
+
+@RestController
+@RequestMapping("/reports")
+public class ReportController {
+
+  private final ReportRepository reportRepository;
+
+  public ReportController(ReportRepository reportRepository) {
+    this.reportRepository = reportRepository;
+  }
+
+  @GetMapping("/monthlyBilling")
+  public ResponseEntity<List<MonthlyBillingProjection>> monthlyBilling() {
+    return ResponseEntity.ok().body(reportRepository.monthlyBilling());
+  }
+
+  @GetMapping("/studentsByCity")
+  public ResponseEntity<List<StudentsByCityProjection>> studentsByCity() {
+    return ResponseEntity.ok().body(reportRepository.studentsByCity());
+  }
+
+  @GetMapping("/outstandingInvoices")
+  public ResponseEntity<List<OutstandingInvoicesProjection>> outstandingInvoices() {
+    return ResponseEntity.ok().body(reportRepository.outstandingInvoices());
+  }
+
+}
