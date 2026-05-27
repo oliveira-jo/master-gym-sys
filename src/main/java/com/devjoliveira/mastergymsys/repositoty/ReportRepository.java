@@ -35,8 +35,8 @@ public interface ReportRepository extends Repository<Payment, Long> {
 
   @Query(value = """
          SELECT
-          en.id as subscriptionId,
-          s.name as studentNome,
+          en.id as enrollmentId,
+          s.name as studentName,
           p.due_date as dueDate,
           p.amount
         FROM payments p

@@ -11,6 +11,6 @@ public interface OutstandingInvoicesProjection {
 
   LocalDate getDueDate();
 
-  BigDecimal getValue();
+  BigDecimal getAmount();
 
 }
