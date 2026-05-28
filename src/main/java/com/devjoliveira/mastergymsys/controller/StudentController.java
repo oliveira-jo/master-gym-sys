@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devjoliveira.mastergymsys.doc.StudentControllerDoc;
 import com.devjoliveira.mastergymsys.dto.StudentFilterRequest;
 import com.devjoliveira.mastergymsys.dto.StudentRequestDTO;
 import com.devjoliveira.mastergymsys.dto.StudentResponseDTO;
@@ -24,7 +25,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/students")
-public class StudentController {
+public class StudentController implements StudentControllerDoc {
 
   private final StudentService studentService;
 

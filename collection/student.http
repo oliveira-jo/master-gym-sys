@@ -1,0 +1,106 @@
+@baseUrl = http://localhost:8080
+
+### Save Student
+POST {{baseUrl}}/alunos
+Content-Type: application/json
+
+{
+  "name" : "João da Silva",
+  "birthdate": "1995-08-15",
+  "genre": "M",
+  "phone": "48991645543",
+  "email": "joao@email.com",
+  "observations": "Aluno iniciante",
+  "address": "Rua das Flores",
+  "number": "123",
+  "complement": "Apartamento 202",
+  "city": "Criciúma",
+  "state": "SC",
+  "zipCode": "88802410"
+}
+
+### List Students
+GET {{baseUrl}}/students
+
+### List Students With pagination
+GET {{baseUrl}}/students?page=0&size=10&sort=name,asc
+
+### Find student by ID
+GET {{baseUrl}}/students/1
+
+### Update Student
+PUT {{baseUrl}}/students/1
+Content-Type: application/json
+
+{
+  "name" : "João da Silva Atualizado",
+  "birthdate": "1995-08-15",
+  "genre": "M",
+  "phone": "48991645543",
+  "email": "joao@email.com",
+  "observations": "Aluno iniciante",
+  "address": "Rua das Flores",
+  "number": "123",
+  "complement": "Apartamento 202",
+  "city": "Criciúma",
+  "state": "SC",
+  "zipCode": "88802410"
+}
+
+### Delete Student
+DELETE {{baseUrl}}/students/1
+
+### Save Student
+POST {{baseUrl}}/students
+Content-Type: application/json
+
+{
+  "name" : "Vanessa Oliveira",
+  "birthdate": "1998-03-22",
+  "genre": "F",
+  "phone": "48991645543",
+  "email": "vanessa@email.com",
+  "observations": "Aluna Ja possui boa avaliacao",
+  "address": "Rua das Flores",
+  "number": "123",
+  "complement": "Apartamento 202",
+  "city": "Criciúma",
+  "state": "SC",
+  "zipCode": "88802410"
+}
+
+### Sabe Invalid Student
+POST {{baseUrl}}/studentsstudents-Type: application/json
+
+{
+  "name" : "",
+  "birthdate": "1998-03-22",
+  "genre": "Masculino",
+  "email": "email-invalido",
+  "state": "Santa Catarina"
+}
+
+### List todos
+GET {{baseUrl}}/students?page=0&size=10&sort=nome,asc
+
+### List by name
+GET {{baseUrl}}/students?name=joao&page=0&size=10&sort=name,asc
+
+### List by city
+GET {{baseUrl}}/students?city=Criciúma&page=0&size=10&sort=name,asc
+
+### List by city
+GET {{baseUrl}}/students?state=SC&page=0&size=10&sort=name,asc
+
+### List by email
+GET {{baseUrl}}/students?email=joao@email.com&page=0&size=10&sort=name,asc
+
+
+### Monthly Billing - Faturamento mensal
+GET {{baseUrl}}/reports/monthlyBilling
+
+### Students By City
+GET {{baseUrl}}/reports/studentsByCity
+
+### Outstanding Invoices - Faturas em aberto
+GET {{baseUrl}}/reports/outstandingInvoices
