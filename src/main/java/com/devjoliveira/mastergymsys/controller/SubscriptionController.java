@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devjoliveira.mastergymsys.doc.SubscriptionControllerDoc;
 import com.devjoliveira.mastergymsys.dto.SubscriptionRequestDTO;
 import com.devjoliveira.mastergymsys.dto.SubscriptionResponseDTO;
 import com.devjoliveira.mastergymsys.service.SubscriptionService;
@@ -23,7 +24,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/subscriptions")
-public class SubscriptionController {
+public class SubscriptionController implements SubscriptionControllerDoc {
 
   private final SubscriptionService subscriptionService;
 

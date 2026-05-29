@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devjoliveira.mastergymsys.doc.EnrollmentControllerDoc;
 import com.devjoliveira.mastergymsys.dto.EnrollmentRequestDTO;
 import com.devjoliveira.mastergymsys.dto.EnrollmentResponseDTO;
 import com.devjoliveira.mastergymsys.service.EnrollmentService;
@@ -23,7 +24,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/enrollments")
-public class EnrollmentController {
+public class EnrollmentController implements EnrollmentControllerDoc {
 
   private final EnrollmentService enrollmentService;
 
