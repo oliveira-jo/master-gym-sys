@@ -164,3 +164,16 @@ public class ReportController {
   }
 }
 ````
+
+## Creating a New Migration
+
+  Creating a v3 migration for test the financial:
+  - Enrollments
+  - enrollments_modalities
+  - Payments
+  - Report 
+
+## Opan Api and Documentation
+  - Configuration Open Api
+  - Generate documentation as a interface 
+  - And implementation this in Controller
