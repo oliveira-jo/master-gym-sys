@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devjoliveira.mastergymsys.doc.GraduationControllerDoc;
 import com.devjoliveira.mastergymsys.dto.GraduationRequestDTO;
 import com.devjoliveira.mastergymsys.dto.GraduationResponseDTO;
 import com.devjoliveira.mastergymsys.service.GraduationService;
@@ -24,7 +25,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/graduations")
-public class GraduationController {
+public class GraduationController implements GraduationControllerDoc {
 
   private final GraduationService graduationService;
 

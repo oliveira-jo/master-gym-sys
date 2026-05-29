@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devjoliveira.mastergymsys.doc.ModalityControllerDoc;
 import com.devjoliveira.mastergymsys.dto.ModalityRequestDTO;
 import com.devjoliveira.mastergymsys.dto.ModalityResponseDTO;
 import com.devjoliveira.mastergymsys.service.ModalityService;
@@ -24,7 +25,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/modalities")
-public class ModalityController {
+public class ModalityController implements ModalityControllerDoc {
 
   private final ModalityService modalityService;
 

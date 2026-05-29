@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.devjoliveira.mastergymsys.doc.ReportControllerDoc;
 import com.devjoliveira.mastergymsys.projection.MonthlyBillingProjection;
 import com.devjoliveira.mastergymsys.projection.OutstandingInvoicesProjection;
 import com.devjoliveira.mastergymsys.projection.StudentsByCityProjection;
@@ -14,7 +15,7 @@ import com.devjoliveira.mastergymsys.repositoty.ReportRepository;
 
 @RestController
 @RequestMapping("/reports")
-public class ReportController {
+public class ReportController implements ReportControllerDoc {
 
   private final ReportRepository reportRepository;
 
