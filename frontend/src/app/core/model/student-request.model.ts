@@ -6,11 +6,9 @@ export interface StudentRequest {
   email: string;
   cpf: string;
   observations?: string;
-
   address: string;
   number: string;
   complement?: string;
-
   city: string;
   state: string;
   zipCode: string;

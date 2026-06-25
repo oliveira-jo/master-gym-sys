@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
+import { SubscriptionRequest } from '../model/subscription-request.model';
+import { SubscriptionResponse } from '../model/subscription-response.model';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SubscriptionService {
+export class SubscriptionService extends BaseService<SubscriptionRequest, SubscriptionResponse> {
 
-  constructor() { }
+  protected override endpoint = 'subscriptions';
+
+  constructor() {
+    super();
+  }
 }
