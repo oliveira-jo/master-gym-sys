@@ -1,3 +1,12 @@
+INSERT INTO students (id, name, birthdate, genre, phone, email, cpf, observations, address, number, complement, city, state, zip_code)
+VALUES (1, 'João Silva', '1990-06-06', 'M', '(11) 99999-9999', 'joao.silva@example.com', '45546550082', 'Aluno Iniciante', 'Rua Exemplo, 123', '123', 'Casa', 'Cidade Exemplo', 'RS', '90000-000');
+
+INSERT INTO students (id, name, birthdate, genre, phone, email, cpf, observations, address, number, complement, city, state, zip_code)
+VALUES (2, 'Maria Oliveira', '1985-08-15', 'F', '(11) 98888-8888', 'maria.oliveira@example.com', '45546550083', 'Aluna Iniciante', 'Rua Exemplo, 456', '456', 'Apartamento', 'Cidade Exemplo', 'RS', '90000-000');
+
+INSERT INTO students (id, name, birthdate, genre, phone, email, cpf, observations, address, number, complement, city, state, zip_code)
+VALUES (3, 'Carlos Santos', '1992-03-20', 'M', '(11) 97777-7777', 'carlos.santos@example.com', '45546550084', 'Aluno Iniciante', 'Rua Exemplo, 789', '789', 'Sala', 'Cidade Exemplo', 'RS', '90000-000');
+
 INSERT INTO enrollments (student_id, enrollment_date, due_day, status)
 VALUES (2, CURRENT_DATE - INTERVAL '90 days', 10, 'ACTIVE');
 
