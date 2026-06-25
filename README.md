@@ -177,3 +177,80 @@ public class ReportController {
   - Configuration Open Api
   - Generate documentation as a interface 
   - And implementation this in Controller
+
+## Monorepo Structure
+````
+├── backend
+│   └── spring-boot
+│
+├── frontend
+│   └── angular
+│
+├── docs
+│
+└── docker
+````
+
+## Frontend Structure
+````
+frontend/
+│
+├── src/
+│
+│   ├── assets/
+│   │
+│   ├── environments/
+│   │
+│   ├── styles.css
+│   │
+│   └── app/
+│
+│       ├── core/
+│       │   ├── guards/
+│       │   ├── interceptors/
+│       │   ├── models/
+│       │   ├── services/
+│       │   └── constants/
+│       │
+│       ├── shared/
+│       │   ├── components/
+│       │   ├── pipes/
+│       │   ├── directives/
+│       │   └── interfaces/
+│       │
+│       ├── layout/
+│       │   ├── home/
+│       │   ├── navbar/
+│       │   ├── footer/
+│       │   └── sidebar/
+│       │
+│       ├── features/
+│       │
+│       │   ├── auth/
+│       │   │   └── login/
+│       │   │
+│       │   ├── usuarios-user/
+│       │   │
+│       │   ├── alunos-student/
+│       │   │
+│       │   ├── modalidades-modality/
+│       │   │
+│       │   ├── planos-subscription/
+│       │   │
+│       │   ├── matriculas-enrollment/
+│       │   │
+│       │   ├── faturamento-/
+│       │   │
+│       │   ├── pagamentos-payment/
+│       │   │
+│       │   └── relatorios-report/
+│       │
+│       ├── app.component.ts
+│       ├── app.routes.ts
+│       └── app.config.ts
+│
+├── angular.json
+├── package.json
+└── tsconfig.json
+````
+
