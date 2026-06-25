@@ -2,133 +2,55 @@
 
   <div class="container-fluid">
 
-    <a class="navbar-brand fw-bold" routerLink="/">
+    <a class="navbar-brand" routerLink="/">
       Academia
     </a>
 
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
       <span class="navbar-toggler-icon"></span>
-
     </button>
 
     <div class="collapse navbar-collapse" id="menu">
 
       <ul class="navbar-nav">
 
-        <!-- Sistemas -->
+        @for (menu of menus; track menu.label) {
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
 
-            Sistemas
+            {{ menu.label }}
 
           </a>
 
           <ul class="dropdown-menu">
 
+            @for (item of menu.children; track item.label) {
+
             <li>
-              <a class="dropdown-item" routerLink="/usuarios">
 
-                Usuários
-
+              @if (item.route) {
+              <a class="dropdown-item" [routerLink]="item.route">
+                {{ item.label }}
               </a>
-            </li>
+              }
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-
+              @if (!item.route) {
               <a class="dropdown-item">
-
-                Sair
-
+                {{ item.label }}
               </a>
+              }
 
             </li>
+
+            }
 
           </ul>
 
         </li>
 
-        <!-- Cadastros -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-
-            Cadastros
-
-          </a>
-
-          <ul class="dropdown-menu">
-
-            <li>
-              <a class="dropdown-item" routerLink="/alunos">
-
-                Alunos
-
-              </a>
-            </li>
-
-            <li>
-              <a class="dropdown-item" routerLink="/modalidades">
-
-                Modalidades
-
-              </a>
-            </li>
-
-            <li>
-              <a class="dropdown-item" routerLink="/planos">
-
-                Planos
-
-              </a>
-            </li>
-
-          </ul>
-
-        </li>
-
-        <!-- Processos -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-
-            Processos
-
-          </a>
-
-        </li>
-
-        <!-- Relatórios -->
-
-        <li class="nav-item">
-
-          <a class="nav-link" routerLink="/relatorios">
-
-            Relatórios
-
-          </a>
-
-        </li>
-
-        <!-- Ajuda -->
-
-        <li class="nav-item">
-
-          <a class="nav-link">
-
-            Ajuda
-
-          </a>
-
-        </li>
+        }
 
       </ul>
 
