@@ -8,9 +8,9 @@ public record ModalityRequestDTO(
 
     @NotBlank(message = "Name is required") String name) {
 
-  public ModalityRequestDTO(Student student) {
-    this(
-        student.getName());
-  }
+  // public ModalityRequestDTO(Student student) {
+  // this(
+  // student.getName());
+  // }
 
 }

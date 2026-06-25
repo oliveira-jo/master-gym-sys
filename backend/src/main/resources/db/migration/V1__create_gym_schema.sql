@@ -55,7 +55,7 @@ CREATE TABLE enrollments_modalities (
     id BIGSERIAL PRIMARY KEY,
     enrollment_id BIGINT NOT NULL REFERENCES enrollments(id) ON DELETE CASCADE,
     modalitie_id BIGINT NOT NULL REFERENCES modalities(id) ON DELETE CASCADE,
-    graduation_id BIGINT NOT NULL REFERENCES graduations(id) ON DELETE CASCADE,
+    graduation_id BIGINT REFERENCES graduations(id) ON DELETE CASCADE,
     subscription_id BIGINT NOT NULL REFERENCES subscriptions(id) ON DELETE CASCADE,
     start_date DATE NOT NULL DEFAULT CURRENT_DATE,
     end_date DATE,

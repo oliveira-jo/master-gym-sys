@@ -7,7 +7,7 @@ public record EnrollmentResponseDTO(
     String enrollmentDate,
     Integer dueDay,
     String closingDate,
-    String studentId) {
+    Long studentId) {
 
   public EnrollmentResponseDTO(Enrollment enrollment) {
     this(
@@ -15,7 +15,7 @@ public record EnrollmentResponseDTO(
         enrollment.getEnrollmentDate().toString(),
         enrollment.getDueDay(),
         enrollment.getClosingDate().toString(),
-        enrollment.getStudent().getId().toString());
+        enrollment.getStudent().getId());
   }
 
 }
