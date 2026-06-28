@@ -8,7 +8,7 @@ export abstract class BaseService<Request, Response> {
 
   protected abstract endpoint: string;
 
-  private get url(): string {
+  protected get url(): string {
     return `${environment.apiUrl}/${this.endpoint}`;
   }
 
