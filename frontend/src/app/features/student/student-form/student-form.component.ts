@@ -43,7 +43,10 @@ export class StudentFormComponent {
 
   ngOnInit() {
     if (this.student) {
-      this.form.patchValue(this.student);
+      this.form.patchValue({
+        ...this.student,
+        birthdate: DateUtils.toBrazilian(this.student.birthdate)
+      });
     }
   }
 

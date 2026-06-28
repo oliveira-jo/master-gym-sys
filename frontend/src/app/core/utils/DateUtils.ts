@@ -1,5 +1,15 @@
 export class DateUtils {
 
+  static toBrazilian(date: string): string {
+    if (!date) {
+      return '';
+    }
+
+    const [year, month, day] = date.split('-');
+
+    return `${day}/${month}/${year}`;
+  }
+
   static toIso(date: string): string {
 
     if (!date) {
