@@ -17,7 +17,8 @@ public record StudentRequestDTO(
 
     @NotBlank(message = "Name is required") String name,
 
-    @JsonFormat(pattern = "dd/MM/yyyy") @Past(message = "Birthdate need to be in past") LocalDate birthdate,
+    // @JsonFormat(pattern = "dd/MM/yyyy")
+    @Past(message = "Birthdate need to be in past") LocalDate birthdate,
 
     @NotBlank(message = "Genre is required") @Size(max = 1, message = "The genre must have a maximum of 1 caracter") String genre,
 
@@ -27,7 +28,9 @@ public record StudentRequestDTO(
 
     @Email(message = "Invalid email format") @Size(max = 150, message = "The mail must have a maximum of 150 caracters") String email,
 
-    @NotBlank(message = "CPF is required") @CPF(message = "Invalid CPF number!") String cpf,
+    @NotBlank(message = "CPF is required")
+    // @CPF(message = "Invalid CPF number!")
+    String cpf,
 
     String observations,
 
