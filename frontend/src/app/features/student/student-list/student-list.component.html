@@ -10,44 +10,98 @@
 
   </div>
 
-  <table class="table table-striped">
+  <!-- Card search -->
+  <div class="card shadow-sm border-0 mb-4">
 
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Email</th>
-        <th>Telefone</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
+    <div class="card-header bg-white">
+      <strong>Pesquisar</strong>
+    </div>
 
-    <tbody>
+    <div class="card-body">
 
-      @for (student of students; track student.id) {
-      <tr>
-        <td>{{ student.name }}</td>
-        <td>{{ student.email }}</td>
-        <td>{{ student.phone }}</td>
+      <form [formGroup]="searchForm">
 
-        <td>
-          <button class="btn btn-sm btn-warning me-2" (click)="openEdit(student)">
-            Editar
-          </button>
+        <div class="row g-3 align-items-end">
 
-          <button class="btn btn-sm btn-danger" (click)="delete(student.id)">
-            Excluir
-          </button>
-        </td>
-      </tr>
-      }
+          <div class="col-md-5">
 
-    </tbody>
+            <label class="form-label">
+              Nome
+            </label>
 
-  </table>
+            <input type="text" class="form-control" formControlName="name" placeholder="Digite o nome do aluno">
 
-  @if (modalOpen) {
-  <app-student-form [student]="selectedStudent" (close)="closeModal($event)">
-  </app-student-form>
-  }
+          </div>
 
-</div>
+          <div class="col-md-5">
+
+            <label class="form-label">
+              E-mail
+            </label>
+
+            <input type="email" class="form-control" formControlName="email" placeholder="Digite o e-mail">
+
+          </div>
+
+          <div class="col-md-2 d-flex align-items-end">
+
+            <div class="d-flex gap-2 w-100">
+              <button type="button" class="btn btn-sm btn-primary" (click)="search()">
+                <i class="bi bi-search me-1"></i>
+                Pesquisar
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" (click)="clear()">
+                Limpar
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <table class="table table-striped">
+
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Telefone</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (student of students; track student.id) {
+        <tr>
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.phone }}</td>
+
+          <td>
+            <button class="btn btn-sm btn-warning me-2" (click)="openEdit(student)">
+              Editar
+            </button>
+
+            <button class="btn btn-sm btn-danger" (click)="delete(student.id)">
+              Excluir
+            </button>
+          </td>
+        </tr>
+        }
+
+      </tbody>
+
+    </table>
+
+    @if (modalOpen) {
+    <app-student-form [student]="selectedStudent" (close)="closeModal($event)">
+    </app-student-form>
+    }
+
+  </div>
