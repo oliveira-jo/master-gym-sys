@@ -5,10 +5,11 @@ import { PageResponse } from '../../../core/model/page/page-response.model';
 import { PageableRequest } from '../../../core/model/page/pageable-request.model';
 import { FormBuilder } from '@angular/forms';
 import { ModalityRequest } from '../../../core/model/modality-request.model';
+import { ModalityFormComponent } from "../modality-form/modality-form.component";
 
 @Component({
   selector: 'app-modality-list',
-  imports: [],
+  imports: [ModalityFormComponent],
   templateUrl: './modality-list.component.html',
   styleUrl: './modality-list.component.css'
 })
@@ -16,7 +17,7 @@ export class ModalityListComponent implements OnInit {
 
   private readonly modalityService = inject(ModalityService);
 
-  students: ModalityResponse[] = [];
+  modalities: ModalityResponse[] = [];
 
   pageResponse?: PageResponse<ModalityResponse>;
 
@@ -47,7 +48,7 @@ export class ModalityListComponent implements OnInit {
       .subscribe({
 
         next: page => {
-          this.students = page.content;
+          this.modalities = page.content;
           this.totalElements = page.totalElements;
         },
 
