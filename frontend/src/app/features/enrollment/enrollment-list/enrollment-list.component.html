@@ -1,1 +1,55 @@
-<p>enrollment-list works!</p>
+<div class="container">
+
+  <div class="d-flex justify-content-between mb-3">
+
+    <h3>Matriculas</h3>
+
+    <button class="btn btn-primary" (click)="openCreate()">
+      Nova
+    </button>
+
+  </div>
+
+  <!-- Card search -->
+  <div class="card shadow-sm border-0 mb-4">
+
+    <table class="table table-striped">
+
+      <thead>
+        <tr>
+          <th>Nome</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (enrollment of enrollments; track enrollment.id) {
+        <tr>
+          <td>{{ enrollment.id }}</td>
+          <td>{{ enrollment.enrollmentDate }}</td>
+          <td>{{ enrollment.dueDay }}</td>
+          <td>{{ enrollment.closingDate }}</td>
+          <td>{{ enrollment.studentId }}</td>
+
+          <td>
+            <button class="btn btn-sm btn-warning me-2" (click)="openEdit(enrollment)">
+              Editar
+            </button>
+
+            <button class="btn btn-sm btn-danger" (click)="delete(enrollment.id)">
+              Excluir
+            </button>
+          </td>
+        </tr>
+        }
+
+      </tbody>
+
+    </table>
+
+    @if (modalOpen) {
+    <app-enrollment-form [enrollment]="selectedEnrollment" (close)="closeModal($event)">
+    </app-enrollment-form>
+    }
+
+  </div>

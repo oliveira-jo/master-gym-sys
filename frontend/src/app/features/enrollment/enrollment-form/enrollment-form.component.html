@@ -1,1 +1,37 @@
-<p>enrollment-form works!</p>
+<div class="modal d-block bg-dark bg-opacity-50">
+
+  <div class="modal-dialog modal-xl">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ enrollment ? 'Editar Aluno' : 'Nova Matricula' }}
+        </h5>
+
+        <button class="btn-close" (click)="cancel()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <input class="form-control mb-2" placeholder="enrollmentDate" formControlName="enrollmentDate">
+          <input class="form-control mb-2" placeholder="dueDay" formControlName="dueDay">
+          <input class="form-control mb-2" placeholder="closingDate" formControlName="closingDate">
+          <input class="form-control mb-2" placeholder="studentId" formControlName="studentId">
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="cancel()">
+          Cancelar
+        </button>
+        <button class="btn btn-primary" (click)="save()">
+          Salvar
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
