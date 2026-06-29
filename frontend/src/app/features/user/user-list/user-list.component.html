@@ -1,1 +1,108 @@
-<p>user-list works!</p>
+<div class="container">
+
+  <div class="d-flex justify-content-between mb-3">
+
+    <h3>Usuários</h3>
+
+    <button class="btn btn-primary" (click)="openCreate()">
+      Novo
+    </button>
+
+  </div>
+
+  <!-- Card search -->
+  <div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-header bg-white">
+      <strong>Pesquisar</strong>
+    </div>
+
+    <div class="card-body">
+
+      <form [formGroup]="searchForm">
+
+        <div class="row g-3 align-items-end">
+
+          <div class="col-md-5">
+
+            <label class="form-label">
+              Nome
+            </label>
+
+            <input type="text" class="form-control" formControlName="name" placeholder="Digite o nome do usuário">
+
+          </div>
+
+          <div class="col-md-5">
+
+            <label class="form-label">
+              E-mail
+            </label>
+
+            <input type="email" class="form-control" formControlName="email" placeholder="Digite o e-mail">
+
+          </div>
+
+          <div class="col-md-2 d-flex align-items-end">
+
+            <div class="d-flex gap-2 w-100">
+              <button type="button" class="btn btn-sm btn-primary" (click)="search()">
+                <i class="bi bi-search me-1"></i>
+                Pesquisar
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" (click)="clear()">
+                Limpar
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <table class="table table-striped">
+
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Telefone</th>
+          <th>Cpf</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (obj of users; track obj.id) {
+        <tr>
+          <td>{{ obj.name }}</td>
+          <td>{{ obj.email }}</td>
+          <td>{{ obj.phone }}</td>
+          <td>{{ obj.cpf }}</td>
+
+          <td>
+            <button class="btn btn-sm btn-warning me-2" (click)="openEdit(obj)">
+              Editar
+            </button>
+
+            <button class="btn btn-sm btn-danger" (click)="delete(obj.id)">
+              Excluir
+            </button>
+          </td>
+        </tr>
+        }
+
+      </tbody>
+
+    </table>
+
+    @if (modalOpen) {
+    <app-user-form [user]="selectedUser" (close)="closeModal($event)">
+    </app-user-form>
+    }
+
+  </div>

@@ -4,11 +4,17 @@ import { UserResponse } from '../../../core/model/user-response.model';
 import { PageResponse } from '../../../core/model/page/page-response.model';
 import { UserFilterRequest } from '../../../core/model/user-filter.model';
 import { PageableRequest } from '../../../core/model/page/pageable-request.model';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { UserFormComponent } from '../user-form/user-form.component';
 
 @Component({
   selector: 'app-user-list',
-  imports: [],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    UserFormComponent
+  ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
