@@ -11,7 +11,6 @@ import { PageableRequest } from '../model/page/pageable-request.model';
   providedIn: 'root'
 })
 export class StudentService extends BaseService<StudentRequest, StudentResponse> {
-
   protected override endpoint = 'students';
 
   findAll(
@@ -30,6 +29,4 @@ export class StudentService extends BaseService<StudentRequest, StudentResponse>
     );
 
   }
-
-
 }
