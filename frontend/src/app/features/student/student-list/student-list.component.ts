@@ -34,7 +34,6 @@ export class StudentListComponent implements OnInit {
   selectedStudent?: StudentResponse;
   modalOpen = false;
 
-  // 
   private fb = inject(FormBuilder);
   searchForm = this.fb.group({
     name: [''], birthdate: [''], genre: [''], phone: [''], email: [''],
@@ -61,19 +60,14 @@ export class StudentListComponent implements OnInit {
           this.students = page.content;
           this.totalElements = page.totalElements;
         },
-
         error: err => console.error(err)
 
       });
-
   }
 
   search(): void {
-
     this.page.page = 0;
-
     this.loadStudents();
-
   }
 
   clear(): void {
