@@ -1,209 +1,328 @@
 
-# Mastergymsys
+# Mastergymsys (Monorepo)
 
-A system to help manage a gym, providing complete registration of students, enrollments, and plans.
+> Status: Developing V1
 
-- CRUD Users
-- CRUD Students
-- CRUD Modalities
-- CRUD Graduations
-- CRUD Subscriptions
-- CRUD Enrollments (Student, Modality, Subscrition)
-- Invoice Generation, Invoice Search and payments
-- Report Generation
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![Vscode](https://img.shields.io/badge/Vscode-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37.svg?style=for-the-badge&logo=Postman&logoColor=white)
+![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white) 
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 
-## Start Project With Flyway
 
-- Postgres and flyway config properties
-- Flyway for generate and manage scripts sql
-- Scrips in: resources ->  db -> migration
-- Patther: VX__Name
+Master Gym Sys é um sistema completo para gerenciamento de academias desenvolvido como um monorepo, contendo backend em Spring Boot e frontend em Angular. O projeto foi criado com foco em boas práticas de arquitetura, organização de código, escalabilidade e aplicações reais utilizadas no mercado.
 
-## Create Entities
+---
 
-- Pack Domain 
+## Sumário
 
-## Data persistem
+- Destaques
+- Tecnologias
+- Roadmap
+- Funcionalidades
+- Arquitetura
+- Estrutura
+- Instalação
+- Banco de Dados
+- API
+- Roadmap
+- Licença
+- Autor
 
-- Repository - Persistence with postgresql
+---
 
-## CRUD Students  
+## Destaques
 
-- Create, Read, Update, Delete
-- Repository, Service, DTO, Controller
-- Generate endpoints
+- Arquitetura em Camadas
+- Monorepo (Spring Boot + Angular)
+- JWT Authentication
+- Flyway Migrations
+- OpenAPI (Swagger)
+- Global Exception Handler
+- DTO Pattern
+- Mapper Pattern
+- Repository Pattern
+- Clean Code
+- SOLID
+- RESTful API
 
-## Testing with Postman
+---
 
-- Testing endpoints in Postman
-- JSON
+## Tecnologias
 
-## Validation In Project and Global Exception Handler
+- Java 21
+- Spring Boot
+<!-- - Spring Security JWT -->
+- Spring Data JPA
+- Hibernate
+- PostgreSQL
+- Flyway
+- OpenAPI (Swagger)
+- Angular 20
+- TypeScript
+- RxJS
+- Angular Material
+- Bootstrap
+<!-- - Docker -->
+- Git
+- Maven
+- Projections 
 
-- Pack Validation
-- Add validation in requests dtos
-  - @NotBlank, @Email, ...
-- @Valid in controller
-- Global Exception Handler and Custom Exceptions
+---
 
-## Filters With Specifications
+## Roadmap
 
-Instead of creating multiple methods within the repository, a specification is created.
+- [x] CRUD de alunos
+- [x] CRUD de planos
+- [x] CRUD de modalidades
+- [ ] Autenticação JWT
+- [ ] Matrículas
+- [ ] Financeiro
+- [ ] Dashboard
+- [ ] Notificações
+- [ ] Docker Compose
+- [ ] Deploy
 
-- Create StudentFilterRequest
-- Create pack specification
-- Create StudentSpecification
+---
 
-````JAVA
-public class StudentSpecification {
-  public static Specification<Student> withFilter(StudentFilterRequest filter) {
-    return Specification.<Student>unrestricted()
-        .and(nameContem(filter.name()))
-        .and(emailContem(filter.email()))
-        .and(phoneContem(filter.phone()))
-        .and(cityContem(filter.city()))
-        .and(stateContem(filter.state()));
-  }
+## Funcionalidades
 
-  private static Specification<Student> nameContem(String name) {
-    return (root, query, cb) -> {
-      if (name == null || name.isBlank()) {
-        return null;
-      }
-      return cb.like(cb.lower(root.get("name")), "%" + name.toLowerCase() + "%");
-    };
-  }
-}
-// others methodos with data ...
+<!-- - Autenticação JWT -->
+<!-- - Gestão de usuários -->
+- Gestão de alunos
+- Gestão de planos
+- Gestão de modalidades
+- Gestão de graduações
+<!-- - Matrículas -->
+<!-- - Controle financeiro -->
+<!-- - Pagamento de mensalidades -->
+<!-- - Relatórios -->
+- Documentação da API
+- Tratamento global de exceções
+
+---
+
+## Arquitetura 
+
+O projeto segue uma arquitetura em camadas:
+
+### Backend
+```
+┌─────────────┐
+│  Component  │
+└──────┬──────┘
+       │
+┌──────▼──────┐
+│   Service   │
+└──────┬──────┘
+       │
+┌──────▼──────┐
+│ Repository  │
+└──────┬──────┘
+       │
+┌──────▼──────┐
+│  Database   │
+└─────────────┘
+```
+
+### Frontend
+```
+┌─────────────┐
+│     UI      │
+└──────┬──────┘
+       │
+┌──────▼──────┐
+│  Component  │
+└──────┬──────┘
+       │
+┌──────▼──────┐
+│   Service   │
+└──────┬──────┘
+       │
+┌──────▼──────┐
+│ HttpClient  │
+└──────┬──────┘
+       │
+┌──────▼──────┐
+│ Interceptor │
+└──────┬──────┘
+       │
+┌──────▼──────┐
+│ Spring Boot │
+└─────────────┘
+```
+
+---
+
+## Banco de Dados
+
+- O projeto utiliza PostgreSQL.
+- As tabelas são criadas automaticamente através do Flyway.
+- Configuração padrão:
+- Host: localhost
+- Porta: 5432
+- Database: mastergym
+- Username: postgres
+- Password: password
+
+---
+
+<!-- ## Variáveis de Ambiente
+
+- application.properties
+- DB_HOST
+- DB_PORT
+- DB_NAME
+- DB_USER
+- DB_PASSWORD
+- JWT_SECRET
+
+--- -->
+
+## Pré-requisitos
+
+- Java 21+
+- Maven 3.9+
+- Node.js 22+
+- npm 10+
+- Angular CLI 20+
+- Git
+
+---
+
+## Documentação da API
+
+````
+http://localhost:8080/api/v1/swagger-ui/index.html
 ````
 
-- In StudentRepository add JpaSpecificationExecutor
+---
 
-````JAVA
-public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpecificationExecutor<Student> {}
+## Instalação
+
+1. Clone o repositório
+
+````
+git clone https://github.com/oliveira-jo/master-gym-sys.git
 ````
 
-- In StudentService
+Entre na pasta do projeto:
 
-Update method findAll
-
-````JAVA
- @Transactional(readOnly = true)
-  public Page<StudentResponseDTO> findAll(StudentFilterRequest filter, @NonNull Pageable pageable) {
-    return studentRepository.findAll(StudentSpecification.withFilter(filter), pageable)
-        .map(StudentResponseDTO::new);
-  }
+````
+cd master-gym-sys
 ````
 
-- In StudentController
+2. Executando o Backend (Spring Boot)
 
-Update method findAll
+Acesse a pasta do backend:
 
-````JAVA
-  @GetMapping
-  public ResponseEntity<Page<StudentResponseDTO>> findAll(StudentFilterRequest filter, Pageable pageable){
-    return ResponseEntity.ok(studentService.findAll(filter, pageable));
-  }
+````
+cd backend
 ````
 
-### Testing in Postman
+Instale as dependências e execute o projeto:
+
 ````
-http://localhost:8080/students?name=Metz&page=0&size=10&sorte=name,asc
-````
-
-- The JPA specification offers a huge improvement in coding.
-- It sets it apart from other professionals who use it directly within the repository.
-
-## Projetions and Native Query
-
-- Many developers are using four requests to build a dashboard as an example.
-- We can do something much more sophisticated and lighter using projections.
-
-- Create pack projection
-- Create MonthlyBillingProjection
-
-````JAVA
-public interface MonthlyBillingProjection {
-  String getMonth();
-  BigDecimal getTotal();
-}
+./mvnw spring-boot:run
 ````
 
-- Create ReportRepository
+Ou, se estiver utilizando o Maven instalado na máquina:
 
-````JAVA
-public interface ReportRepository extends Repository<Payment, Long> {
 
-  @Query(value = """
-        SELECT
-          TO_CHAR(due_date, 'YYYY-MM') AS month,
-          SUM(amount) AS total
-        FROM payments
-        WHERE status = 'PAID'
-        GROUP BY TO_CHAR(due_date, 'YYYY-MM')
-        ORDER BY month
-      """, nativeQuery = true)
-  List<MonthlyBillingProjection> monthlyBilling();
-  // others
-}
+````
+mvn spring-boot:run
 ````
 
-- Create ReportController
+Também é possível abrir o projeto em sua IDE favorita 
+(IntelliJ IDEA, Eclipse ou VS Code) e executar a classe principal da aplicação.
 
-````JAVA
-@RestController
-@RequestMapping("/reports")
-public class ReportController {
-  @Autowired
-  private ReportRepository reportRepository;
+Após iniciar, a API estará disponível em:
 
-  @GetMapping("/monthlyBilling")
-  public ResponseEntity<List<MonthlyBillingProjection>> monthlyBilling() {
-    return ResponseEntity.ok().body(reportRepository.monthlyBilling());
-  }
-}
+````
+http://localhost:8080
+
 ````
 
-## Creating a New Migration
+3. Executando o Frontend (Angular)
 
-  Creating a v3 migration for test the financial:
-  - Enrollments
-  - enrollments_modalities
-  - Payments
-  - Report 
+Em um novo terminal, acesse a pasta do frontend:
 
-## Opan Api and Documentation
-  - Configuration Open Api
-  - Generate documentation as a interface 
-  - And implementation this in Controller
+````
+cd frontend
+````
 
-## Monorepo Structure
+Instale as dependências:
+
+````
+npm install
+````
+
+Execute a aplicação:
+
+````
+ng serve
+````
+
+Ou:
+
+````
+npm start
+````
+
+A aplicação estará disponível em:
+
+````
+http://localhost:4200
+````
+
+---
+
+## Como executar
+
+### Rodando localmente
+
+```bash
+./mvnw spring-boot:run
+```
+
+---
+
+##  Estrutura Monorepo
+
 ````
 ├── backend
 │   └── spring-boot
-│
 ├── frontend
 │   └── angular
-│
 ├── docs
-│
 └── docker
 ````
 
-## Frontend Structure
+##  Estrutura do Backend
+
+````
+src
+ ├── controller
+ ├── service
+ ├── repository
+ ├── dto
+ ├── entity
+ ├── config
+ └── security
+````
+
+##  Estrutura do Frontend
+
 ````
 frontend/
 │
 ├── src/
-│
 │   ├── assets/
-│   │
 │   ├── environments/
-│   │
 │   ├── styles.css
-│   │
 │   └── app/
-│
 │       ├── core/
 │       │   ├── guards/
 │       │   ├── interceptors/
@@ -224,24 +343,15 @@ frontend/
 │       │   └── sidebar/
 │       │
 │       ├── features/
-│       │
 │       │   ├── auth/
 │       │   │   └── login/
-│       │   │
 │       │   ├── usuarios-user/
-│       │   │
 │       │   ├── alunos-student/
-│       │   │
 │       │   ├── modalidades-modality/
-│       │   │
 │       │   ├── planos-subscription/
-│       │   │
 │       │   ├── matriculas-enrollment/
-│       │   │
 │       │   ├── faturamento-/
-│       │   │
 │       │   ├── pagamentos-payment/
-│       │   │
 │       │   └── relatorios-report/
 │       │
 │       ├── app.component.ts
@@ -252,4 +362,40 @@ frontend/
 ├── package.json
 └── tsconfig.json
 ````
+
+---
+
+## Licença
+
+Este projeto está sob licença MIT.
+
+
+### Contribuições são bem-vindas.
+
+Faça um Fork
+
+Crie uma branch
+
+Abra um Pull Request
+
+---
+
+## 👨‍💻 Autor
+
+Jonathan Oliveira
+
+LinkedIn:
+[LinkedIn](https://www.linkedin.com/in/oliveira-jo)
+
+GitHub:
+[GitHub](https://github.com/oliveira-jo)
+
+
+
+
+
+
+
+
+
 
