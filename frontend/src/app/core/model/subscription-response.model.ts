@@ -1,7 +1,9 @@
+import { ModalityResponse } from "./modality-response.model";
+
 export interface SubscriptionResponse {
   id: number;
   name: string;
-  modalityName: string;
-  price: string;
+  modality: ModalityResponse | null;
+  price: number;
   active: boolean;
 }
