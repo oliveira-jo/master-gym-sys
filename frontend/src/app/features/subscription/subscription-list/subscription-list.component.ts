@@ -20,7 +20,7 @@ export class SubscriptionListComponent implements OnInit {
 
   pageResponse?: PageResponse<SubscriptionResponse>;
 
-  page = new PageableRequest(0, 30, 'name');
+  page = new PageableRequest(0, 10, 'id');
 
   selectedSubscription?: SubscriptionResponse;
 
@@ -46,6 +46,10 @@ export class SubscriptionListComponent implements OnInit {
       .subscribe({
 
         next: page => {
+
+          //pagination
+          this.pageResponse = page;
+
           this.subscriptions = page.content;
           this.totalElements = page.totalElements;
         },
@@ -95,5 +99,38 @@ export class SubscriptionListComponent implements OnInit {
       this.loadSubscriptions();
     }
   }
-}
 
+
+  //pagination
+  nextPage(): void {
+    if (!this.pageResponse?.last) {
+      this.page.page++;
+      this.loadSubscriptions();
+    }
+  }
+
+  previousPage(): void {
+    if (!this.pageResponse?.first) {
+      this.page.page--;
+      this.loadSubscriptions();
+    }
+
+  }
+
+  goToPage(page: number): void {
+    this.page.page = page;
+    this.loadSubscriptions();
+  }
+
+  //generate page number
+  get pages(): number[] {
+    if (!this.pageResponse) {
+      return [];
+    }
+    return Array.from(
+      { length: this.pageResponse.totalPages }, // array length
+      (_, i) => i // value, i retorn i
+    );
+  }
+
+}
