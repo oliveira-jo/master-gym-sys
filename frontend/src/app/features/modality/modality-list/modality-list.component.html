@@ -2,7 +2,7 @@
 
   <div class="d-flex justify-content-between mb-3">
 
-    <h3>Modalidade</h3>
+    <h3>Modalidades</h3>
 
     <button class="btn btn-primary" (click)="openCreate()">
       Novo
@@ -17,22 +17,22 @@
 
       <thead>
         <tr>
-          <th>Nome</th>
+          <th>Nome Modalidade</th>
+          <th>Ação</th>
         </tr>
       </thead>
 
       <tbody>
 
-        @for (modality of modalities; track modality.id) {
+        @for (obj of modalities; track obj.id) {
         <tr>
-          <td>{{ modality.name }}</td>
+          <td>{{ obj.name }}</td>
 
           <td>
-            <button class="btn btn-sm btn-warning me-2" (click)="openEdit(modality)">
+            <button class="btn btn-sm btn-warning me-2" (click)="openEdit(obj)">
               Editar
             </button>
-
-            <button class="btn btn-sm btn-danger" (click)="delete(modality.id)">
+            <button class="btn btn-sm btn-danger" (click)="delete(obj.id)">
               Excluir
             </button>
           </td>
