@@ -24,14 +24,16 @@ export class StudentListComponent implements OnInit {
 
   students: StudentResponse[] = [];
 
-  pageResponse?: PageResponse<StudentResponse>;
-
   filter: StudentFilterRequest = {};
+
+  pageResponse?: PageResponse<StudentResponse>;
 
   page = new PageableRequest(0, 10, 'name');
 
   totalElements = 0;
+
   selectedStudent?: StudentResponse;
+
   modalOpen = false;
 
   private fb = inject(FormBuilder);
@@ -135,16 +137,13 @@ export class StudentListComponent implements OnInit {
 
   //generate page number
   get pages(): number[] {
-
     if (!this.pageResponse) {
       return [];
     }
-
     return Array.from(
-      { length: this.pageResponse.totalPages },
-      (_, i) => i
+      { length: this.pageResponse.totalPages }, // array length
+      (_, i) => i // value, i retorn i
     );
-
   }
 
 }
