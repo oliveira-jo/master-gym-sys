@@ -99,6 +99,33 @@
 
     </table>
 
+    <!-- Pagination -->
+    <nav class="d-flex justify-content-center mt-3">
+      <small>
+        Exibindo {{ students.length }} de {{ totalElements }} registros
+      </small>
+    </nav>
+    <nav class="d-flex justify-content-center mt-3">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="pageResponse?.first">
+          <button class="page-link" (click)="previousPage()"> &laquo; </button>
+        </li>
+
+        @for (p of pages; track p) {
+
+        <li class="page-item" [class.active]="p === page.page">
+          <button class="page-link" (click)="goToPage(p)"> {{ p + 1 }} </button>
+        </li>
+
+        }
+
+        <li class="page-item" [class.disabled]="pageResponse?.last">
+          <button class="page-link" (click)="nextPage()"> &raquo; </button>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Modal form -->
     @if (modalOpen) {
     <app-student-form [student]="selectedStudent" (close)="closeModal($event)">
     </app-student-form>

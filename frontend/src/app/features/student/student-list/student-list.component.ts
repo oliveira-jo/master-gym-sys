@@ -57,6 +57,10 @@ export class StudentListComponent implements OnInit {
       .subscribe({
 
         next: page => {
+
+          //pagination
+          this.pageResponse = page;
+
           this.students = page.content;
           this.totalElements = page.totalElements;
         },
@@ -106,6 +110,41 @@ export class StudentListComponent implements OnInit {
     if (refresh) {
       this.loadStudents();
     }
+  }
+
+  //pagination
+  nextPage(): void {
+    if (!this.pageResponse?.last) {
+      this.page.page++;
+      this.loadStudents();
+    }
+  }
+
+  previousPage(): void {
+    if (!this.pageResponse?.first) {
+      this.page.page--;
+      this.loadStudents();
+    }
+
+  }
+
+  goToPage(page: number): void {
+    this.page.page = page;
+    this.loadStudents();
+  }
+
+  //generate page number
+  get pages(): number[] {
+
+    if (!this.pageResponse) {
+      return [];
+    }
+
+    return Array.from(
+      { length: this.pageResponse.totalPages },
+      (_, i) => i
+    );
+
   }
 
 }
