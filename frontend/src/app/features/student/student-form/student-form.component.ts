@@ -25,7 +25,7 @@ export class StudentFormComponent {
   states = STATES;
 
   form = this.fb.group({
-    // Data
+    // Princiapl Data
     name: ['', Validators.required],
     birthdate: ['', Validators.required],
     genre: ['', Validators.required],
@@ -44,10 +44,6 @@ export class StudentFormComponent {
   });
 
   ngOnInit() {
-
-    console.log(STATES);
-    console.log(this.states);
-
     if (this.student) {
       this.form.patchValue({
         ...this.student,
