@@ -17,6 +17,8 @@ export class ModalityListComponent implements OnInit {
 
   private readonly modalityService = inject(ModalityService);
 
+  private fb = inject(FormBuilder);
+
   modalities: ModalityResponse[] = [];
 
   pageResponse?: PageResponse<ModalityResponse>;
@@ -24,15 +26,14 @@ export class ModalityListComponent implements OnInit {
   page = new PageableRequest(0, 10, 'id');
 
   totalElements = 0;
+
   selectedModality?: ModalityResponse;
+
   modalOpen = false;
 
-  // 
-  private fb = inject(FormBuilder);
   searchForm = this.fb.group({
     name: ['']
   });
-
 
   ngOnInit(): void {
     this.loadModalities();
@@ -48,6 +49,10 @@ export class ModalityListComponent implements OnInit {
       .subscribe({
 
         next: page => {
+
+          //pagination
+          this.pageResponse = page;
+
           this.modalities = page.content;
           this.totalElements = page.totalElements;
         },
@@ -100,6 +105,37 @@ export class ModalityListComponent implements OnInit {
     if (refresh) {
       this.loadModalities();
     }
+  }
+
+  //pagination
+  nextPage(): void {
+    if (!this.pageResponse?.last) {
+      this.page.page++;
+      this.loadModalities();
+    }
+  }
+
+  previousPage(): void {
+    if (!this.pageResponse?.first) {
+      this.page.page--;
+      this.loadModalities();
+    }
+  }
+
+  goToPage(page: number): void {
+    this.page.page = page;
+    this.loadModalities();
+  }
+
+  //generate page number
+  get pages(): number[] {
+    if (!this.pageResponse) {
+      return [];
+    }
+    return Array.from(
+      { length: this.pageResponse.totalPages }, // array length
+      (_, i) => i // value, i retorn i
+    );
   }
 
 }
