@@ -1,1 +1,58 @@
-<p>subscription-form works!</p>
+<div class="modal d-block bg-dark bg-opacity-50">
+
+  <div class="modal-dialog modal-xl">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ subscription ? 'Editar Inscrição' : 'Nova Inscrição' }}
+        </h5>
+
+        <button class="btn-close" (click)="cancel()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <input class="form-control mb-2" placeholder="Nome" formControlName="name">
+        </form>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <input class="form-control mb-2" placeholder="price" formControlName="price">
+        </form>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="form">
+
+          <label class="form-label">Modalidade</label>
+          <select class="form-select" formControlName="modalityName">
+            <option [ngValue]="null">
+              Selecione...
+            </option>
+            @for (modality of modalities; track modality.id) {
+            <option [ngValue]="modality.name">
+              {{ modality.name }}
+            </option>
+            }
+          </select>
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="cancel()">
+          Cancelar
+        </button>
+        <button class="btn btn-primary" (click)="save()">
+          Salvar
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

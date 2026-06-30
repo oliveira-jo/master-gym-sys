@@ -1,1 +1,46 @@
-<p>subscription-list works!</p>
+<div class="container">
+  <div class="d-flex justify-content-between mb-3">
+    <h3>Planos</h3>
+    <button class="btn btn-primary" (click)="openCreate()">
+      Novo
+    </button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Plano</th>
+        <th>Modalidade</th>
+        <th>Preço</th>
+        <th>Ativo</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (obj of subscriptions; track obj.id) {
+      <tr>
+        <td>{{ obj.id }}</td>
+        <td>{{ obj.name }}</td>
+        <td>{{ obj.modality?.name }}</td>
+        <td>{{ obj.price }}</td>
+        <td>{{ obj.active }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="openEdit(obj)">
+            Editar
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="delete(obj.id)">
+            Excluir
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  @if (modalOpen) {
+  <app-subscription-form [subscription]="selectedSubscription" (close)="closeModal($event)">
+  </app-subscription-form>
+  }
+
+</div>
