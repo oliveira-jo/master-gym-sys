@@ -15,13 +15,32 @@
 
         <form [formGroup]="form">
           <input class="form-control mb-2" placeholder="Nome" formControlName="name">
-          <input class="form-control mb-2" placeholder="Data Nascimento" formControlName="birthdate">
-          <input class="form-control mb-2" placeholder="Genero" formControlName="genre">
+          <input class="form-control mb-2" placeholder="Data Nascimento - XX/XX/XXXX" formControlName="birthdate">
+
+
+          <!-- <input class="form-control mb-2" placeholder="Genero" formControlName="genre"> -->
+          <select class="form-select mb-2" formControlName="genre">
+            <option value="" disabled>Selecione o gênero</option>
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+          </select>
+
           <input class="form-control mb-2" placeholder="cpf" formControlName="cpf">
-          <input class="form-control mb-2" placeholder="Celular" formControlName="phone">
+          <input class="form-control mb-2" placeholder="Celuar (XX)9XXXX-XXXX" formControlName="phone">
           <input class="form-control mb-2" placeholder="Email" formControlName="email">
           <input class="form-control mb-2" placeholder="CEP" formControlName="zipCode">
-          <input class="form-control mb-2" placeholder="Estado" formControlName="state">
+
+          <!-- <input class="form-control mb-2" placeholder="Estado" formControlName="state"> -->
+          <select class="form-select mb-2" formControlName="state">
+            <option value="">Selecione um estado</option>
+
+            @for (state of states; track state.uf) {
+            <option [value]="state.uf">
+              {{ state.name }} ({{ state.uf }})
+            </option>
+            }
+          </select>
+
           <input class="form-control mb-2" placeholder="Cidade" formControlName="city">
           <input class="form-control mb-2" placeholder="Endereço" formControlName="address">
           <input class="form-control mb-2" placeholder="Número" formControlName="number">

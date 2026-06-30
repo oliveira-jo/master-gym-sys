@@ -7,6 +7,7 @@ import { StudentRequest } from '../../../core/model/student-request.model';
 import { DateUtils } from '../../../core/utils/DateUtils';
 import { DocumentUtils } from '../../../core/utils/DocumentUtils';
 import { PhoneUtils } from '../../../core/utils/PhoneUtils';
+import { STATES } from '../../../core/constant/states';
 
 @Component({
   selector: 'app-student-form',
@@ -21,6 +22,7 @@ export class StudentFormComponent {
 
   private fb = inject(NonNullableFormBuilder);
   private studentService = inject(StudentService);
+  states = STATES;
 
   form = this.fb.group({
     // Data
@@ -42,6 +44,10 @@ export class StudentFormComponent {
   });
 
   ngOnInit() {
+
+    console.log(STATES);
+    console.log(this.states);
+
     if (this.student) {
       this.form.patchValue({
         ...this.student,
