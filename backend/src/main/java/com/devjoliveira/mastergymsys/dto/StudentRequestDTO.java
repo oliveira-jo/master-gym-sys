@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.devjoliveira.mastergymsys.domain.Student;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -17,7 +16,6 @@ public record StudentRequestDTO(
 
     @NotBlank(message = "Name is required") String name,
 
-    // @JsonFormat(pattern = "dd/MM/yyyy")
     @Past(message = "Birthdate need to be in past") LocalDate birthdate,
 
     @NotBlank(message = "Genre is required") @Size(max = 1, message = "The genre must have a maximum of 1 caracter") String genre,
@@ -28,9 +26,7 @@ public record StudentRequestDTO(
 
     @Email(message = "Invalid email format") @Size(max = 150, message = "The mail must have a maximum of 150 caracters") String email,
 
-    @NotBlank(message = "CPF is required")
-    // @CPF(message = "Invalid CPF number!")
-    String cpf,
+    @NotBlank(message = "CPF is required") @CPF(message = "Invalid CPF number!") String cpf,
 
     String observations,
 
