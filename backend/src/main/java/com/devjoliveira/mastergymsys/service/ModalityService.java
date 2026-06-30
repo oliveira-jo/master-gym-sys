@@ -33,8 +33,13 @@ public class ModalityService {
 
   @Transactional(readOnly = true)
   public ModalityResponseDTO findByName(String name) {
-    return modalityRepository.findByNameContainingIgnoreCase(name)
-        .orElseThrow(() -> new BusinessException("Modality not found with name: " + name));
+    Modality response = modalityRepository.findByNameContainingIgnoreCase(name).get();
+    if (response == null) {
+      new BusinessException("Modality not found with name: " + name);
+
+    }
+    return new ModalityResponseDTO(response);
+
   }
 
   @Transactional

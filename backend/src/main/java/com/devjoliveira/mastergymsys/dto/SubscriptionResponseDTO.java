@@ -5,7 +5,7 @@ import com.devjoliveira.mastergymsys.domain.Subscription;
 public record SubscriptionResponseDTO(
         Long id,
         String name,
-        String modalityName,
+        ModalityResponseDTO modality,
         String price,
         boolean active) {
 
@@ -13,7 +13,7 @@ public record SubscriptionResponseDTO(
         this(
                 subscription.getId(),
                 subscription.getName(),
-                subscription.getModality() != null ? subscription.getModality().getName() : null,
+                new ModalityResponseDTO(subscription.getModality()),
                 subscription.getPrice() != null ? subscription.getPrice().toString() : null,
                 subscription.isActive());
     }

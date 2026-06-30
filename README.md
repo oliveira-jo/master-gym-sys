@@ -8,7 +8,7 @@ A system to help manage a gym, providing complete registration of students, enro
 - CRUD Modalities
 - CRUD Graduations
 - CRUD Subscriptions
-- CRID Enrollments (Student, Modality, Subscrition)
+- CRUD Enrollments (Student, Modality, Subscrition)
 - Invoice Generation, Invoice Search and payments
 - Report Generation
 
@@ -18,7 +18,6 @@ A system to help manage a gym, providing complete registration of students, enro
 - Flyway for generate and manage scripts sql
 - Scrips in: resources ->  db -> migration
 - Patther: VX__Name
-
 
 ## Create Entities
 

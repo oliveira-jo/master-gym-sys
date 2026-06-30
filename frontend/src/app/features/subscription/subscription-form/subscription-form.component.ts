@@ -24,8 +24,8 @@ export class SubscriptionFormComponent {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    modalityName: ['', Validators.required],
-    price: [0.0, Validators.required],
+    modalityId: this.fb.control<number | null>(null, Validators.required),
+    price: this.fb.control<number | null>(null, Validators.required),
     active: [true, Validators.required],
   });
 
@@ -39,7 +39,7 @@ export class SubscriptionFormComponent {
     if (this.subscription) {
       this.form.patchValue({
         name: this.subscription.name,
-        modalityName: this.subscription.modality?.name,
+        modalityId: this.subscription.modality?.id,
         price: this.subscription.price,
         active: this.subscription.active
       });

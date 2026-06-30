@@ -41,12 +41,12 @@
         <form [formGroup]="form">
 
           <label class="form-label">Modalidade</label>
-          <select class="form-select" formControlName="modalityName">
+          <select class="form-select" formControlName="modalityId">
             <option [ngValue]="null">
               Selecione...
             </option>
             @for (modality of modalities; track modality.id) {
-            <option [ngValue]="modality.name">
+            <option [ngValue]="modality.id">
               {{ modality.name }}
             </option>
             }

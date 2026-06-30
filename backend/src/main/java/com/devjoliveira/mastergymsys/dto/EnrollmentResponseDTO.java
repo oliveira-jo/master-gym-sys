@@ -14,7 +14,7 @@ public record EnrollmentResponseDTO(
         enrollment.getId(),
         enrollment.getEnrollmentDate().toString(),
         enrollment.getDueDay(),
-        enrollment.getClosingDate().toString(),
+        enrollment.getClosingDate() != null ? enrollment.getClosingDate().toString() : null,
         enrollment.getStudent().getId());
   }
 
