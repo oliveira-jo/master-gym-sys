@@ -6,9 +6,8 @@
 
       <div class="modal-header">
         <h5 class="modal-title">
-          {{ student ? 'Editar Aluno' : 'Novo Aluno' }}
+          {{ student ? 'Editar Aluno' : 'Cadastrar Aluno' }}
         </h5>
-
         <button class="btn-close" (click)="cancel()"></button>
       </div>
 
@@ -16,32 +15,29 @@
 
         <form [formGroup]="form">
           <input class="form-control mb-2" placeholder="Nome" formControlName="name">
-          <input class="form-control mb-2" placeholder="birthdate" formControlName="birthdate">
-          <input class="form-control mb-2" placeholder="genre" formControlName="genre">
+          <input class="form-control mb-2" placeholder="Data Nascimento" formControlName="birthdate">
+          <input class="form-control mb-2" placeholder="Genero" formControlName="genre">
           <input class="form-control mb-2" placeholder="cpf" formControlName="cpf">
-          <input class="form-control mb-2" placeholder="phone" formControlName="phone">
-          <input class="form-control mb-2" placeholder="email" formControlName="email">
-          <input class="form-control mb-2" placeholder="zipCode" formControlName="zipCode">
-          <input class="form-control mb-2" placeholder="state" formControlName="state">
-          <input class="form-control mb-2" placeholder="city" formControlName="city">
-          <input class="form-control mb-2" placeholder="address" formControlName="address">
-          <input class="form-control mb-2" placeholder="number" formControlName="number">
-          <input class="form-control mb-2" placeholder="complement" formControlName="complement">
-          <textarea class="form-control mb-2" placeholder="observations" formControlName="observations"></textarea>
+          <input class="form-control mb-2" placeholder="Celular" formControlName="phone">
+          <input class="form-control mb-2" placeholder="Email" formControlName="email">
+          <input class="form-control mb-2" placeholder="CEP" formControlName="zipCode">
+          <input class="form-control mb-2" placeholder="Estado" formControlName="state">
+          <input class="form-control mb-2" placeholder="Cidade" formControlName="city">
+          <input class="form-control mb-2" placeholder="Endereço" formControlName="address">
+          <input class="form-control mb-2" placeholder="Número" formControlName="number">
+          <input class="form-control mb-2" placeholder="Complemento" formControlName="complement">
+          <textarea class="form-control mb-2" placeholder="Observação" formControlName="observations"></textarea>
         </form>
 
       </div>
 
       <div class="modal-footer">
-
         <button class="btn btn-secondary" (click)="cancel()">
           Cancelar
         </button>
-
         <button class="btn btn-primary" (click)="save()">
           Salvar
         </button>
-
       </div>
 
     </div>

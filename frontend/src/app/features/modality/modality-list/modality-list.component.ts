@@ -21,7 +21,7 @@ export class ModalityListComponent implements OnInit {
 
   pageResponse?: PageResponse<ModalityResponse>;
 
-  page = new PageableRequest(0, 10, 'name');
+  page = new PageableRequest(0, 10, 'id');
 
   totalElements = 0;
   selectedModality?: ModalityResponse;

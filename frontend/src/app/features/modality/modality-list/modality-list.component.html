@@ -1,33 +1,28 @@
 <div class="container">
 
-  <div class="d-flex justify-content-between mb-3">
-
+  <!-- w-75 mx-auto ajust to smal table w-75 → 75% and center -->
+  <div class="d-flex justify-content-between mb-3 w-75 mx-auto">
     <h3>Modalidades</h3>
-
     <button class="btn btn-primary" (click)="openCreate()">
       Novo
     </button>
-
   </div>
 
   <!-- Card search -->
-  <div class="card shadow-sm border-0 mb-4">
-
+  <div class="card shadow-sm border-0 mb-4 w-75 mx-auto">
     <table class="table table-striped">
-
       <thead>
         <tr>
-          <th>Nome Modalidade</th>
+          <th>Modalidade Id</th>
+          <th>Modalidade Nome</th>
           <th>Ação</th>
         </tr>
       </thead>
-
       <tbody>
-
         @for (obj of modalities; track obj.id) {
         <tr>
+          <td>{{ obj.id }}</td>
           <td>{{ obj.name }}</td>
-
           <td>
             <button class="btn btn-sm btn-warning me-2" (click)="openEdit(obj)">
               Editar
@@ -38,9 +33,7 @@
           </td>
         </tr>
         }
-
       </tbody>
-
     </table>
 
     @if (modalOpen) {

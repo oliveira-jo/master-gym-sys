@@ -20,7 +20,7 @@ export class EnrollmentListComponent implements OnInit {
 
   pageResponse?: PageResponse<EnrollmentResponse>;
 
-  page = new PageableRequest(0, 10, 'name');
+  page = new PageableRequest(0, 10, 'id');
 
   totalElements = 0;
   selectedEnrollment?: EnrollmentResponse;

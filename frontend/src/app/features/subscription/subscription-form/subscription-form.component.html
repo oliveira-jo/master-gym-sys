@@ -6,7 +6,7 @@
 
       <div class="modal-header">
         <h5 class="modal-title">
-          {{ subscription ? 'Editar Inscrição' : 'Nova Inscrição' }}
+          {{ subscription ? 'Editar Inscrição' : 'Cadastrar Inscrição' }}
         </h5>
 
         <button class="btn-close" (click)="cancel()"></button>
@@ -14,14 +14,28 @@
 
       <div class="modal-body">
         <form [formGroup]="form">
-          <input class="form-control mb-2" placeholder="Nome" formControlName="name">
+          <label class="form-label">Nome</label>
+          <input class="form-control mb-2" placeholder="Nome do Plano" formControlName="name">
         </form>
       </div>
       <div class="modal-body">
         <form [formGroup]="form">
-          <input class="form-control mb-2" placeholder="price" formControlName="price">
+          <label class="form-label">Valor</label>
+          <input class="form-control mb-2" placeholder="Valor" formControlName="price">
         </form>
       </div>
+
+      <!-- <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" formControlName="active" id="active">
+            <label class="form-check-label" for="active">
+              Plano Ativo
+            </label>
+          </div>
+        </form>
+      </div> -->
+
       <div class="modal-body">
 
         <form [formGroup]="form">

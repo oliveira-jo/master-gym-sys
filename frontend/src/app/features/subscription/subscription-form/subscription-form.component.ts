@@ -25,7 +25,8 @@ export class SubscriptionFormComponent {
   form = this.fb.group({
     name: ['', Validators.required],
     modalityName: ['', Validators.required],
-    price: [0, Validators.required],
+    price: [0.0, Validators.required],
+    active: [true, Validators.required],
   });
 
   private readonly modalityService = inject(ModalityService);
@@ -39,7 +40,8 @@ export class SubscriptionFormComponent {
       this.form.patchValue({
         name: this.subscription.name,
         modalityName: this.subscription.modality?.name,
-        price: this.subscription.price
+        price: this.subscription.price,
+        active: this.subscription.active
       });
     }
 
