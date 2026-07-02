@@ -1,41 +1,33 @@
 <div class="container">
-
   <div class="d-flex justify-content-between mb-3">
-
     <h3>Matriculas</h3>
-
-    <button class="btn btn-primary" (click)="openCreate()">
-      Nova
+    <button class="btn btn-primary" [routerLink]="['/matricular']">
+      Matricular
     </button>
 
   </div>
 
   <!-- Card search -->
   <div class="card shadow-sm border-0 mb-4">
-
     <table class="table table-striped">
-
       <thead>
         <tr>
-          <th>Matricula-id</th>
+          <th>id</th>
           <th>Data da Matricula</th>
           <th>Dia Vencimento</th>
-          <th>Data de Encerramento</th>
-          <th>Aluno-id</th>
+          <th>Encerramento</th>
+          <th>Aluno</th>
           <th>Ação</th>
         </tr>
       </thead>
-
       <tbody>
-
         @for (enrollment of enrollments; track enrollment.id) {
         <tr>
           <td>{{ enrollment.id }}</td>
           <td>{{ enrollment.enrollmentDate }}</td>
           <td>{{ enrollment.dueDay }}</td>
           <td>{{ enrollment.closingDate }}</td>
-          <td>{{ enrollment.studentId }}</td>
-
+          <td>{{ enrollment.student.name }}</td>
           <td>
             <button class="btn btn-sm btn-warning me-2" (click)="openEdit(enrollment)">
               Editar
@@ -46,9 +38,7 @@
           </td>
         </tr>
         }
-
       </tbody>
-
     </table>
 
     @if (modalOpen) {

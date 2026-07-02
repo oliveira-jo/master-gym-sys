@@ -1,16 +1,22 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { EnrollmentFormComponent } from '../enrollment-form/enrollment-form.component';
 import { EnrollmentService } from '../../../core/service/enrollment.service';
 import { EnrollmentResponse } from '../../../core/model/enrollment-response.model';
 import { PageResponse } from '../../../core/model/page/page-response.model';
 import { PageableRequest } from '../../../core/model/page/pageable-request.model';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { EnrollmentFormComponent } from "../enrollment-form/enrollment-form.component";
+import { CommonModule } from '@angular/common';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-enrollment-list',
-  imports: [EnrollmentFormComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    EnrollmentFormComponent,
+    RouterLink
+  ],
   templateUrl: './enrollment-list.component.html',
-  styleUrl: './enrollment-list.component.css'
 })
 export class EnrollmentListComponent implements OnInit {
 
