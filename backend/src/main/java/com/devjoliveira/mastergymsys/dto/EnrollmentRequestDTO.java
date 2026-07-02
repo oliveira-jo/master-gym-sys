@@ -10,7 +10,8 @@ import jakarta.validation.constraints.NotNull;
 
 public record EnrollmentRequestDTO(
 
-    @JsonFormat(pattern = "dd/MM/yyyy") LocalDate enrollmentDate,
+    // @JsonFormat(pattern = "dd/MM/yyyy")
+    LocalDate enrollmentDate,
     @NotNull(message = "Due day is required") Integer dueDay,
     @JsonFormat(pattern = "dd/MM/yyyy") LocalDate closingDate,
     @NotBlank(message = "StudentId is required") String studentId) {
