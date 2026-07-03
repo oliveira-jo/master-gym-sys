@@ -1,9 +1,10 @@
 package com.devjoliveira.mastergymsys.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.devjoliveira.mastergymsys.domain.enums.StatusEnrollment;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,8 +15,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+
+import com.devjoliveira.mastergymsys.domain.enums.StatusEnrollment;
 
 @Entity
 @Table(name = "enrollments")
@@ -41,6 +45,9 @@ public class Enrollment {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "student_id")
   private Student student;
+
+  @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+  private List<EnrollmentModality> enrollmentModalities = new ArrayList<>();
 
   @PrePersist
   public void prePersist() {
@@ -95,6 +102,10 @@ public class Enrollment {
 
   public void setStudent(Student student) {
     this.student = student;
+  }
+
+  public List<EnrollmentModality> getEnrollmentModalities() {
+    return this.enrollmentModalities;
   }
 
   @Override

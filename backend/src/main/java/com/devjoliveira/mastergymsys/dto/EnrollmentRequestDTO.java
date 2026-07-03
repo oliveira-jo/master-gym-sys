@@ -1,26 +1,25 @@
 package com.devjoliveira.mastergymsys.dto;
 
+import java.util.List;
 import java.time.LocalDate;
 
-import com.devjoliveira.mastergymsys.domain.Enrollment;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record EnrollmentRequestDTO(
 
-    // @JsonFormat(pattern = "dd/MM/yyyy")
-    LocalDate enrollmentDate,
-    @NotNull(message = "Due day is required") Integer dueDay,
-    @JsonFormat(pattern = "dd/MM/yyyy") LocalDate closingDate,
-    @NotBlank(message = "StudentId is required") String studentId) {
+        // @JsonFormat(pattern = "dd/MM/yyyy")
+        @NotNull(message = "The Enrollment Date is required") LocalDate enrollmentDate,
 
-  public EnrollmentRequestDTO(Enrollment enrollment) {
-    this(enrollment.getEnrollmentDate(),
-        enrollment.getDueDay(),
-        enrollment.getClosingDate(),
-        enrollment.getStudent().getId().toString());
-  }
+        @NotNull(message = "Due day is required") Integer dueDay,
+
+        // @JsonFormat(pattern = "dd/MM/yyyy")
+        // @NotBlank(message = "The Enrollment Date is required")
+        LocalDate closingDate,
+
+        @NotNull(message = "StudentId is required") Long studentId,
+
+        @NotNull(message = "Enrollment modalities is required") List<EnrollmentModalityRequestDTO> enrollmentModalityies
+
+) {
 
 }
