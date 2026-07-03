@@ -12,7 +12,6 @@ import com.devjoliveira.mastergymsys.domain.Enrollment;
 import com.devjoliveira.mastergymsys.domain.EnrollmentModality;
 import com.devjoliveira.mastergymsys.domain.Student;
 import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
-import com.devjoliveira.mastergymsys.dto.EnrollmentModalityResponseDTO;
 import com.devjoliveira.mastergymsys.dto.EnrollmentRequestDTO;
 import com.devjoliveira.mastergymsys.dto.EnrollmentResponseDTO;
 import com.devjoliveira.mastergymsys.repositoty.EnrollmentModalityRepository;
