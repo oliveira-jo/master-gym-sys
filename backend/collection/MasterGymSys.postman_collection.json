@@ -168,12 +168,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/students?page=0&size=10&sorte=name,asc",
-							"protocol": "http",
+							"raw": "{{url-lgym-local}}/students?page=0&size=10&sorte=name,asc",
 							"host": [
-								"localhost"
+								"{{url-lgym-local}}"
 							],
-							"port": "8080",
 							"path": [
 								"students"
 							],
@@ -209,7 +207,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/students"
+						"url": "{{url-lgym-local}}/students"
 					},
 					"response": []
 				},
@@ -227,7 +225,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/students/6"
+						"url": "{{url-lgym-local}}/students/6"
 					},
 					"response": []
 				},
@@ -236,7 +234,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/students/7"
+						"url": "{{url-lgym-local}}/students/7"
 					},
 					"response": []
 				},
@@ -245,7 +243,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8080/students/9"
+						"url": "{{url-lgym-local}}/students/9"
 					},
 					"response": []
 				}
@@ -259,7 +257,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/modalities"
+						"url": "{{url-lgym-local}}/modalities"
 					},
 					"response": []
 				},
@@ -269,12 +267,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/modalities/search?name=Musculação",
-							"protocol": "http",
+							"raw": "{{url-lgym-local}}/modalities/search?name=Musculação",
 							"host": [
-								"localhost"
+								"{{url-lgym-local}}"
 							],
-							"port": "8080",
 							"path": [
 								"modalities",
 								"search"
@@ -303,7 +299,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/modalities"
+						"url": "{{url-lgym-local}}/modalities"
 					},
 					"response": []
 				},
@@ -321,7 +317,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/modalities/9"
+						"url": "{{url-lgym-local}}/modalities/9"
 					},
 					"response": []
 				},
@@ -330,7 +326,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/modalities/9"
+						"url": "{{url-lgym-local}}/modalities/9"
 					},
 					"response": []
 				},
@@ -339,7 +335,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8080/modalities/9"
+						"url": "{{url-lgym-local}}/modalities/9"
 					},
 					"response": []
 				}
@@ -354,12 +350,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/subscriptions?page=1",
-							"protocol": "http",
+							"raw": "{{url-lgym-local}}/subscriptions?page=1",
 							"host": [
-								"localhost"
+								"{{url-lgym-local}}"
 							],
-							"port": "8080",
 							"path": [
 								"subscriptions"
 							],
@@ -378,7 +372,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/subscriptions/1"
+						"url": "{{url-lgym-local}}/subscriptions/1"
 					},
 					"response": []
 				},
@@ -396,7 +390,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/subscriptions"
+						"url": "{{url-lgym-local}}/subscriptions"
 					},
 					"response": []
 				},
@@ -414,7 +408,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/subscriptions/9"
+						"url": "{{url-lgym-local}}/subscriptions/9"
 					},
 					"response": []
 				},
@@ -423,7 +417,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8080/subscriptions/9"
+						"url": "{{url-lgym-local}}/subscriptions/9"
 					},
 					"response": []
 				}
@@ -446,7 +440,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/graduations"
+						"url": "{{url-lgym-local}}/graduations"
 					},
 					"response": []
 				},
@@ -464,7 +458,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/graduations/9"
+						"url": "{{url-lgym-local}}/graduations/9"
 					},
 					"response": []
 				},
@@ -473,7 +467,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/graduations/1"
+						"url": "{{url-lgym-local}}/graduations/1"
 					},
 					"response": []
 				},
@@ -482,7 +476,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8080/graduations/9"
+						"url": "{{url-lgym-local}}/graduations/9"
 					},
 					"response": []
 				},
@@ -491,7 +485,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/graduations"
+						"url": "{{url-lgym-local}}/graduations"
 					},
 					"response": []
 				},
@@ -501,12 +495,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/graduations/search?name=Branca",
-							"protocol": "http",
+							"raw": "{{url-lgym-local}}/graduations/search?name=Branca",
 							"host": [
-								"localhost"
+								"{{url-lgym-local}}"
 							],
-							"port": "8080",
 							"path": [
 								"graduations",
 								"search"
@@ -533,14 +525,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"enrollmentDate\": \"06/05/2026\",\n    \"dueDay\": \"06\",\n    \"closingDate\": \"06/05/2027\",\n    \"studentId\": 6\n}",
+							"raw": "{\n    \"enrollmentDate\": \"2026-07-03\",\n    \"dueDay\": 10,\n    \"closingDate\": \"2026-11-03\",\n    \"studentId\": 2,\n    \"enrollmentModalityies\": [\n        {\n            \"modalityId\": 4,\n            \"graduationId\": 4,\n            \"subscriptionId\": 2,\n            \"startDate\": \"2026-03-27\",\n            \"endDate\": \"2026-11-03\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8080/enrollments"
+						"url": "{{url-lgym-local}}/enrollments"
 					},
 					"response": []
 				},
@@ -558,7 +550,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/enrollments/9"
+						"url": "{{url-lgym-local}}/enrollments/9"
 					},
 					"response": []
 				},
@@ -567,7 +559,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/enrollments/1"
+						"url": "{{url-lgym-local}}/enrollments/1"
 					},
 					"response": []
 				},
@@ -576,7 +568,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8080/enrollments/9"
+						"url": "{{url-lgym-local}}/enrollments/7"
 					},
 					"response": []
 				},
@@ -585,7 +577,131 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/enrollments"
+						"url": "{{url-lgym-local}}/enrollments"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "monthlyBilling",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url-lgym-local}}/reports/monthlyBilling"
+					},
+					"response": []
+				},
+				{
+					"name": "studentsByCity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url-lgym-local}}/reports/studentsByCity"
+					},
+					"response": []
+				},
+				{
+					"name": "outstandingInvoices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url-lgym-local}}/reports/outstandingInvoices"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Do Login Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// var res = JSON.parse(responseBody);",
+									"// pm.environment.set(\"tokenam\", res.accessToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eeyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMzgzNjk0OSwiaWF0IjoxNzIzODMzMzQ5fQ.Fyf7c8glvfGRZuTudJDwYL4OAx-RXNBPXBO7ysyrjho",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@mastergym.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url-lgym-local}}/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "User Logged Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{tokenhd}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eeyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMzgzNjk0OSwiaWF0IjoxNzIzODMzMzQ5fQ.Fyf7c8glvfGRZuTudJDwYL4OAx-RXNBPXBO7ysyrjho",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url-lgym-local}}/auth"
 					},
 					"response": []
 				}
