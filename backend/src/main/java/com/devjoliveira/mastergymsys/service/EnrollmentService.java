@@ -82,7 +82,7 @@ public class EnrollmentService {
     Enrollment enrollmntFromDB = enrollmentRepository.save(enrollment);
 
     // EnrollmentModality
-    List<EnrollmentModality> enrollmentModalities = request.enrollmentModalityies().stream().map(
+    List<EnrollmentModality> enrollmentModalities = request.enrollmentModalities().stream().map(
         dto -> {
           EnrollmentModality em = new EnrollmentModality();
           em.setModality(modalityRepository.findById(dto.modalityId()).get());
