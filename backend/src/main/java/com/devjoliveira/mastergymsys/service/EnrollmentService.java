@@ -54,23 +54,14 @@ public class EnrollmentService {
 
   @Transactional(readOnly = true)
   public EnrollmentResponseDTO findById(Long id) {
-    return new EnrollmentResponseDTO(searchById(id));
+    return new EnrollmentResponseDTO(verifyEnrollmentById(id));
   }
 
   @SuppressWarnings("null")
   @Transactional
   public EnrollmentResponseDTO save(EnrollmentRequestDTO request) {
 
-    // Enrollment
-    Long studentId;
-    try {
-      studentId = Long.valueOf(request.studentId());
-    } catch (NumberFormatException e) {
-      throw new BusinessException("Invalid student id: " + request.studentId() + ":" + e);
-    }
-
-    Student studentFromDB = studentRepository.findById(studentId)
-        .orElseThrow(() -> new BusinessException("Student not found with id: " + studentId));
+    Student studentFromDB = verifyStudentById(request.studentId());
 
     Enrollment enrollment = new Enrollment();
     enrollment.setEnrollmentDate(request.enrollmentDate());
@@ -107,22 +98,47 @@ public class EnrollmentService {
   @Transactional
   public EnrollmentResponseDTO change(Long id, EnrollmentRequestDTO request) {
 
-    Enrollment fromDB = searchById(id);
+    Enrollment fromDB = verifyEnrollmentById(id);
 
     fromDB.setEnrollmentDate(request.enrollmentDate());
     fromDB.setDueDay(request.dueDay());
     fromDB.setClosingDate(request.closingDate());
 
-    enrollmentRepository.save(fromDB);
+    // enrollmentRepository.save(fromDB);
+    Enrollment enrollmntFromDB = enrollmentRepository.save(fromDB);
 
-    return new EnrollmentResponseDTO(fromDB);
+    List<EnrollmentModality> enrollmentModalities = request.enrollmentModalities().stream().map(
+        dto -> {
+          EnrollmentModality em = new EnrollmentModality();
+          em.setModality(modalityRepository.findById(dto.modalityId()).get());
+          em.setGraduation(graduationRepository.findById(dto.graduationId()).get());
+          em.setSubscription(subscriptionRepository.findById(dto.subscriptionId()).get());
+          em.setStartDate(dto.startDate());
+          em.setEndDate(dto.endDate());
+          em.setEnrollment(enrollmntFromDB);
+          return em;
+        }).toList();
+
+    System.out.println("-------> " + enrollmentModalities);
+
+    // Clear all enrollments
+    enrollmentModalityRepository.deleteByEnrollment(enrollmntFromDB);
+    enrollmentModalityRepository.flush();
+
+    // Upload EnrollmentsModalities in DB
+    List<EnrollmentModality> emFromDB = enrollmentModalityRepository.saveAll(enrollmentModalities);
+
+    // Mount response
+    EnrollmentResponseDTO response = new EnrollmentResponseDTO(enrollmntFromDB, emFromDB);
+
+    return response;
 
   }
 
   @SuppressWarnings("null")
   @Transactional
   public void deleteById(Long id) {
-    Enrollment fromDB = searchById(id);
+    Enrollment fromDB = verifyEnrollmentById(id);
 
     try {
       enrollmentRepository.delete(fromDB);
@@ -132,8 +148,15 @@ public class EnrollmentService {
   }
 
   @SuppressWarnings("null")
-  private Enrollment searchById(Long id) {
+  private Enrollment verifyEnrollmentById(Long id) {
     return enrollmentRepository.findById(id)
         .orElseThrow(() -> new BusinessException("Enrollment not found with id: " + id));
   }
+
+  @SuppressWarnings("null")
+  private Student verifyStudentById(Long id) {
+    return studentRepository.findById(id)
+        .orElseThrow(() -> new BusinessException("Enrollment not found with id: " + id));
+  }
+
 }

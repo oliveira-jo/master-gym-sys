@@ -10,4 +10,6 @@ public interface EnrollmentModalityRepository extends JpaRepository<EnrollmentMo
 
   List<EnrollmentModality> findByEnrollment(Enrollment enrollment);
 
+  void deleteByEnrollment(Enrollment enrollment);
+
 }
