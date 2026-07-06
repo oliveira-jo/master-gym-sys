@@ -68,8 +68,9 @@
     </nav>
 
     @if (modalOpen) {
-    <app-enrollment-form [enrollment]="selectedEnrollment" (close)="closeModal($event)">
-    </app-enrollment-form>
+    <!-- <app-enrollment-form [enrollment]="selectedEnrollment" (close)="closeModal($event)">
+    </app-enrollment-form> -->
+    <app-enrollment-form></app-enrollment-form>
     }
 
   </div>

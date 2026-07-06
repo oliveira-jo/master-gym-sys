@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { EnrollmentService } from '../../../core/service/enrollment.service';
-import { EnrollmentResponse } from '../../../core/model/response/enrollment-response.model';
 import { PageResponse } from '../../../core/model/page/page-response.model';
 import { PageableRequest } from '../../../core/model/page/pageable-request.model';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { EnrollmentFormComponent } from "../enrollment-form/enrollment-form.component";
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from "@angular/router";
+import { EnrollmentFormComponent } from '../enrollment-form/enrollment-form.component';
+import { EnrollmentResponse } from '../../../core/model/response/enrollment-response.model';
 
 @Component({
   selector: 'app-enrollment-list',
