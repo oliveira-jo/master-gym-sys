@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { StudentFilterRequest } from '../model/student-filter.model';
-import { StudentRequest } from '../model/student-request.model';
-import { StudentResponse } from '../model/student-response.model';
+import { StudentFilterRequest } from '../model/filter/student-filter.model';
+import { StudentRequest } from '../model/request/student-request.model';
+import { StudentResponse } from '../model/response/student-response.model';
 import { BaseService } from './base.service';
 import { PageResponse } from '../model/page/page-response.model';
 import { HttpParamsBuilder } from '../builders/http-params.builder';

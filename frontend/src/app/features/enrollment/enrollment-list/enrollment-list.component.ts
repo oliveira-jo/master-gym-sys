@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { EnrollmentService } from '../../../core/service/enrollment.service';
-import { EnrollmentResponse } from '../../../core/model/enrollment-response.model';
+import { EnrollmentResponse } from '../../../core/model/response/enrollment-response.model';
 import { PageResponse } from '../../../core/model/page/page-response.model';
 import { PageableRequest } from '../../../core/model/page/pageable-request.model';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';

@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output, } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators, } from '@angular/forms';
-import { EnrollmentModalityRequest } from '../../../core/model/enrollment-modality-request.model';
+import { EnrollmentModalityRequest } from '../../../core/model/request/enrollment-modality-request.model';
 import { ModalityService } from '../../../core/service/modality.service';
 import { SubscriptionService } from '../../../core/service/subscription.service';
 import { GraduationService } from '../../../core/service/graduation.service';
-import { ModalityResponse } from '../../../core/model/modality-response.model';
+import { ModalityResponse } from '../../../core/model/response/modality-response.model';
 import { PageableRequest } from '../../../core/model/page/pageable-request.model';
-import { GraduationResponse } from '../../../core/model/graduation-response.model';
-import { SubscriptionResponse } from '../../../core/model/subscription-response.model';
-import { EnrollmentModalityResponse } from '../../../core/model/enrollment-modality-response.model';
+import { GraduationResponse } from '../../../core/model/response/graduation-response.model';
+import { SubscriptionResponse } from '../../../core/model/response/subscription-response.model';
+import { EnrollmentModalityResponse } from '../../../core/model/response/enrollment-modality-response.model';
 
 @Component({
   selector: 'app-enrollment-modality-form',

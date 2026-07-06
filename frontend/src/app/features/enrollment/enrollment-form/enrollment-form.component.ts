@@ -1,19 +1,19 @@
 import { Component, EventEmitter, inject, Input, Output } from "@angular/core";
-import { EnrollmentResponse } from "../../../core/model/enrollment-response.model";
+import { EnrollmentResponse } from "../../../core/model/response/enrollment-response.model";
 import { EnrollmentService } from "../../../core/service/enrollment.service";
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { EnrollmentRequest } from "../../../core/model/enrollment-request.model";
 import { StudentService } from "../../../core/service/student.service";
-import { StudentResponse } from "../../../core/model/student-response.model";
+import { StudentResponse } from "../../../core/model/response/student-response.model";
 import { PageableRequest } from "../../../core/model/page/pageable-request.model";
-import { StudentFilterRequest } from "../../../core/model/student-filter.model";
+import { StudentFilterRequest } from "../../../core/model/filter/student-filter.model";
 import { DateUtils } from "../../../core/utils/DateUtils";
 import { DAYS } from "../../../core/constant/days";
 import { EnrollmentModalityFormComponent } from "../enrollment-modality-form/enrollment-modality-form.component";
-import { EnrollmentModalityResponse } from "../../../core/model/enrollment-modality-response.model";
+import { EnrollmentModalityResponse } from "../../../core/model/response/enrollment-modality-response.model";
 
 import { ActivatedRoute, Router } from "@angular/router";
+import { EnrollmentRequest } from "../../../core/model/request/enrollment-request.model";
 
 @Component({
   selector: 'app-enrollment-form',

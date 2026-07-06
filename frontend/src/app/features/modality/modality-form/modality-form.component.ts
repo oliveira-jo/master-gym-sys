@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ModalityResponse } from '../../../core/model/modality-response.model';
+import { ModalityResponse } from '../../../core/model/response/modality-response.model';
 import { ModalityService } from '../../../core/service/modality.service';
-import { ModalityRequest } from '../../../core/model/modality-request.model';
+import { ModalityRequest } from '../../../core/model/request/modality-request.model';
 
 @Component({
   selector: 'app-modality-form',

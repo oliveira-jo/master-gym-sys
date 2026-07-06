@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { SubscriptionRequest } from '../model/subscription-request.model';
-import { SubscriptionResponse } from '../model/subscription-response.model';
+import { SubscriptionRequest } from '../model/request/subscription-request.model';
+import { SubscriptionResponse } from '../model/response/subscription-response.model';
 import { BaseService } from './base.service';
 import { PageableRequest } from '../model/page/pageable-request.model';
 import { PageResponse } from '../model/page/page-response.model';

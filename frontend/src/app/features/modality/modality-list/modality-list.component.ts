@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ModalityService } from '../../../core/service/modality.service';
-import { ModalityResponse } from '../../../core/model/modality-response.model';
+import { ModalityResponse } from '../../../core/model/response/modality-response.model';
 import { PageResponse } from '../../../core/model/page/page-response.model';
 import { PageableRequest } from '../../../core/model/page/pageable-request.model';
 import { FormBuilder } from '@angular/forms';
-import { ModalityRequest } from '../../../core/model/modality-request.model';
+import { ModalityRequest } from '../../../core/model/request/modality-request.model';
 import { ModalityFormComponent } from "../modality-form/modality-form.component";
 
 @Component({

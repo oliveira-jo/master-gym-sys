@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EnrollmentRequest } from '../model/enrollment-request.model';
 import { BaseService } from './base.service';
-import { EnrollmentResponse } from '../model/enrollment-response.model';
+import { EnrollmentResponse } from '../model/response/enrollment-response.model';
 import { PageableRequest } from '../model/page/pageable-request.model';
 import { PageResponse } from '../model/page/page-response.model';
 import { HttpParamsBuilder } from '../builders/http-params.builder';

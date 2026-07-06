@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { SubscriptionResponse } from '../../../core/model/subscription-response.model';
+import { SubscriptionResponse } from '../../../core/model/response/subscription-response.model';
 import { SubscriptionService } from '../../../core/service/subscription.service';
 import { PageResponse } from '../../../core/model/page/page-response.model';
 import { PageableRequest } from '../../../core/model/page/pageable-request.model';

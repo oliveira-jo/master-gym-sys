@@ -1,4 +1,4 @@
-import { ModalityResponse } from "./modality-response.model";
+import { ModalityResponse } from "../response/modality-response.model";
 
 export interface SubscriptionRequest {
   name: string | null;

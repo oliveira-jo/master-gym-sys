@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../../core/service/user.service';
-import { UserResponse } from '../../../core/model/user-response.model';
+import { UserResponse } from '../../../core/model/response/user-response.model';
 import { PageResponse } from '../../../core/model/page/page-response.model';
-import { UserFilterRequest } from '../../../core/model/user-filter.model';
+import { UserFilterRequest } from '../../../core/model/filter/user-filter.model';
 import { PageableRequest } from '../../../core/model/page/pageable-request.model';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';

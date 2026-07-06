@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { GraduationResponse } from "../model/graduation-response.model";
-import { GraduationRequest } from "../model/graduation-request.model";
+import { GraduationResponse } from "../model/response/graduation-response.model";
+import { GraduationRequest } from "../model/request/graduation-request.model";
 import { BaseService } from "./base.service";
 import { PageableRequest } from "../model/page/pageable-request.model";
 import { PageResponse } from "../model/page/page-response.model";

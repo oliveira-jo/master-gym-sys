@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { StudentResponse } from '../../../core/model/student-response.model';
+import { StudentResponse } from '../../../core/model/response/student-response.model';
 import { StudentService } from '../../../core/service/student.service';
-import { StudentRequest } from '../../../core/model/student-request.model';
+import { StudentRequest } from '../../../core/model/request/student-request.model';
 import { DateUtils } from '../../../core/utils/DateUtils';
 import { DocumentUtils } from '../../../core/utils/DocumentUtils';
 import { PhoneUtils } from '../../../core/utils/PhoneUtils';

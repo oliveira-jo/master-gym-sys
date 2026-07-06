@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SubscriptionResponse } from '../../../core/model/subscription-response.model';
+import { SubscriptionResponse } from '../../../core/model/response/subscription-response.model';
 import { SubscriptionService } from '../../../core/service/subscription.service';
-import { SubscriptionRequest } from '../../../core/model/subscription-request.model';
-import { ModalityResponse } from '../../../core/model/modality-response.model';
+import { SubscriptionRequest } from '../../../core/model/request/subscription-request.model';
+import { ModalityResponse } from '../../../core/model/response/modality-response.model';
 import { ModalityService } from '../../../core/service/modality.service';
 import { PageableRequest } from '../../../core/model/page/pageable-request.model';
 
