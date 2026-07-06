@@ -1,3 +1,4 @@
+import { EnrollmentModalityResponse } from "./enrollment-modality-response.model";
 import { StudentResponse } from "./student-response.model";
 
 export interface EnrollmentResponse {
@@ -6,4 +7,5 @@ export interface EnrollmentResponse {
   dueDay: number;
   closingDate: string;
   student: StudentResponse;
+  enrollmentModalities: EnrollmentModalityResponse[];
 }

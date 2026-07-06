@@ -72,6 +72,13 @@ export const routes: Routes = [
             .then(c => c.EnrollmentFormComponent)
       },
 
+      {
+        path: 'matriculas/:id/editar',
+        loadComponent: () =>
+          import('./features/enrollment/enrollment-form/enrollment-form.component')
+            .then(c => c.EnrollmentFormComponent)
+      },
+
       // Financeiro
       {
         path: 'faturas',

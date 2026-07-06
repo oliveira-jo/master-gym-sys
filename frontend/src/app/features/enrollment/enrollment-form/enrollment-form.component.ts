@@ -10,10 +10,10 @@ import { PageableRequest } from "../../../core/model/page/pageable-request.model
 import { StudentFilterRequest } from "../../../core/model/student-filter.model";
 import { DateUtils } from "../../../core/utils/DateUtils";
 import { DAYS } from "../../../core/constant/days";
-import { EnrollmentModalityRequest } from "../../../core/model/enrollment-modality-request.model";
 import { EnrollmentModalityFormComponent } from "../enrollment-modality-form/enrollment-modality-form.component";
 import { EnrollmentModalityResponse } from "../../../core/model/enrollment-modality-response.model";
-import { StudentRequest } from "../../../core/model/student-request.model";
+
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-enrollment-form',
@@ -27,46 +27,74 @@ import { StudentRequest } from "../../../core/model/student-request.model";
 })
 export class EnrollmentFormComponent {
 
-  @Input() enrollment?: EnrollmentResponse;
-
   @Output() close = new EventEmitter<boolean>();
 
-  private enrollmentService = inject(EnrollmentService);
-
-  private studentService = inject(StudentService);
-
   private fb = inject(NonNullableFormBuilder);
+  private enrollmentService = inject(EnrollmentService);
+  private studentService = inject(StudentService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
-  students: StudentResponse[] = [];
-
-  page = new PageableRequest(0, 500, 'id');
-
-  days = DAYS;
-
-  modalOpen = false;
-
-  maxEnrollmenteModality = false;
+  enrollmentModalitiesResponse: EnrollmentModalityResponse[] = [];
 
   selectedEnrollmentModality!: EnrollmentModalityResponse;
 
-  enrollmentModalities: EnrollmentModalityResponse[] = [];
+  students: StudentResponse[] = [];
+
+  enrollment?: EnrollmentResponse;
+
+  isEdit = false;
+
+  page = new PageableRequest(0, 500, 'id');
+
+  maxEnrollmenteModality = false;
+
+  modalOpen = false;
+
+  days = DAYS;
 
   form = this.fb.group({
-    id: [0, Validators.required],
-    enrollmentDate: ['', Validators.required],
-    dueDay: [0, Validators.required],
-    closingDate: ['', Validators.required],
+    id: this.fb.control<number | null>(null),
+    enrollmentDate: this.fb.control('', Validators.required),
+    closingDate: this.fb.control(''),
+    dueDay: this.fb.control<number | null>(null, Validators.required),
     studentId: this.fb.control<number | null>(null, Validators.required),
   });
 
-
   ngOnInit() {
-    if (this.enrollment) {
-      this.form.patchValue({
-        ...this.enrollment,
-      });
-    }
+
     this.loadStudents();
+
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+      this.isEdit = true;
+      this.loadEnrollment(+id);
+    }
+
+  }
+
+  loadEnrollment(id: number): void {
+    this.enrollmentService.getById(id)
+      .subscribe(enrollment => {
+
+        // Log for see what api retur in payload
+        // console.log("-----> ", enrollment);
+
+        this.enrollment = enrollment;
+
+        this.form.patchValue({
+          id: enrollment.id,
+          enrollmentDate: enrollment.enrollmentDate,
+          closingDate: enrollment.closingDate,
+          dueDay: enrollment.dueDay,
+          studentId: enrollment.student.id
+        });
+
+        this.enrollmentModalitiesResponse = [
+          ...enrollment.enrollmentModalities
+        ];
+      });
   }
 
   loadStudents(): void {
@@ -77,6 +105,11 @@ export class EnrollmentFormComponent {
       .subscribe({
         next: page => {
           this.students = page.content;
+
+          const id = this.route.snapshot.paramMap.get('id');
+          if (id) {
+            this.loadEnrollment(+id);
+          }
         },
         error: err => console.error(err)
       });
@@ -84,45 +117,70 @@ export class EnrollmentFormComponent {
   }
 
   save(): void {
+
+    //Logic
     if (this.form.invalid) {
+      console.log("this.form.invalid ? ", this.form.invalid)
       this.form.markAllAsTouched();
       return;
     }
-    const request: EnrollmentRequest = this.form.getRawValue();
-    //convert data for ISO
-    request.enrollmentDate = DateUtils.toIso(request.enrollmentDate);
 
-    if (this.enrollment) {
+    const request: EnrollmentRequest = {
+      ...this.form.getRawValue(),
+      enrollmentModalities: this.enrollmentModalitiesResponse.map(m => ({
+        modalityId: m.modality.id,
+        graduationId: m.graduation.id,
+        subscriptionId: m.subscription.id,
+        startDate: m.startDate,
+        endDate: m.endDate
+      }))
+    };
+
+    request.enrollmentDate = DateUtils.toIso(request.enrollmentDate!);
+
+    if (request.closingDate) {
+      request.closingDate = DateUtils.toIso(request.closingDate);
+    }
+
+    //add and convert EnrollmentModality to Enrollment
+    request.enrollmentModalities = this.enrollmentModalitiesResponse.map(m => ({
+      modalityId: m.modality.id,
+      graduationId: m.graduation.id,
+      subscriptionId: m.subscription.id,
+      startDate: m.startDate,
+      endDate: m.endDate
+    }));
+
+    // Logge
+    // console.log(" Enrollment Modality data ", request.enrollmentModalities);
+
+    if (this.isEdit) {
       this.enrollmentService
-        .update(this.enrollment.id, request)
-        .subscribe(() => this.close.emit(true));
+        .update(this.enrollment!.id, request)
+        .subscribe(() => {
+          this.router.navigate(['/matriculas']);
+        });
+
     } else {
       this.enrollmentService
         .create(request)
-        .subscribe(() => this.close.emit(true));
+        .subscribe(() => {
+          this.router.navigate(['/matriculas']);
+        });
     }
 
-  }
-
-  ngOnChanges(): void {
-    if (!this.enrollment) {
-      this.form.reset();
-      return;
-    }
-    this.form.patchValue({
-      enrollmentDate: this.enrollment.enrollmentDate,
-      dueDay: this.enrollment.dueDay,
-      closingDate: this.enrollment.closingDate,
-      studentId: this.enrollment.student.id,
-    });
   }
 
   cancel() {
     this.close.emit(false);
   }
 
+  backEnrollmentList() {
+    this.router.navigate(['/matriculas']);
+  }
+
   deleteEnrollmentModality(obj: EnrollmentModalityResponse): void {
-    this.enrollmentModalities = this.enrollmentModalities.filter(
+    this.enrollmentModalitiesResponse = this.enrollmentModalitiesResponse.filter(
       item => item !== obj
     );
     this.maxEnrollmenteModality = false;
@@ -146,7 +204,7 @@ export class EnrollmentFormComponent {
   closeModal(result?: EnrollmentModalityResponse) {
     this.modalOpen = false;
     if (result) {
-      this.enrollmentModalities.push(result);
+      this.enrollmentModalitiesResponse.push(result);
     }
   }
 

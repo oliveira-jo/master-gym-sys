@@ -7,11 +7,14 @@
         Matrícular Aluno
       </h5>
       <div>
-        <button class="btn btn-primary btn-sm me-2">
-          Adicionar
+        <button class="btn btn-primary btn-sm me-2" type="button" (click)="save()">
+          Salvar
         </button>
-        <button class="btn btn-danger btn-sm">
+        <button class="btn btn-danger btn-sm" type="button">
           Remover
+        </button>
+        <button class="btn btn-secundaty btn-sm" type="button" (click)="backEnrollmentList()">
+          Voltar
         </button>
       </div>
     </div>
@@ -23,7 +26,7 @@
             <label class="form-label">
               Matrícula
             </label>
-            <input type="text" class="form-control" disabled>
+            <input type="text" class="form-control" formControlName="id" readonly>
           </div>
 
           <div class="col-md-6">
@@ -31,10 +34,8 @@
               Aluno
             </label>
             <select class="form-select" formControlName="studentId">
-              <option [ngValue]="null">
-                Selecione...
-              </option>
-              @for (obj of students; track obj) {
+              <option [ngValue]="null"> Selecione... </option>
+              @for (obj of students; track obj.id) {
               <option [ngValue]="obj.id">
                 {{ obj.name }}
               </option>
@@ -46,17 +47,22 @@
             <label class="form-label">
               Data Matrícula
             </label>
-            <input type="date" class="form-control">
+            <input type="date" class="form-control" formControlName="enrollmentDate">
+          </div>
+
+          <div class="col-md-2">
+            <label class="form-label">
+              Data Fechamento
+            </label>
+            <input type="date" class="form-control" formControlName="closingDate">
           </div>
 
           <div class="col-md-2">
             <label class="form-label">
               Dia do Vencimento
             </label>
-            <select class="form-select" formControlName="studentId">
-              <option [ngValue]="null">
-                Selecione...
-              </option>
+            <select class="form-select" formControlName="dueDay">
+              <option [ngValue]="null"> Selecione... </option>
               @for (obj of days; track obj) {
               <option [ngValue]="obj.day">
                 {{ obj.day }}
@@ -97,7 +103,7 @@
           </tr>
         </thead>
         <tbody>
-          @for(obj of enrollmentModalities; track obj) {
+          @for(obj of enrollmentModalitiesResponse; track obj) {
           <tr>
             <td>{{ obj.modality.name }}</td>
             <td>{{ obj.graduation.name }}</td>

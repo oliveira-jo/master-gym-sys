@@ -6,7 +6,7 @@ import { PageableRequest } from '../../../core/model/page/pageable-request.model
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { EnrollmentFormComponent } from "../enrollment-form/enrollment-form.component";
 import { CommonModule } from '@angular/common';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-enrollment-list',
@@ -21,6 +21,8 @@ import { RouterLink } from "@angular/router";
 export class EnrollmentListComponent implements OnInit {
 
   private readonly enrollmentService = inject(EnrollmentService);
+
+  private router = inject(Router);
 
   enrollments: EnrollmentResponse[] = [];
 
@@ -53,6 +55,10 @@ export class EnrollmentListComponent implements OnInit {
       .subscribe({
 
         next: page => {
+
+          //pagination
+          this.pageResponse = page;
+
           this.enrollments = page.content;
           this.totalElements = page.totalElements;
         },
@@ -60,6 +66,7 @@ export class EnrollmentListComponent implements OnInit {
         error: err => console.error(err)
 
       });
+
   }
 
   search(): void {
@@ -80,7 +87,7 @@ export class EnrollmentListComponent implements OnInit {
 
   openEdit(enrollment: EnrollmentResponse): void {
     this.selectedEnrollment = enrollment;
-    this.modalOpen = true;
+    this.router.navigate(['/matriculas', enrollment.id, 'editar']);
   }
 
   delete(id: number): void {
@@ -105,4 +112,36 @@ export class EnrollmentListComponent implements OnInit {
     }
   }
 
+  //pagination
+  nextPage(): void {
+    if (!this.pageResponse?.last) {
+      this.page.page++;
+      this.loadEnrollments();
+    }
+  }
+
+  previousPage(): void {
+    if (!this.pageResponse?.first) {
+      this.page.page--;
+      this.loadEnrollments();
+    }
+  }
+
+  goToPage(page: number): void {
+    this.page.page = page;
+    this.loadEnrollments();
+  }
+
+  //generate page number
+  get pages(): number[] {
+    if (!this.pageResponse) {
+      return [];
+    }
+    return Array.from(
+      { length: this.pageResponse.totalPages }, // array length
+      (_, i) => i // value, i retorn i
+    );
+  }
+
 }
+
