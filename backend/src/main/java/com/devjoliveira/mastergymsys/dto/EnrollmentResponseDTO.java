@@ -10,8 +10,8 @@ public record EnrollmentResponseDTO(
     String enrollmentDate,
     Integer dueDay,
     String closingDate,
-    StudentRequestDTO student,
-    List<EnrollmentModalityResponseDTO> enrollmentModalityies) {
+    StudentResponseDTO student,
+    List<EnrollmentModalityResponseDTO> enrollmentModalities) {
 
   public EnrollmentResponseDTO(Enrollment enrollment) {
     this(
@@ -19,21 +19,21 @@ public record EnrollmentResponseDTO(
         enrollment.getEnrollmentDate().toString(),
         enrollment.getDueDay(),
         enrollment.getClosingDate() != null ? enrollment.getClosingDate().toString() : null,
-        enrollment.getStudent() != null ? new StudentRequestDTO(enrollment.getStudent()) : null,
+        enrollment.getStudent() != null ? new StudentResponseDTO(enrollment.getStudent()) : null,
         enrollment.getEnrollmentModalities() != null
             ? enrollment.getEnrollmentModalities().stream().map(EnrollmentModalityResponseDTO::new).toList()
             : List.of());
   }
 
-  public EnrollmentResponseDTO(Enrollment enrollment, List<EnrollmentModality> enrollmentModality) {
+  public EnrollmentResponseDTO(Enrollment enrollment, List<EnrollmentModality> enrollmentModalities) {
     this(
         enrollment.getId(),
         enrollment.getEnrollmentDate().toString(),
         enrollment.getDueDay(),
         enrollment.getClosingDate() != null ? enrollment.getClosingDate().toString() : null,
-        enrollment.getStudent() != null ? new StudentRequestDTO(enrollment.getStudent()) : null,
-        enrollmentModality != null
-            ? enrollmentModality.stream().map(EnrollmentModalityResponseDTO::new).toList()
+        enrollment.getStudent() != null ? new StudentResponseDTO(enrollment.getStudent()) : null,
+        enrollmentModalities != null
+            ? enrollmentModalities.stream().map(EnrollmentModalityResponseDTO::new).toList()
             : List.of());
   }
 
