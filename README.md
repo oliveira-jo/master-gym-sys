@@ -77,13 +77,15 @@ Master Gym Sys é um sistema completo para gerenciamento de academias desenvolvi
 - [x] CRUD de alunos
 - [x] CRUD de planos
 - [x] CRUD de modalidades
+- [x] Matrículas
 - [ ] Autenticação JWT
-- [ ] Matrículas
+- [ ] Gestão de usuários (ADMIN, RECEPCIONISTA, PROFESSOR)
 - [ ] Financeiro
 - [ ] Dashboard
+- [ ] Relatórios
 - [ ] Notificações
+- [ ] Auditoria e Logs
 - [ ] Docker Compose
-- [ ] Deploy
 
 ---
 
@@ -108,51 +110,7 @@ Master Gym Sys é um sistema completo para gerenciamento de academias desenvolvi
 
 O projeto segue uma arquitetura em camadas:
 
-### Backend
-```
-┌─────────────┐
-│  Component  │
-└──────┬──────┘
-       │
-┌──────▼──────┐
-│   Service   │
-└──────┬──────┘
-       │
-┌──────▼──────┐
-│ Repository  │
-└──────┬──────┘
-       │
-┌──────▼──────┐
-│  Database   │
-└─────────────┘
-```
-
-### Frontend
-```
-┌─────────────┐
-│     UI      │
-└──────┬──────┘
-       │
-┌──────▼──────┐
-│  Component  │
-└──────┬──────┘
-       │
-┌──────▼──────┐
-│   Service   │
-└──────┬──────┘
-       │
-┌──────▼──────┐
-│ HttpClient  │
-└──────┬──────┘
-       │
-┌──────▼──────┐
-│ Interceptor │
-└──────┬──────┘
-       │
-┌──────▼──────┐
-│ Spring Boot │
-└─────────────┘
-```
+![diagram](../mastergymsys/frontend/public/leyers-diagran.jpg)
 
 ---
 
