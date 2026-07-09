@@ -5,6 +5,7 @@ import java.net.URI;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,21 +35,25 @@ public class ModalityController implements ModalityControllerDoc {
   }
 
   @SuppressWarnings("null")
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @GetMapping
   public ResponseEntity<Page<ModalityResponseDTO>> findAll(Pageable pageable) {
     return ResponseEntity.ok(modalityService.findAll(pageable));
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @GetMapping("/{id}")
   public ResponseEntity<ModalityResponseDTO> findById(@PathVariable Long id) {
     return ResponseEntity.ok(modalityService.findById(id));
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @GetMapping("/search")
   public ResponseEntity<ModalityResponseDTO> searchByName(@RequestParam(defaultValue = "") String name) {
     return ResponseEntity.ok(modalityService.findByName(name));
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @PostMapping
   public ResponseEntity<ModalityResponseDTO> save(@RequestBody @Valid ModalityRequestDTO request) {
     ModalityResponseDTO savedModality = modalityService.save(request);
@@ -59,12 +64,14 @@ public class ModalityController implements ModalityControllerDoc {
     return ResponseEntity.created(uri).body(savedModality);
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @PutMapping("/{id}")
   public ResponseEntity<ModalityResponseDTO> change(@PathVariable Long id,
       @RequestBody @Valid ModalityRequestDTO request) {
     return ResponseEntity.ok().body(modalityService.update(id, request));
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteById(@PathVariable Long id) {
     modalityService.deleteById(id);

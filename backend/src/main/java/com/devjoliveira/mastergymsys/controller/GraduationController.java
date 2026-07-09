@@ -5,6 +5,7 @@ import java.net.URI;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,21 +35,25 @@ public class GraduationController implements GraduationControllerDoc {
   }
 
   @SuppressWarnings("null")
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @GetMapping
   public ResponseEntity<Page<GraduationResponseDTO>> findAll(Pageable pageable) {
     return ResponseEntity.ok(graduationService.findAll(pageable));
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @GetMapping("/{id}")
   public ResponseEntity<GraduationResponseDTO> findById(@PathVariable Long id) {
     return ResponseEntity.ok(graduationService.findById(id));
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @GetMapping("/search")
   public ResponseEntity<GraduationResponseDTO> searchByName(@RequestParam(defaultValue = "") String name) {
     return ResponseEntity.ok(graduationService.findByName(name));
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @PostMapping
   public ResponseEntity<GraduationResponseDTO> save(@RequestBody @Valid GraduationRequestDTO request) {
     GraduationResponseDTO savedGraduation = graduationService.save(request);
@@ -59,12 +64,14 @@ public class GraduationController implements GraduationControllerDoc {
     return ResponseEntity.created(uri).body(savedGraduation);
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @PutMapping("/{id}")
   public ResponseEntity<GraduationResponseDTO> change(@PathVariable Long id,
       @RequestBody @Valid GraduationRequestDTO request) {
     return ResponseEntity.ok().body(graduationService.update(id, request));
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteById(@PathVariable Long id) {
     graduationService.deleteById(id);

@@ -5,6 +5,7 @@ import java.net.URI;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,17 +34,20 @@ public class StudentController implements StudentControllerDoc {
     this.studentService = studentService;
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @SuppressWarnings("null")
   @GetMapping
   public ResponseEntity<Page<StudentResponseDTO>> findAll(StudentFilterRequest filter, Pageable pageable) {
     return ResponseEntity.ok(studentService.findAll(filter, pageable));
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @GetMapping("/{id}")
   public ResponseEntity<StudentResponseDTO> findById(@PathVariable Long id) {
     return ResponseEntity.ok(studentService.findById(id));
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @PostMapping
   public ResponseEntity<StudentResponseDTO> save(@RequestBody @Valid StudentRequestDTO request) {
     StudentResponseDTO savedStudent = studentService.save(request);
@@ -54,12 +58,14 @@ public class StudentController implements StudentControllerDoc {
     return ResponseEntity.created(uri).body(savedStudent);
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @PutMapping("/{id}")
   public ResponseEntity<StudentResponseDTO> change(@PathVariable Long id,
       @RequestBody @Valid StudentRequestDTO request) {
     return ResponseEntity.ok().body(studentService.update(id, request));
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ATTENDANT')")
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteById(@PathVariable Long id) {
     studentService.deleteById(id);
