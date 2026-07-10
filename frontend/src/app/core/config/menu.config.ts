@@ -6,7 +6,7 @@ export const MENU_CONFIG: MenuItem[] = [
     label: 'Sistemas',
     children: [
       { label: 'Usuários', route: '/usuarios' },
-      { label: 'Sair' }
+      { label: 'Sair', route: '/login' }
     ]
   },
 

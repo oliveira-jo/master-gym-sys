@@ -15,47 +15,38 @@
       <ul class="navbar-nav">
 
         @for (menu of menus; track menu.label) {
-
         <li class="nav-item dropdown">
 
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-
             {{ menu.label }}
-
           </a>
 
           <ul class="dropdown-menu">
-
             @for (item of menu.children; track item.label) {
-
             <li>
-
               @if (item.route) {
               <a class="dropdown-item" [routerLink]="item.route">
                 {{ item.label }}
               </a>
               }
-
               @if (!item.route) {
               <a class="dropdown-item">
                 {{ item.label }}
               </a>
               }
-
             </li>
-
             }
-
           </ul>
 
         </li>
-
         }
 
       </ul>
-
     </div>
 
-  </div>
+    <button class="btn btn-outline-danger" (click)="logout()">
+      Sair
+    </button>
 
+  </div>
 </nav>

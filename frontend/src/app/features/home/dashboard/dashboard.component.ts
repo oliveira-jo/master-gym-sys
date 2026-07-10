@@ -19,7 +19,7 @@ export class DashboardComponent {
     this.studentService.getAll().subscribe({
       next: (data) => {
         this.students = data;
-        console.log('Students:', data);
+        // console.log('Students:', data);
       }
     });
   }
