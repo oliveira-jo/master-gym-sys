@@ -1,35 +1,64 @@
 <div class="container">
 
   <div class="row justify-content-center mt-5">
-
     <div class="col-md-4">
-
       <div class="card shadow">
-
         <div class="card-body">
+          <h3 class="text-center mb-4"> Login </h3>
 
-          <h3 class="text-center mb-4">
+          <form [formGroup]="form" (ngSubmit)="login()">
 
-            Login
+            <!-- Usuário -->
+            <div class="mb-3">
+              <label class="form-label">
+                Usuário
+              </label>
+              <input type="text" class="form-control" formControlName="username">
 
-          </h3>
+              @if(form.controls.username.invalid &&
+              form.controls.username.touched){
 
-          <input class="form-control mb-3" placeholder="Usuário">
+              <div class="text-danger mt-1">
+                Informe o usuário.
+              </div>
+              }
+            </div>
 
-          <input class="form-control mb-3" type="password" placeholder="Senha">
+            <!-- Senha -->
+            <div class="mb-3">
+              <label class="form-label">
+                Senha
+              </label>
+              <input type="password" class="form-control" formControlName="password">
 
-          <button class="btn btn-primary w-100">
+              @if(form.controls.password.invalid &&
+              form.controls.password.touched){
 
-            Entrar
+              <div class="text-danger mt-1">
+                Informe a senha.
+              </div>
+              }
 
-          </button>
+            </div>
+
+            @if(errorMessage){
+            <div class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+            }
+
+            <button class="btn btn-primary w-100" type="submit" [disabled]="loading">
+              @if(loading){
+              Entrando...
+              } @else {
+              Entrar
+              }
+            </button>
+
+          </form>
 
         </div>
-
       </div>
-
     </div>
-
   </div>
-
 </div>
