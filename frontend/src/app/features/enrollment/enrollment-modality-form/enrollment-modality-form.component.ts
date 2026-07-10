@@ -10,6 +10,7 @@ import { PageableRequest } from '../../../core/model/page/pageable-request.model
 import { GraduationResponse } from '../../../core/model/response/graduation-response.model';
 import { SubscriptionResponse } from '../../../core/model/response/subscription-response.model';
 import { EnrollmentModalityResponse } from '../../../core/model/response/enrollment-modality-response.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-enrollment-modality-form',
@@ -26,7 +27,16 @@ export class EnrollmentModalityFormComponent {
   @Output()
   close = new EventEmitter<EnrollmentModalityResponse | undefined>();
 
+  private readonly modalityService = inject(ModalityService);
+  private readonly graduationService = inject(GraduationService);
+  private readonly subscriptionService = inject(SubscriptionService);
   private fb = inject(NonNullableFormBuilder);
+
+  modalities: ModalityResponse[] = [];
+  graduations: GraduationResponse[] = [];
+  subscriptions: SubscriptionResponse[] = [];
+
+  page = new PageableRequest(0, 100, 'id');
 
   form = this.fb.group({
     modality: this.fb.control<ModalityResponse | null>(null, Validators.required),
@@ -37,20 +47,9 @@ export class EnrollmentModalityFormComponent {
 
   });
 
-  private readonly modalityService = inject(ModalityService);
-  private readonly graduationService = inject(GraduationService);
-  private readonly subscriptionService = inject(SubscriptionService);
-
-  modalities: ModalityResponse[] = [];
-  graduations: GraduationResponse[] = [];
-  subscriptions: SubscriptionResponse[] = [];
-
-  page = new PageableRequest(0, 100, 'id');
-
   ngOnInit(): void {
 
     this.loadDatas();
-
     if (this.enrollmentModality) {
       this.form.patchValue({
         ...this.enrollmentModality,
