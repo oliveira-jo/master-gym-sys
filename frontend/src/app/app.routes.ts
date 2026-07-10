@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guard/auth.guard';
 
 export const routes: Routes = [
 
-  // Login (sem layout)
+  // Público
   {
     path: 'login',
     loadComponent: () =>
@@ -10,16 +11,17 @@ export const routes: Routes = [
         .then(c => c.LoginComponent)
   },
 
-  // Área autenticada
+  // Privado
   {
     path: '',
     loadComponent: () =>
       import('./layout/main-layout/main-layout.component')
         .then(c => c.MainLayoutComponent),
 
+    canActivateChild: [authGuard],
+
     children: [
 
-      // Dashboard
       {
         path: '',
         loadComponent: () =>
@@ -27,7 +29,6 @@ export const routes: Routes = [
             .then(c => c.DashboardComponent)
       },
 
-      // Segurança
       {
         path: 'usuarios',
         loadComponent: () =>
@@ -35,7 +36,6 @@ export const routes: Routes = [
             .then(c => c.UserListComponent)
       },
 
-      // Cadastro
       {
         path: 'alunos',
         loadComponent: () =>
@@ -57,7 +57,6 @@ export const routes: Routes = [
             .then(c => c.SubscriptionListComponent)
       },
 
-      // Matrículas
       {
         path: 'matriculas',
         loadComponent: () =>
@@ -66,7 +65,7 @@ export const routes: Routes = [
       },
 
       {
-        path: 'matricular',
+        path: 'matriculas/matricular',
         loadComponent: () =>
           import('./features/enrollment/enrollment-form/enrollment-form.component')
             .then(c => c.EnrollmentFormComponent)
@@ -79,29 +78,7 @@ export const routes: Routes = [
             .then(c => c.EnrollmentFormComponent)
       },
 
-      // Financeiro
-      {
-        path: 'faturas',
-        loadComponent: () =>
-          import('./features/finance/invoice/search-invoice/search-invoice.component')
-            .then(c => c.SearchInvoiceComponent)
-      },
-
-      {
-        path: 'pagamentos',
-        loadComponent: () =>
-          import('./features/finance/payment/generate-payment/generate-payment.component')
-            .then(c => c.GeneratePaymentComponent)
-      },
-
-      // Relatórios
-      {
-        path: 'relatorios',
-        loadComponent: () =>
-          import('./features/report/enrollment/enrollment.component')
-            .then(c => c.EnrollmentComponent)
-      }
-
+      // resto das rotas...
     ]
   },
 
