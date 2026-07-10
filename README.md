@@ -78,8 +78,8 @@ Master Gym Sys é um sistema completo para gerenciamento de academias desenvolvi
 - [x] CRUD de planos
 - [x] CRUD de modalidades
 - [x] Matrículas
-- [ ] Autenticação JWT
-- [ ] Gestão de usuários (ADMIN, RECEPCIONISTA, PROFESSOR)
+- [x] Autenticação JWT
+- [x] Gestão de usuários (ADMIN, RECEPCIONISTA)
 - [ ] Financeiro
 - [ ] Dashboard
 - [ ] Relatórios
@@ -91,8 +91,8 @@ Master Gym Sys é um sistema completo para gerenciamento de academias desenvolvi
 
 ## Funcionalidades
 
-<!-- - Autenticação JWT -->
-<!-- - Gestão de usuários -->
+- Autenticação JWT
+- Gestão de usuários
 - Gestão de alunos
 - Gestão de planos
 - Gestão de modalidades
