@@ -15,6 +15,12 @@
 						{
 							"name": "Student by name",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -52,6 +58,12 @@
 						{
 							"name": "Student by email",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -89,6 +101,12 @@
 						{
 							"name": "Student by city",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -126,6 +144,12 @@
 						{
 							"name": "Student by state",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -165,6 +189,12 @@
 				{
 					"name": "All Students",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -196,6 +226,12 @@
 				{
 					"name": "Student",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -214,6 +250,12 @@
 				{
 					"name": "Student",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -232,6 +274,12 @@
 				{
 					"name": "Student by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "{{url-lgym-local}}/students/7"
@@ -241,6 +289,12 @@
 				{
 					"name": "Student by id Copy",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": "{{url-lgym-local}}/students/9"
@@ -255,6 +309,12 @@
 				{
 					"name": "All Modalities",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "{{url-lgym-local}}/modalities"
@@ -264,6 +324,12 @@
 				{
 					"name": "Modality by name",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -288,6 +354,12 @@
 				{
 					"name": "Modality",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -306,6 +378,12 @@
 				{
 					"name": "Modality",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -324,6 +402,12 @@
 				{
 					"name": "Modalities by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "{{url-lgym-local}}/modalities/9"
@@ -333,6 +417,12 @@
 				{
 					"name": "Student by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": "{{url-lgym-local}}/modalities/9"
@@ -347,6 +437,12 @@
 				{
 					"name": "All Subscriptions",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -370,6 +466,12 @@
 				{
 					"name": "Subscription by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "{{url-lgym-local}}/subscriptions/1"
@@ -379,6 +481,12 @@
 				{
 					"name": "Subscription",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -397,6 +505,12 @@
 				{
 					"name": "Subscription",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -415,6 +529,12 @@
 				{
 					"name": "Subscription by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": "{{url-lgym-local}}/subscriptions/9"
@@ -429,6 +549,12 @@
 				{
 					"name": "Graduation",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -447,6 +573,12 @@
 				{
 					"name": "Graduation",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -465,6 +597,12 @@
 				{
 					"name": "Graduation by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "{{url-lgym-local}}/graduations/1"
@@ -474,6 +612,12 @@
 				{
 					"name": "Graduations by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": "{{url-lgym-local}}/graduations/9"
@@ -483,6 +627,12 @@
 				{
 					"name": "All Graduations",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "{{url-lgym-local}}/graduations"
@@ -492,6 +642,12 @@
 				{
 					"name": "Graduation by name",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -521,11 +677,17 @@
 				{
 					"name": "Enrollment",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"enrollmentDate\": \"2026-07-03\",\n    \"dueDay\": 10,\n    \"closingDate\": \"2026-11-03\",\n    \"studentId\": 2,\n    \"enrollmentModalityies\": [\n        {\n            \"modalityId\": 4,\n            \"graduationId\": 4,\n            \"subscriptionId\": 2,\n            \"startDate\": \"2026-03-27\",\n            \"endDate\": \"2026-11-03\"\n        }\n    ]\n}",
+							"raw": "{\n    \"enrollmentDate\": \"2026-07-03\",\n    \"dueDay\": 10,\n    \"closingDate\": \"2026-11-03\",\n    \"studentId\": 1,\n    \"enrollmentModalities\": [\n        {\n            \"modalityId\": 1,\n            \"graduationId\": 1,\n            \"subscriptionId\": 1,\n            \"startDate\": \"2026-03-27\",\n            \"endDate\": \"2026-11-03\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -539,6 +701,12 @@
 				{
 					"name": "Enrollment",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -557,6 +725,12 @@
 				{
 					"name": "Enrollment by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "{{url-lgym-local}}/enrollments/1"
@@ -566,6 +740,12 @@
 				{
 					"name": "Enrollments by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": "{{url-lgym-local}}/enrollments/7"
@@ -575,6 +755,12 @@
 				{
 					"name": "All Enrollments",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "{{url-lgym-local}}/enrollments"
@@ -589,6 +775,12 @@
 				{
 					"name": "monthlyBilling",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "{{url-lgym-local}}/reports/monthlyBilling"
@@ -598,6 +790,12 @@
 				{
 					"name": "studentsByCity",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "{{url-lgym-local}}/reports/studentsByCity"
@@ -607,6 +805,12 @@
 				{
 					"name": "outstandingInvoices",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "{{url-lgym-local}}/reports/outstandingInvoices"
@@ -619,14 +823,19 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "Do Login Copy",
+					"name": "Do Login Master",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"// var res = JSON.parse(responseBody);",
-									"// pm.environment.set(\"tokenam\", res.accessToken);"
+									"// pm.environment.set(\"tokenam\", res.accessToken);",
+									"",
+									"if (responseCode.code >= 200 && responseCode.code < 300) {",
+									"   var json = JSON.parse(responseBody);",
+									"   postman.setEnvironmentVariable('token', json.access_token);",
+									"} "
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -635,7 +844,11 @@
 					],
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "basic",
+							"basic": {
+								"password": "{{myclientsecret}}",
+								"username": "{{myclientid}}"
+							}
 						},
 						"method": "POST",
 						"header": [
@@ -647,15 +860,26 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"admin@mastergym.com\",\n    \"password\": \"123456\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
 								}
-							}
+							]
 						},
-						"url": "{{url-lgym-local}}/auth/login"
+						"url": "{{url-lgym-local}}/oauth2/token"
 					},
 					"response": []
 				},
