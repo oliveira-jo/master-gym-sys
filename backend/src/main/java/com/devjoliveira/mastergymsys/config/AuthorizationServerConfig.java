@@ -8,7 +8,6 @@ import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,18 +62,28 @@ public class AuthorizationServerConfig {
   @Value("${security.jwt.duration}")
   private Integer jwtDurationSeconds;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+  private final PasswordEncoder passwordEncoder;
 
-  @Autowired
-  private UserDetailsService userDetailsService;
+  private final UserDetailsService userDetailsService;
+
+  AuthorizationServerConfig(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
+    this.passwordEncoder = passwordEncoder;
+    this.userDetailsService = userDetailsService;
+  }
 
   @Bean
   @Order(2)
   public SecurityFilterChain asSecurityFilterChain(HttpSecurity http) throws Exception {
 
-    http.securityMatcher("/oauth2/**", "/.well-known/**")
-        .with(OAuth2AuthorizationServerConfigurer.authorizationServer(), Customizer.withDefaults());
+    // http.securityMatcher("/api/v1/oauth2/**", "/api/v1/.well-known/**")
+    // .with(OAuth2AuthorizationServerConfigurer.authorizationServer(),
+    // Customizer.withDefaults());
+
+    OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer
+        .authorizationServer();
+
+    http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
+        .with(authorizationServerConfigurer, Customizer.withDefaults());
 
     // @formatter:off
 		http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
@@ -133,7 +142,15 @@ public class AuthorizationServerConfig {
 
   @Bean
   public AuthorizationServerSettings authorizationServerSettings() {
-    return AuthorizationServerSettings.builder().build();
+    // return AuthorizationServerSettings.builder().build();
+    return AuthorizationServerSettings.builder()
+        .tokenEndpoint("/api/v1/oauth2/token")
+        .jwkSetEndpoint("/api/v1/oauth2/jwks")
+        .tokenRevocationEndpoint("/api/v1/oauth2/revoke")
+        .tokenIntrospectionEndpoint("/api/v1/oauth2/introspect")
+        .oidcUserInfoEndpoint("/api/v1/userinfo")
+        .oidcLogoutEndpoint("/api/v1/connect/logout")
+        .build();
   }
 
   @Bean
