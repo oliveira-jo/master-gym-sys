@@ -16,12 +16,14 @@ VALUES (3, CURRENT_DATE - INTERVAL '60 days', 15, 'ACTIVE');
 INSERT INTO enrollments_modalities(
    enrollment_id,
    modalitie_id,
+   graduation_id,
    subscription_id,
    start_date
 )
 SELECT
     en.id,
     mo.id,
+    1,
     sub.id,
     CURRENT_DATE - INTERVAL '90 days'
 FROM enrollments en
