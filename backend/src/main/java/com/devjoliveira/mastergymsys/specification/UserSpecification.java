@@ -12,9 +12,7 @@ public class UserSpecification {
     return Specification.<User>unrestricted()
         .and(nameContem(filter.name()))
         .and(emailContem(filter.email()))
-        .and(phoneContem(filter.phone()))
-        .and(cityContem(filter.city()))
-        .and(stateContem(filter.state()));
+        .and(phoneContem(filter.phone()));
 
   }
 
@@ -43,24 +41,6 @@ public class UserSpecification {
         return null;
       }
       return cb.like(cb.lower(root.get("phone")), "%" + phone.toLowerCase() + "%");
-    };
-  }
-
-  private static Specification<User> cityContem(String city) {
-    return (root, query, cb) -> {
-      if (city == null || city.isBlank()) {
-        return null;
-      }
-      return cb.like(cb.lower(root.get("city")), "%" + city.toLowerCase() + "%");
-    };
-  }
-
-  private static Specification<User> stateContem(String state) {
-    return (root, query, cb) -> {
-      if (state == null || state.isBlank()) {
-        return null;
-      }
-      return cb.equal(cb.upper(root.get("state")), state.toUpperCase());
     };
   }
 

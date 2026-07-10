@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.devjoliveira.mastergymsys.domain.exception.ErrorResponse;
+import com.devjoliveira.mastergymsys.dto.UserFilterRequest;
 import com.devjoliveira.mastergymsys.dto.UserRequestDTO;
 import com.devjoliveira.mastergymsys.dto.UserResponseDTO;
 
@@ -30,7 +31,11 @@ public interface UserControllerDoc {
                 responses = {
                         @ApiResponse(responseCode = "200", description = "List of users returned successfully")
                 })
-        ResponseEntity<Page<UserResponseDTO>> findAll(@Parameter(description = "Pagination and sorting information") Pageable pageable);
+        ResponseEntity<Page<UserResponseDTO>> findAll(
+                @Parameter(description = "Optional filters for searching user") 
+                UserFilterRequest filtro,
+
+                @Parameter(description = "Pagination and sorting information") Pageable pageable);
 
 
         // Find By ID

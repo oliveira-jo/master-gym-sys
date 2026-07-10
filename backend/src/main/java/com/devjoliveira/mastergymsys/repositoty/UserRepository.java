@@ -6,13 +6,14 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.NonNull;
 
 import com.devjoliveira.mastergymsys.domain.User;
 import com.devjoliveira.mastergymsys.projection.UserDetailsProjection;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
 	@Query(nativeQuery = true, value = """
 				SELECT users.email AS username, users.password, roles.id AS roleId, roles.authority

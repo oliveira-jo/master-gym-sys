@@ -16,11 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devjoliveira.mastergymsys.domain.Role;
 import com.devjoliveira.mastergymsys.domain.User;
 import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
+import com.devjoliveira.mastergymsys.dto.UserFilterRequest;
 import com.devjoliveira.mastergymsys.dto.UserRequestDTO;
 import com.devjoliveira.mastergymsys.dto.UserResponseDTO;
 import com.devjoliveira.mastergymsys.mapper.UserMapper;
 import com.devjoliveira.mastergymsys.projection.UserDetailsProjection;
 import com.devjoliveira.mastergymsys.repositoty.UserRepository;
+import com.devjoliveira.mastergymsys.specification.UserSpecification;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -54,8 +56,8 @@ public class UserService implements UserDetailsService {
   }
 
   @Transactional(readOnly = true)
-  public Page<UserResponseDTO> findAll(@NonNull Pageable pageable) {
-    return userRepository.findAll(pageable)
+  public Page<UserResponseDTO> findAll(UserFilterRequest filter, @NonNull Pageable pageable) {
+    return userRepository.findAll(UserSpecification.withFilter(filter), pageable)
         .map(UserResponseDTO::new);
   }
 
