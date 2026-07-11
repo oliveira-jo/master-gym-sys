@@ -21,6 +21,7 @@ import com.devjoliveira.mastergymsys.dto.UserRequestDTO;
 import com.devjoliveira.mastergymsys.dto.UserResponseDTO;
 import com.devjoliveira.mastergymsys.mapper.UserMapper;
 import com.devjoliveira.mastergymsys.projection.UserDetailsProjection;
+import com.devjoliveira.mastergymsys.repositoty.RoleRepository;
 import com.devjoliveira.mastergymsys.repositoty.UserRepository;
 import com.devjoliveira.mastergymsys.specification.UserSpecification;
 
@@ -30,11 +31,14 @@ public class UserService implements UserDetailsService {
   private final UserRepository userRepository;
   private final UserMapper userMapper;
   private final PasswordEncoder passwordEncoder;
+  private final RoleRepository roleRepository;
 
-  public UserService(UserRepository userRepository, UserMapper userMapper, PasswordEncoder encoder) {
+  public UserService(UserRepository userRepository, UserMapper userMapper, PasswordEncoder encoder,
+      RoleRepository roleRepository) {
     this.userRepository = userRepository;
     this.userMapper = userMapper;
     this.passwordEncoder = encoder;
+    this.roleRepository = roleRepository;
   }
 
   @Override
@@ -89,6 +93,10 @@ public class UserService implements UserDetailsService {
     User newUser = userMapper.toDomain(userRequestDTO, passEncode);
     newUser.setCpf(cpfRequest);
 
+    // ADD ROLE - all new user is attendent
+    Role role = roleRepository.findByAuthority("ROLE_ATTENDANT").get();
+    newUser.addRole(role);
+
     // Save in Database
     User fromDB = userRepository.save(newUser);
 
@@ -125,6 +133,12 @@ public class UserService implements UserDetailsService {
   @Transactional
   public void deleteById(Long id) {
     User fromDB = searchById(id);
+
+    fromDB.getRoles().forEach(role -> {
+      if (role.getAuthority().equals("ROLE_ADMIN")) {
+        throw new BusinessException("Admin cannot be deleted!");
+      }
+    });
 
     try {
       userRepository.delete(fromDB);
