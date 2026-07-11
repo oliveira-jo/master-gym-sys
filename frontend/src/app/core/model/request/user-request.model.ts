@@ -1,7 +1,14 @@
 export class UserRequest {
   name = '';
+  cpf = '';
   phone = '';
   email = '';
-  cpf = '';
   password = '';
+  birthdate = '';
+  address = '';
+  number = '';
+  state = '';
+  complement = '';
+  city = '';
+  zipCode = '';
 }
