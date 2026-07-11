@@ -6,9 +6,8 @@
 
       <div class="modal-header">
         <h5 class="modal-title">
-          {{ user ? 'Editar Usuário' : 'Novo Usuáio' }}
+          {{ user ? 'Editar Usuário' : 'Cadastrar Usuário' }}
         </h5>
-
         <button class="btn-close" (click)="cancel()"></button>
       </div>
 
@@ -16,23 +15,70 @@
 
         <form [formGroup]="form">
           <input class="form-control mb-2" placeholder="Nome" formControlName="name">
-          <input class="form-control mb-2" placeholder="phone" formControlName="phone">
-          <input class="form-control mb-2" placeholder="email" formControlName="email">
-          <input class="form-control mb-2" placeholder="password" formControlName="password">
+          <input class="form-control mb-2" placeholder="Data Nascimento - 01/01/1900" formControlName="birthdate">
+
+          <input class="form-control mb-2" placeholder="cpf" formControlName="cpf">
+          <input class="form-control mb-2" placeholder="Celuar - (11)90000-0000" formControlName="phone">
+          <input class="form-control mb-2" placeholder="Email" formControlName="email">
+
+          <!-- PASSWORD -->
+          <input type="password" class="form-control mb-2" placeholder="Senha" formControlName="password">
+          <input type="password" class="form-control mb-2" placeholder="Confirmar senha"
+            formControlName="confirmPassword">
+
+          <!-- PASSWORD MSN -->
+          @if (form.get('password')?.touched && form.get('password')?.invalid) {
+          <div class="text-danger small">
+            @if (form.get('password')?.errors?.['required']) {
+            <div>A senha é obrigatória.</div>
+            }
+            @if (form.get('password')?.errors?.['minlength']) {
+            <div>A senha deve possuir pelo menos 8 caracteres.</div>
+            }
+            @if (form.get('password')?.errors?.['maxlength']) {
+            <div>A senha deve possuir no máximo 50 caracteres.</div>
+            }
+            @if (form.get('password')?.errors?.['pattern']) {
+            <div>
+              A senha deve conter letra maiúscula, letra minúscula e número.
+            </div>
+            }
+            @if (form.hasError('passwordMismatch') && form.get('confirmPassword')?.touched) {
+            <div class="text-danger">
+              As senhas não coincidem.
+            </div>
+            }
+          </div>
+          }
+
+          <!-- ODERS -->
+          <input class="form-control mb-2" placeholder="Endereço" formControlName="address">
+          <input class="form-control mb-2" placeholder="Número" formControlName="number">
+          <input class="form-control mb-2" placeholder="Cidade" formControlName="city">
+          <input class="form-control mb-2" placeholder="Complemento" formControlName="complement">
+          <input class="form-control mb-2" placeholder="CEP" formControlName="zipCode">
+
+          <select class="form-select mb-2" formControlName="state">
+            <option value="">Selecione um estado</option>
+
+            @for (state of states; track state.uf) {
+            <option [value]="state.uf">
+              {{ state.name }} ({{ state.uf }})
+            </option>
+            }
+          </select>
+
         </form>
 
       </div>
 
       <div class="modal-footer">
-
         <button class="btn btn-secondary" (click)="cancel()">
           Cancelar
         </button>
-
         <button class="btn btn-primary" (click)="save()">
           Salvar
         </button>
-
       </div>
 
     </div>
