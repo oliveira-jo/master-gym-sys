@@ -15,10 +15,8 @@
 
         <form [formGroup]="form">
           <input class="form-control mb-2" placeholder="Nome" formControlName="name">
-          <input class="form-control mb-2" placeholder="Data Nascimento - XX/XX/XXXX" formControlName="birthdate">
+          <input class="form-control mb-2" placeholder="Data Nascimento - 01/01/1900" formControlName="birthdate">
 
-
-          <!-- <input class="form-control mb-2" placeholder="Genero" formControlName="genre"> -->
           <select class="form-select mb-2" formControlName="genre">
             <option value="" disabled>Selecione o gênero</option>
             <option value="M">Masculino</option>
@@ -26,7 +24,7 @@
           </select>
 
           <input class="form-control mb-2" placeholder="cpf" formControlName="cpf">
-          <input class="form-control mb-2" placeholder="Celuar (XX)9XXXX-XXXX" formControlName="phone">
+          <input class="form-control mb-2" placeholder="Celuar - (11)90000-0000" formControlName="phone">
           <input class="form-control mb-2" placeholder="Email" formControlName="email">
           <input class="form-control mb-2" placeholder="CEP" formControlName="zipCode">
 
