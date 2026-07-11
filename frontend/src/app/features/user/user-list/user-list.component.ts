@@ -27,7 +27,7 @@ export class UserListComponent implements OnInit {
 
   filter: UserFilterRequest = {};
 
-  page = new PageableRequest(0, 10, 'name');
+  page = new PageableRequest(0, 10, 'id');
 
   totalElements = 0;
   selectedUser?: UserResponse;
@@ -109,6 +109,38 @@ export class UserListComponent implements OnInit {
     if (refresh) {
       this.loadUsers();
     }
+  }
+
+  //Pagination
+  nextPage(): void {
+    if (!this.pageResponse?.last) {
+      this.page.page++;
+      this.loadUsers();
+    }
+  }
+
+  previousPage(): void {
+    if (!this.pageResponse?.first) {
+      this.page.page--;
+      this.loadUsers();
+    }
+
+  }
+
+  goToPage(page: number): void {
+    this.page.page = page;
+    this.loadUsers();
+  }
+
+  //generate page number
+  get pages(): number[] {
+    if (!this.pageResponse) {
+      return [];
+    }
+    return Array.from(
+      { length: this.pageResponse.totalPages }, // array length
+      (_, i) => i // value, i retorn i
+    );
   }
 
 }
