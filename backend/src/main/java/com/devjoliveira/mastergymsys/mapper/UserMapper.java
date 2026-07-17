@@ -3,8 +3,8 @@ package com.devjoliveira.mastergymsys.mapper;
 import org.springframework.stereotype.Component;
 
 import com.devjoliveira.mastergymsys.domain.User;
-import com.devjoliveira.mastergymsys.dto.UserRequestDTO;
-import com.devjoliveira.mastergymsys.dto.UserResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.UserRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.UserResponseDTO;
 
 @Component
 public class UserMapper {

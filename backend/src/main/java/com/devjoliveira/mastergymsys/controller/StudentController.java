@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devjoliveira.mastergymsys.doc.StudentControllerDoc;
-import com.devjoliveira.mastergymsys.dto.StudentFilterRequest;
-import com.devjoliveira.mastergymsys.dto.StudentRequestDTO;
-import com.devjoliveira.mastergymsys.dto.StudentResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.StudentFilterRequest;
+import com.devjoliveira.mastergymsys.dto.request.StudentRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.StudentResponseDTO;
 import com.devjoliveira.mastergymsys.service.StudentService;
 
 import jakarta.validation.Valid;

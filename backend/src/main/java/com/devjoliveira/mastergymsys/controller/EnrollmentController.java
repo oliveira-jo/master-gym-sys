@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devjoliveira.mastergymsys.doc.EnrollmentControllerDoc;
-import com.devjoliveira.mastergymsys.dto.EnrollmentRequestDTO;
-import com.devjoliveira.mastergymsys.dto.EnrollmentResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.EnrollmentRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.EnrollmentResponseDTO;
 import com.devjoliveira.mastergymsys.service.EnrollmentService;
 
 import jakarta.validation.Valid;

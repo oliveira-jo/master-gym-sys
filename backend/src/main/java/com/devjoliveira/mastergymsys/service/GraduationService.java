@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devjoliveira.mastergymsys.domain.Graduation;
 import com.devjoliveira.mastergymsys.domain.Modality;
 import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
-import com.devjoliveira.mastergymsys.dto.GraduationRequestDTO;
-import com.devjoliveira.mastergymsys.dto.GraduationResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.GraduationRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.GraduationResponseDTO;
 import com.devjoliveira.mastergymsys.repositoty.GraduationRepository;
 import com.devjoliveira.mastergymsys.repositoty.ModalityRepository;
 

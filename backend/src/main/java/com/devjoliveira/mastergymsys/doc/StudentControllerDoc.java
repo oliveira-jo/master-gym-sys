@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.devjoliveira.mastergymsys.domain.exception.ErrorResponse;
-import com.devjoliveira.mastergymsys.dto.StudentFilterRequest;
-import com.devjoliveira.mastergymsys.dto.StudentRequestDTO;
-import com.devjoliveira.mastergymsys.dto.StudentResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.StudentFilterRequest;
+import com.devjoliveira.mastergymsys.dto.request.StudentRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.StudentResponseDTO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

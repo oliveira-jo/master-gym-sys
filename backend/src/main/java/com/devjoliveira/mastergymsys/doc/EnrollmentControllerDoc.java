@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.devjoliveira.mastergymsys.domain.exception.ErrorResponse;
-import com.devjoliveira.mastergymsys.dto.EnrollmentRequestDTO;
-import com.devjoliveira.mastergymsys.dto.EnrollmentResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.EnrollmentRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.EnrollmentResponseDTO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

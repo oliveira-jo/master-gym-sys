@@ -1,4 +1,4 @@
-package com.devjoliveira.mastergymsys.dto;
+package com.devjoliveira.mastergymsys.dto.request;
 
 import java.time.LocalDate;
 

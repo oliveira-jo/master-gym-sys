@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devjoliveira.mastergymsys.domain.Modality;
 import com.devjoliveira.mastergymsys.domain.Subscription;
 import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
-import com.devjoliveira.mastergymsys.dto.SubscriptionRequestDTO;
-import com.devjoliveira.mastergymsys.dto.SubscriptionResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.SubscriptionRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.SubscriptionResponseDTO;
 import com.devjoliveira.mastergymsys.repositoty.ModalityRepository;
 import com.devjoliveira.mastergymsys.repositoty.SubscriptionRepository;
 

@@ -3,7 +3,7 @@ package com.devjoliveira.mastergymsys.specification;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.devjoliveira.mastergymsys.domain.Student;
-import com.devjoliveira.mastergymsys.dto.StudentFilterRequest;
+import com.devjoliveira.mastergymsys.dto.request.StudentFilterRequest;
 
 public class StudentSpecification {
 

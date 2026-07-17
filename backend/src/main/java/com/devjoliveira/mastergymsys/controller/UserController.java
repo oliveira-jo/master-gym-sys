@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devjoliveira.mastergymsys.doc.UserControllerDoc;
-import com.devjoliveira.mastergymsys.dto.UserFilterRequest;
-import com.devjoliveira.mastergymsys.dto.UserRequestDTO;
-import com.devjoliveira.mastergymsys.dto.UserResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.UserFilterRequest;
+import com.devjoliveira.mastergymsys.dto.request.UserRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.UserResponseDTO;
 import com.devjoliveira.mastergymsys.service.UserService;
 
 import jakarta.validation.Valid;

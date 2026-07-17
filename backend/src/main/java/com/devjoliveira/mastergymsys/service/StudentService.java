@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devjoliveira.mastergymsys.domain.Student;
 import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
-import com.devjoliveira.mastergymsys.dto.StudentFilterRequest;
-import com.devjoliveira.mastergymsys.dto.StudentRequestDTO;
-import com.devjoliveira.mastergymsys.dto.StudentResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.StudentFilterRequest;
+import com.devjoliveira.mastergymsys.dto.request.StudentRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.StudentResponseDTO;
 import com.devjoliveira.mastergymsys.mapper.StudentMapper;
 import com.devjoliveira.mastergymsys.repositoty.StudentRepository;
 import com.devjoliveira.mastergymsys.specification.StudentSpecification;

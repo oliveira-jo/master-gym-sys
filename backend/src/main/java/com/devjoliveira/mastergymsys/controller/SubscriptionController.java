@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devjoliveira.mastergymsys.doc.SubscriptionControllerDoc;
-import com.devjoliveira.mastergymsys.dto.SubscriptionRequestDTO;
-import com.devjoliveira.mastergymsys.dto.SubscriptionResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.SubscriptionRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.SubscriptionResponseDTO;
 import com.devjoliveira.mastergymsys.service.SubscriptionService;
 
 import jakarta.validation.Valid;

@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devjoliveira.mastergymsys.doc.GraduationControllerDoc;
-import com.devjoliveira.mastergymsys.dto.GraduationRequestDTO;
-import com.devjoliveira.mastergymsys.dto.GraduationResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.GraduationRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.GraduationResponseDTO;
 import com.devjoliveira.mastergymsys.service.GraduationService;
 
 import jakarta.validation.Valid;

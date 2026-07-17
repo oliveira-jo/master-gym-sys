@@ -3,7 +3,7 @@ package com.devjoliveira.mastergymsys.specification;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.devjoliveira.mastergymsys.domain.User;
-import com.devjoliveira.mastergymsys.dto.UserFilterRequest;
+import com.devjoliveira.mastergymsys.dto.request.UserFilterRequest;
 
 public class UserSpecification {
 

@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devjoliveira.mastergymsys.domain.Modality;
 import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
-import com.devjoliveira.mastergymsys.dto.ModalityRequestDTO;
-import com.devjoliveira.mastergymsys.dto.ModalityResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.ModalityRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.ModalityResponseDTO;
 import com.devjoliveira.mastergymsys.repositoty.ModalityRepository;
 
 @Service

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.devjoliveira.mastergymsys.domain.exception.ErrorResponse;
-import com.devjoliveira.mastergymsys.dto.ModalityRequestDTO;
-import com.devjoliveira.mastergymsys.dto.ModalityResponseDTO;
+import com.devjoliveira.mastergymsys.dto.request.ModalityRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.ModalityResponseDTO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
