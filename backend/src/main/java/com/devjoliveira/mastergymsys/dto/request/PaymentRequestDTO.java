@@ -9,19 +9,19 @@ import jakarta.validation.constraints.NotNull;
 
 public record PaymentRequestDTO(
 
-    @NotNull(message = "Due day is required") Integer dueDate,
+        @NotNull(message = "Due day is required") Integer dueDate,
 
-    @NotNull(message = "Amount is required") @DecimalMin(value = "0.0", inclusive = false, message = "Amount must be greater than zero") BigDecimal amount,
+        @NotNull(message = "Amount is required") @DecimalMin(value = "0.0", inclusive = false, message = "Amount must be greater than zero") BigDecimal amount,
 
-    @NotNull(message = "Payment Amount is required") @DecimalMin(value = "0.0", inclusive = false, message = "Amount must be greater than zero") BigDecimal paymentAmount,
+        @NotNull(message = "Payment Amount is required") @DecimalMin(value = "0.0", inclusive = false, message = "Amount must be greater than zero") BigDecimal paymentAmount,
 
-    @NotNull(message = "The Payment Date is required") LocalDateTime paymentDate,
+        @NotNull(message = "The Payment Date is required") LocalDateTime paymentDate,
 
-    LocalDate canceledDate,
+        LocalDate canceledDate,
 
-    String observation,
+        String observation,
 
-    @NotNull(message = "Enrollment id is required") Long enrollmentId
+        @NotNull(message = "Enrollment id is required") Long enrollmentId
 
 ) {
 
