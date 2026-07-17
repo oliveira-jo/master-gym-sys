@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.devjoliveira.mastergymsys.domain.User;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -37,21 +35,5 @@ public record UserRequestDTO(
     @NotBlank(message = "State is required") @Size(max = 2, message = "The state must have a maximum of 2 caracteres") String state,
 
     @NotBlank(message = "Zip code is required") @Size(max = 20, message = "The cep must have a maximum of 20 caracteres") String zipCode) {
-
-  public UserRequestDTO(User user) {
-    this(
-        user.getName(),
-        user.getCpf(),
-        user.getPhone(),
-        user.getEmail(),
-        user.getPassword(),
-        user.getBirthdate() != null ? user.getBirthdate() : null,
-        user.getAddress(),
-        user.getNumber(),
-        user.getComplement(),
-        user.getCity(),
-        user.getState(),
-        user.getZipCode());
-  }
 
 }
