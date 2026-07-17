@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guard/auth.guard';
+import { roleGuard } from './core/guard/role.guard';
 
 export const routes: Routes = [
 
@@ -27,13 +28,6 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/home/dashboard/dashboard.component')
             .then(c => c.DashboardComponent)
-      },
-
-      {
-        path: 'usuarios',
-        loadComponent: () =>
-          import('./features/user/user-list/user-list.component')
-            .then(c => c.UserListComponent)
       },
 
       {
@@ -79,6 +73,19 @@ export const routes: Routes = [
       },
 
       // resto das rotas...
+      {
+        path: 'usuarios',
+        canActivate: [roleGuard, authGuard],
+
+        data: {
+          roles: ['ROLE_ADMIN']
+        },
+
+        loadComponent: () =>
+          import('./features/user/user-list/user-list.component')
+            .then(c => c.UserListComponent)
+      },
+
     ]
   },
 

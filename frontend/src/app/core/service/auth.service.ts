@@ -40,5 +40,12 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  hasRole(role: string): boolean {
+    return this.tokenService.getAuthorities().includes(role);
+  }
+
+  hasAnyRole(roles: string[]): boolean {
+    return roles.some(role => this.hasRole(role));
+  }
 
 }
