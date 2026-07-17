@@ -16,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,7 +30,11 @@ public class Payment {
   @Column(name = "due_date")
   private LocalDate dueDate;
 
+  @Column(nullable = false, precision = 10, scale = 2)
   private BigDecimal amount;
+
+  @Column(name = "payment_amount", precision = 10, scale = 2)
+  private BigDecimal paymentAmount;
 
   @Column(name = "payment_date")
   private LocalDateTime paymentDate;
@@ -39,7 +44,10 @@ public class Payment {
 
   @Enumerated(EnumType.STRING)
   @Column(length = 20)
-  private StatusPayment status = StatusPayment.OPEN;
+  private StatusPayment status;
+
+  @Column(length = 300)
+  private String observation;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "enrollment_id")
@@ -99,6 +107,27 @@ public class Payment {
 
   public void setEnrollment(Enrollment enrollment) {
     this.enrollment = enrollment;
+  }
+
+  public BigDecimal getPaymentAmount() {
+    return paymentAmount;
+  }
+
+  public void setPaymentAmount(BigDecimal paidAmount) {
+    this.paymentAmount = paidAmount;
+  }
+
+  public String getObservation() {
+    return observation;
+  }
+
+  public void setObservation(String observation) {
+    this.observation = observation;
+  }
+
+  @PrePersist
+  public void PreAuthorize() {
+    this.status = StatusPayment.OPEN;
   }
 
   @Override
