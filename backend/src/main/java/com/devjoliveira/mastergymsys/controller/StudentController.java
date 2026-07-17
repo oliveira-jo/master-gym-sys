@@ -26,6 +26,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/students")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
 public class StudentController implements StudentControllerDoc {
 
   private final StudentService studentService;
@@ -34,20 +35,16 @@ public class StudentController implements StudentControllerDoc {
     this.studentService = studentService;
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
-  @SuppressWarnings("null")
   @GetMapping
   public ResponseEntity<Page<StudentResponseDTO>> findAll(StudentFilterRequest filter, Pageable pageable) {
     return ResponseEntity.ok(studentService.findAll(filter, pageable));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @GetMapping("/{id}")
   public ResponseEntity<StudentResponseDTO> findById(@PathVariable Long id) {
     return ResponseEntity.ok(studentService.findById(id));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @PostMapping
   public ResponseEntity<StudentResponseDTO> save(@RequestBody @Valid StudentRequestDTO request) {
     StudentResponseDTO savedStudent = studentService.save(request);
@@ -58,14 +55,12 @@ public class StudentController implements StudentControllerDoc {
     return ResponseEntity.created(uri).body(savedStudent);
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @PutMapping("/{id}")
   public ResponseEntity<StudentResponseDTO> change(@PathVariable Long id,
       @RequestBody @Valid StudentRequestDTO request) {
     return ResponseEntity.ok().body(studentService.update(id, request));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteById(@PathVariable Long id) {
     studentService.deleteById(id);

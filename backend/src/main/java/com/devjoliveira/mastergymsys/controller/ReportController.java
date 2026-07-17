@@ -16,6 +16,7 @@ import com.devjoliveira.mastergymsys.repositoty.ReportRepository;
 
 @RestController
 @RequestMapping("/reports")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
 public class ReportController implements ReportControllerDoc {
 
   private final ReportRepository reportRepository;
@@ -24,19 +25,16 @@ public class ReportController implements ReportControllerDoc {
     this.reportRepository = reportRepository;
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @GetMapping("/monthlyBilling")
   public ResponseEntity<List<MonthlyBillingProjection>> monthlyBilling() {
     return ResponseEntity.ok().body(reportRepository.monthlyBilling());
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @GetMapping("/studentsByCity")
   public ResponseEntity<List<StudentsByCityProjection>> studentsByCity() {
     return ResponseEntity.ok().body(reportRepository.studentsByCity());
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @GetMapping("/outstandingInvoices")
   public ResponseEntity<List<OutstandingInvoicesProjection>> outstandingInvoices() {
     return ResponseEntity.ok().body(reportRepository.outstandingInvoices());

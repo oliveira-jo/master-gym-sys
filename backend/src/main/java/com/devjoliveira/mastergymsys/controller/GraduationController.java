@@ -26,6 +26,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/graduations")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
 public class GraduationController implements GraduationControllerDoc {
 
   private final GraduationService graduationService;
@@ -34,26 +35,21 @@ public class GraduationController implements GraduationControllerDoc {
     this.graduationService = graduationService;
   }
 
-  @SuppressWarnings("null")
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @GetMapping
   public ResponseEntity<Page<GraduationResponseDTO>> findAll(Pageable pageable) {
     return ResponseEntity.ok(graduationService.findAll(pageable));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @GetMapping("/{id}")
   public ResponseEntity<GraduationResponseDTO> findById(@PathVariable Long id) {
     return ResponseEntity.ok(graduationService.findById(id));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @GetMapping("/search")
   public ResponseEntity<GraduationResponseDTO> searchByName(@RequestParam(defaultValue = "") String name) {
     return ResponseEntity.ok(graduationService.findByName(name));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @PostMapping
   public ResponseEntity<GraduationResponseDTO> save(@RequestBody @Valid GraduationRequestDTO request) {
     GraduationResponseDTO savedGraduation = graduationService.save(request);
@@ -64,14 +60,12 @@ public class GraduationController implements GraduationControllerDoc {
     return ResponseEntity.created(uri).body(savedGraduation);
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @PutMapping("/{id}")
   public ResponseEntity<GraduationResponseDTO> change(@PathVariable Long id,
       @RequestBody @Valid GraduationRequestDTO request) {
     return ResponseEntity.ok().body(graduationService.update(id, request));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteById(@PathVariable Long id) {
     graduationService.deleteById(id);

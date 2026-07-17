@@ -25,6 +25,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/enrollments")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
 public class EnrollmentController implements EnrollmentControllerDoc {
 
   private final EnrollmentService enrollmentService;
@@ -33,20 +34,16 @@ public class EnrollmentController implements EnrollmentControllerDoc {
     this.enrollmentService = enrollmentService;
   }
 
-  @SuppressWarnings("null")
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @GetMapping
   public ResponseEntity<Page<EnrollmentResponseDTO>> findAll(Pageable pageable) {
     return ResponseEntity.ok(enrollmentService.findAll(pageable));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @GetMapping("/{id}")
   public ResponseEntity<EnrollmentResponseDTO> findById(@PathVariable Long id) {
     return ResponseEntity.ok(enrollmentService.findById(id));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @PostMapping
   public ResponseEntity<EnrollmentResponseDTO> save(@RequestBody @Valid EnrollmentRequestDTO request) {
     EnrollmentResponseDTO response = enrollmentService.save(request);
@@ -57,14 +54,12 @@ public class EnrollmentController implements EnrollmentControllerDoc {
     return ResponseEntity.created(uri).body(response);
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @PutMapping("/{id}")
   public ResponseEntity<EnrollmentResponseDTO> change(@PathVariable Long id,
       @RequestBody @Valid EnrollmentRequestDTO request) {
     return ResponseEntity.ok().body(enrollmentService.change(id, request));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ATTENDANT')")
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteById(@PathVariable Long id) {
     enrollmentService.deleteById(id);

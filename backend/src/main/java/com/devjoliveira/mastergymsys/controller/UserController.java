@@ -26,6 +26,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 public class UserController implements UserControllerDoc {
 
   private final UserService userService;
@@ -34,20 +35,16 @@ public class UserController implements UserControllerDoc {
     this.userService = userService;
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-  @SuppressWarnings("null")
   @GetMapping
   public ResponseEntity<Page<UserResponseDTO>> findAll(UserFilterRequest filter, Pageable pageable) {
     return ResponseEntity.ok(userService.findAll(filter, pageable));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
   @GetMapping("/{id}")
   public ResponseEntity<UserResponseDTO> findById(@PathVariable Long id) {
     return ResponseEntity.ok(userService.findById(id));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
   @PostMapping
   public ResponseEntity<UserResponseDTO> save(@RequestBody @Valid UserRequestDTO request) {
     UserResponseDTO savedUser = userService.save(request);
@@ -58,14 +55,12 @@ public class UserController implements UserControllerDoc {
     return ResponseEntity.created(uri).body(savedUser);
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
   @PutMapping("/{id}")
   public ResponseEntity<UserResponseDTO> change(@PathVariable Long id,
       @RequestBody @Valid UserRequestDTO request) {
     return ResponseEntity.ok().body(userService.update(id, request));
   }
 
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteById(@PathVariable Long id) {
     userService.deleteById(id);
