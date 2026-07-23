@@ -37,6 +37,16 @@ public class PaymentController {
     return ResponseEntity.ok().body(paymentService.findAll(pageable));
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<PaymentResponseDTO> findById(@PathVariable Long id) {
+    return ResponseEntity.ok(paymentService.findById(id));
+  }
+
+  @GetMapping("/enrollment/{id}")
+  public ResponseEntity<Page<PaymentResponseDTO>> findByEnrollmentId(Pageable pageable, @PathVariable Long id) {
+    return ResponseEntity.ok().body(paymentService.findByEnrollmentId(pageable, id));
+  }
+
   @GetMapping("/open")
   public ResponseEntity<Page<PaymentResponseDTO>> findOpenPayments(Pageable pageable) {
     return ResponseEntity.ok().body(paymentService.findOpenPayments(pageable));
@@ -45,11 +55,6 @@ public class PaymentController {
   @GetMapping("/overdue")
   public ResponseEntity<Page<PaymentResponseDTO>> findOverduePayments(Pageable pageable) {
     return ResponseEntity.ok().body(paymentService.findOverduePayments(pageable));
-  }
-
-  @GetMapping("/enrollment/{id}")
-  public ResponseEntity<Page<PaymentResponseDTO>> findByEnrollmentId(Pageable pageable, @PathVariable Long id) {
-    return ResponseEntity.ok().body(paymentService.findByEnrollmentId(pageable, id));
   }
 
   @PostMapping
@@ -72,11 +77,6 @@ public class PaymentController {
   public ResponseEntity<Void> cancel(@PathVariable Long id) {
     paymentService.cancel(id);
     return ResponseEntity.ok().build();
-  }
-
-  @GetMapping("/{id}")
-  public ResponseEntity<PaymentResponseDTO> findById(@PathVariable Long id) {
-    return ResponseEntity.ok(paymentService.findById(id));
   }
 
 }
