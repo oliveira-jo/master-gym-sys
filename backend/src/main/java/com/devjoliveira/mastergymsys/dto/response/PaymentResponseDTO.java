@@ -21,11 +21,11 @@ public record PaymentResponseDTO(
   public PaymentResponseDTO(Payment payment) {
     this(
         payment.getId(),
-        payment.getDueDate().toString(),
+        payment.getDueDate() != null ? payment.getDueDate().toString() : "0000-00-00T00:00:00",
         payment.getAmount(),
         payment.getPaymentAmount(),
-        payment.getPaymentDate().toString(),
-        payment.getCanceledDate().toString(),
+        payment.getPaymentDate() != null ? payment.getPaymentDate().toString() : "0000-00-00T00:00:00",
+        payment.getCanceledDate() != null ? payment.getCanceledDate().toString() : "0000-00-00T00:00:00",
         payment.getStatus().toString(),
         payment.getObservation(),
         payment.getEnrollment().getId());
