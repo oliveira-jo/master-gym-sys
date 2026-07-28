@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devjoliveira.mastergymsys.dto.request.PaymentRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.PaymentHistoryResponseDTO;
 import com.devjoliveira.mastergymsys.dto.response.PaymentResponseDTO;
 import com.devjoliveira.mastergymsys.service.PaymentService;
 
@@ -42,9 +43,15 @@ public class PaymentController {
     return ResponseEntity.ok(paymentService.findById(id));
   }
 
+  @GetMapping("/enrollment/{id}/history")
+  public ResponseEntity<PaymentHistoryResponseDTO> findHistoryByEnrollmentId(@PathVariable Long enrollmentId) {
+    return ResponseEntity.ok().body(paymentService.findHistory(enrollmentId));
+  }
+
   @GetMapping("/enrollment/{id}")
   public ResponseEntity<Page<PaymentResponseDTO>> findByEnrollmentId(Pageable pageable, @PathVariable Long id) {
-    return ResponseEntity.ok().body(paymentService.findByEnrollmentId(pageable, id));
+    return ResponseEntity.ok().body(paymentService.findByEnrollmentId(pageable,
+        id));
   }
 
   @GetMapping("/open")

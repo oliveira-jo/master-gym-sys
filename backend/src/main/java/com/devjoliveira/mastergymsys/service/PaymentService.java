@@ -2,6 +2,7 @@ package com.devjoliveira.mastergymsys.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,8 @@ import com.devjoliveira.mastergymsys.domain.Payment;
 import com.devjoliveira.mastergymsys.domain.enums.StatusPayment;
 import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
 import com.devjoliveira.mastergymsys.dto.request.PaymentRequestDTO;
+import com.devjoliveira.mastergymsys.dto.response.EnrollmentSummaryDTO;
+import com.devjoliveira.mastergymsys.dto.response.PaymentHistoryResponseDTO;
 import com.devjoliveira.mastergymsys.dto.response.PaymentResponseDTO;
 import com.devjoliveira.mastergymsys.repositoty.EnrollmentRepository;
 import com.devjoliveira.mastergymsys.repositoty.PaymentRepository;
@@ -106,8 +109,32 @@ public class PaymentService {
   }
 
   @Transactional(readOnly = true)
+  public PaymentHistoryResponseDTO findHistory(Long enrollmentId) {
+
+    List<Payment> payments = paymentRepository.findHistory(enrollmentId);
+
+    if (payments.isEmpty()) {
+      throw new RuntimeException("Nenhum pagamento encontrado para a matrícula.");
+    }
+
+    Enrollment enrollment = payments.getFirst().getEnrollment();
+
+    EnrollmentSummaryDTO summary = new EnrollmentSummaryDTO(
+        enrollment.getId(),
+        enrollment.getStudent().getName(),
+        enrollment.getDueDay(),
+        enrollment.getStatus());
+
+    List<PaymentResponseDTO> paymentDTOs = payments.stream().map(PaymentResponseDTO::new).toList();
+
+    return new PaymentHistoryResponseDTO(summary, paymentDTOs);
+
+  }
+
+  @Transactional(readOnly = true)
   public Page<PaymentResponseDTO> findByEnrollmentId(Pageable pageable, Long enrollmentId) {
-    return paymentRepository.findByEnrollmentId(pageable, enrollmentId).map(PaymentResponseDTO::new);
+    return paymentRepository.findByEnrollmentId(pageable,
+        enrollmentId).map(PaymentResponseDTO::new);
   }
 
   @Transactional(readOnly = true)

@@ -17,6 +17,8 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
   Page<Payment> findByEnrollmentId(Pageable pageable, Long enrollmentId);
 
+  List<Payment> findHistory(Long enrollmentId);
+
   @NonNull
   Page<Payment> findAll(Pageable pageable);
 
