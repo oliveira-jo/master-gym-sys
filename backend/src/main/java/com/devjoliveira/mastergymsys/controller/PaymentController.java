@@ -44,14 +44,14 @@ public class PaymentController {
   }
 
   @GetMapping("/enrollment/{id}/history")
-  public ResponseEntity<PaymentHistoryResponseDTO> findHistoryByEnrollmentId(@PathVariable Long enrollmentId) {
-    return ResponseEntity.ok().body(paymentService.findHistory(enrollmentId));
+  public ResponseEntity<PaymentHistoryResponseDTO> findHistoryByEnrollmentId(@PathVariable Long id,
+      Pageable pageable) {
+    return ResponseEntity.ok().body(paymentService.findHistoryByEnrollmentId(pageable, id));
   }
 
   @GetMapping("/enrollment/{id}")
   public ResponseEntity<Page<PaymentResponseDTO>> findByEnrollmentId(Pageable pageable, @PathVariable Long id) {
-    return ResponseEntity.ok().body(paymentService.findByEnrollmentId(pageable,
-        id));
+    return ResponseEntity.ok().body(paymentService.findByEnrollmentId(pageable, id));
   }
 
   @GetMapping("/open")

@@ -2,7 +2,6 @@ package com.devjoliveira.mastergymsys.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -95,29 +94,28 @@ public class PaymentService {
 
   @Transactional(readOnly = true)
   public Page<PaymentResponseDTO> findPaidPayments(Pageable pageable) {
-    return paymentRepository.findByStatus(pageable, StatusPayment.PAID).map(PaymentResponseDTO::new);
+    return findByStatus(StatusPayment.PAID, pageable);
   }
 
   @Transactional(readOnly = true)
   public Page<PaymentResponseDTO> findOpenPayments(Pageable pageable) {
-    return paymentRepository.findByStatus(pageable, StatusPayment.OPEN).map(PaymentResponseDTO::new);
+    return findByStatus(StatusPayment.OPEN, pageable);
   }
 
   @Transactional(readOnly = true)
   public Page<PaymentResponseDTO> findOverduePayments(Pageable pageable) {
-    return paymentRepository.findByStatus(pageable, StatusPayment.OVERDUE).map(PaymentResponseDTO::new);
+    return findByStatus(StatusPayment.OVERDUE, pageable);
   }
 
   @Transactional(readOnly = true)
-  public PaymentHistoryResponseDTO findHistory(Long enrollmentId) {
+  public PaymentHistoryResponseDTO findHistoryByEnrollmentId(Pageable pageable, Long id) {
 
-    List<Payment> payments = paymentRepository.findHistory(enrollmentId);
+    Enrollment enrollment = enrollmentRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Matrícula não encontrada."));
 
-    if (payments.isEmpty()) {
-      throw new RuntimeException("Nenhum pagamento encontrado para a matrícula.");
-    }
-
-    Enrollment enrollment = payments.getFirst().getEnrollment();
+    Page<PaymentResponseDTO> payments = paymentRepository
+        .findByEnrollmentId(pageable, id)
+        .map(PaymentResponseDTO::new);
 
     EnrollmentSummaryDTO summary = new EnrollmentSummaryDTO(
         enrollment.getId(),
@@ -125,9 +123,7 @@ public class PaymentService {
         enrollment.getDueDay(),
         enrollment.getStatus());
 
-    List<PaymentResponseDTO> paymentDTOs = payments.stream().map(PaymentResponseDTO::new).toList();
-
-    return new PaymentHistoryResponseDTO(summary, paymentDTOs);
+    return new PaymentHistoryResponseDTO(summary, payments);
 
   }
 
@@ -153,6 +149,13 @@ public class PaymentService {
   private Payment searchPaymentById(Long id) {
     return paymentRepository.findById(id).orElseThrow(
         () -> new BusinessException("Payment not found with id: " + id));
+  }
+
+  private Page<PaymentResponseDTO> findByStatus(StatusPayment status, Pageable pageable) {
+
+    return paymentRepository.findByStatus(pageable, status)
+        .map(PaymentResponseDTO::new);
+
   }
 
 }

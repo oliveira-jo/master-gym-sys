@@ -1,12 +1,12 @@
 package com.devjoliveira.mastergymsys.dto.response;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public record PaymentHistoryResponseDTO(
 
-    EnrollmentSummaryDTO enrollment,
+        EnrollmentSummaryDTO enrollment,
 
-    List<PaymentResponseDTO> payments
+        Page<PaymentResponseDTO> payments
 
 ) {
 
