@@ -61,9 +61,16 @@ public class PaymentService {
   }
 
   @Transactional
+  public void pay(Long paymentId) {
+    Payment payment = searchPaymentById(paymentId);
+    validatePayment(payment);
+    markAsPaid(payment);
+    createNextPayment(payment);
+  }
+
+  @Transactional
   public void cancel(Long paymentId) {
     Payment payment = searchPaymentById(paymentId);
-
     if (payment.getStatus() == StatusPayment.PAID)
       throw new BusinessException("A paid payment cannot be canceled.");
 
@@ -71,24 +78,6 @@ public class PaymentService {
       throw new BusinessException("Payment is already canceled.");
 
     payment.setStatus(StatusPayment.CANCELED);
-
-    paymentRepository.save(payment);
-  }
-
-  @Transactional
-  public void pay(Long paymentId) {
-    Payment payment = searchPaymentById(paymentId);
-
-    if (payment.getStatus() == StatusPayment.PAID)
-      throw new BusinessException("Payment has already been paid.");
-
-    if (payment.getStatus() == StatusPayment.CANCELED)
-      throw new BusinessException("Canceled payments cannot be paid.");
-
-    payment.setStatus(StatusPayment.PAID);
-    payment.setPaymentDate(LocalDateTime.now());
-    payment.setPaymentAmount(payment.getAmount());
-
     paymentRepository.save(payment);
   }
 
@@ -108,6 +97,17 @@ public class PaymentService {
   }
 
   @Transactional(readOnly = true)
+  public Page<PaymentResponseDTO> findAll(Pageable pageable) {
+    return paymentRepository.findAll(pageable).map(PaymentResponseDTO::new);
+  }
+
+  @Transactional(readOnly = true)
+  public Page<PaymentResponseDTO> findByEnrollmentId(Pageable pageable, Long enrollmentId) {
+    return paymentRepository.findByEnrollmentId(pageable,
+        enrollmentId).map(PaymentResponseDTO::new);
+  }
+
+  @Transactional(readOnly = true)
   public PaymentHistoryResponseDTO findHistoryByEnrollmentId(Pageable pageable, Long id) {
 
     Enrollment enrollment = enrollmentRepository.findById(id)
@@ -124,25 +124,11 @@ public class PaymentService {
         enrollment.getStatus());
 
     return new PaymentHistoryResponseDTO(summary, payments);
-
-  }
-
-  @Transactional(readOnly = true)
-  public Page<PaymentResponseDTO> findByEnrollmentId(Pageable pageable, Long enrollmentId) {
-    return paymentRepository.findByEnrollmentId(pageable,
-        enrollmentId).map(PaymentResponseDTO::new);
-  }
-
-  @Transactional(readOnly = true)
-  public Page<PaymentResponseDTO> findAll(Pageable pageable) {
-    return paymentRepository.findAll(pageable).map(PaymentResponseDTO::new);
   }
 
   @Transactional(readOnly = true)
   public PaymentResponseDTO findById(Long paymentId) {
-
     Payment payment = searchPaymentById(paymentId);
-
     return new PaymentResponseDTO(payment);
   }
 
@@ -152,10 +138,28 @@ public class PaymentService {
   }
 
   private Page<PaymentResponseDTO> findByStatus(StatusPayment status, Pageable pageable) {
-
     return paymentRepository.findByStatus(pageable, status)
         .map(PaymentResponseDTO::new);
+  }
 
+  private void validatePayment(Payment payment) {
+    if (payment.getStatus() != StatusPayment.OPEN) {
+      throw new BusinessException("Pagamento já processado.");
+    }
+  }
+
+  private void markAsPaid(Payment payment) {
+    payment.setStatus(StatusPayment.PAID);
+    payment.setPaymentDate(LocalDateTime.now());
+  }
+
+  private void createNextPayment(Payment currentPayment) {
+    Payment next = new Payment();
+    next.setEnrollment(currentPayment.getEnrollment());
+    next.setAmount(currentPayment.getAmount());
+    next.setStatus(StatusPayment.OPEN);
+    next.setDueDate(currentPayment.getDueDate().plusMonths(1));
+    paymentRepository.save(next);
   }
 
 }
