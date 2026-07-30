@@ -3,7 +3,6 @@ import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
 import { TokenService } from '../service/token.service';
 
 export const authGuard: CanActivateChildFn = () => {
-
   const tokenService = inject(TokenService);
   const router = inject(Router);
 
@@ -11,7 +10,7 @@ export const authGuard: CanActivateChildFn = () => {
     return true;
   }
 
-  router.navigate(['/login']);
-  return false;
+  tokenService.remove();
 
+  return router.createUrlTree(['/login']);
 };
