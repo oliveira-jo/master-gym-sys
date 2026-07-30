@@ -1,0 +1,152 @@
+<div class="container-fluid">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="h3 mb-1">
+        Relatórios
+      </h1>
+      <p class="text-muted mb-0">
+        Acompanhe os principais indicadores do sistema.
+      </p>
+    </div>
+    <button class="btn btn-primary" type="button" (click)="loadReports()" [disabled]="loading">
+      <i class="fas fa-sync-alt me-2"></i>
+      Atualizar
+    </button>
+  </div>
+
+  <!-- Loading -->
+  @if (loading) {
+  <div class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">
+        Carregando...
+      </span>
+    </div>
+    <p class="mt-3 text-muted">
+      Carregando relatórios...
+    </p>
+  </div>
+  }
+
+  <!-- Erro -->
+  @if (errorMessage) {
+  <div class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  }
+
+  <!-- Content -->
+  @if (!loading && !errorMessage) {
+  <!-- Month payments -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h3 class="card-title mb-0">
+        <i class="fas fa-chart-line me-2"></i>
+        Faturamento mensal
+      </h3>
+    </div>
+
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>Mês</th>
+              <th>Ano</th>
+              <th class="text-end"> Faturamento </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(report of monthlyBilling; track $index) {
+            <tr>
+              <td> {{ report.month }} </td>
+              <td> {{ report.year }} </td>
+              <td class="text-end">
+                {{ report.totalBilling | currency: 'BRL': 'symbol': '1.2-2' }}
+              </td>
+            </tr>
+            }
+            @if (monthlyBilling.length === 0) {
+            <tr>
+              <td colspan="3" class="text-center text-muted py-4"> Nenhum dado encontrado. </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Student by city -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h3 class="card-title mb-0">
+        <i class="fas fa-city me-2"></i> Alunos por cidade
+      </h3>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>Cidade</th>
+              <th class="text-end"> Total de alunos </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (report of studentsByCity; track $index) {
+            <tr>
+              <td> {{ report.city }} </td>
+              <td class="text-end"> {{ report.totalStudents }} </td>
+            </tr>
+            }
+            @if (studentsByCity.length === 0) {
+            <tr>
+              <td colspan="2" class="text-center text-muted py-4"> Nenhum dado encontrado. </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overduw payments -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title mb-0">
+        <i class="fas fa-file-invoice-dollar me-2"></i> Faturas pendentes
+      </h3>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>Aluno</th>
+              <th>Vencimento</th>
+              <th class="text-end"> Valor </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (invoice of outstandingInvoices; track invoice.id) {
+            <tr>
+              <td> {{ invoice.studentName }} </td>
+              <td> {{invoice.dueDate | date:'dd/MM/yyyy'}} </td>
+              <td class="text-end"> {{invoice.amount | currency:'BRL'}} </td>
+            </tr>
+            }
+            @if (outstandingInvoices.length === 0) {
+            <tr>
+              <td colspan="3" class="text-center text-muted py-4"> Nenhuma fatura pendente. </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  }
+</div>

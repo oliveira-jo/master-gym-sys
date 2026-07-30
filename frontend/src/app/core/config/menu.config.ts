@@ -29,7 +29,7 @@ export const MENU_CONFIG: MenuItem[] = [
   {
     label: 'Relatórios',
     children: [
-      { label: 'Matrículas', route: '/relatorios' }
+      { label: 'Matrículas', route: '/relatorio' }
     ]
   }
 

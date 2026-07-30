@@ -79,7 +79,6 @@ export const routes: Routes = [
             .then(c => c.PaymentListComponent)
       },
 
-      // resto das rotas...
       {
         path: 'usuarios',
         canActivate: [roleGuard, authGuard],
@@ -92,6 +91,17 @@ export const routes: Routes = [
           import('./features/user/user-list/user-list.component')
             .then(c => c.UserListComponent)
       },
+
+      {
+        path: 'relatorio',
+        canActivate: [roleGuard],
+        data: {
+          roles: ['ROLE_ADMIN', 'ROLE_ATTENDANT']
+        },
+        loadComponent: () =>
+          import('./features/report/report.component')
+            .then(c => c.ReportComponent)
+      }
 
     ]
   },
