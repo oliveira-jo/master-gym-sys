@@ -72,6 +72,13 @@ export const routes: Routes = [
             .then(c => c.EnrollmentFormComponent)
       },
 
+      {
+        path: 'financeiro',
+        loadComponent: () =>
+          import('./features/finance/payment/payment-list/payment-list.component')
+            .then(c => c.PaymentListComponent)
+      },
+
       // resto das rotas...
       {
         path: 'usuarios',

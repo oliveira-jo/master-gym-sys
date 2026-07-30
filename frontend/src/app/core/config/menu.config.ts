@@ -22,8 +22,7 @@ export const MENU_CONFIG: MenuItem[] = [
     label: 'Processos',
     children: [
       { label: 'Matricular', route: '/matriculas' },
-      { label: 'Faturas', route: '/faturas' },
-      { label: 'Pagamentos', route: '/pagamentos' }
+      { label: 'Financeiro', route: '/financeiro' },
     ]
   },
 

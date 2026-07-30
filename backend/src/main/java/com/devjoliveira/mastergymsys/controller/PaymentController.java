@@ -75,8 +75,8 @@ public class PaymentController {
   }
 
   @PutMapping("/{id}/pay")
-  public ResponseEntity<Void> pay(@PathVariable Long id) {
-    paymentService.pay(id);
+  public ResponseEntity<Void> pay(@PathVariable Long id, @RequestBody PaymentRequestDTO dto) {
+    paymentService.pay(id, dto);
     return ResponseEntity.ok().build();
   }
 

@@ -1,5 +1,9 @@
 package com.devjoliveira.mastergymsys.service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -13,11 +17,13 @@ import com.devjoliveira.mastergymsys.domain.EnrollmentModality;
 import com.devjoliveira.mastergymsys.domain.Student;
 import com.devjoliveira.mastergymsys.domain.exception.BusinessException;
 import com.devjoliveira.mastergymsys.dto.request.EnrollmentRequestDTO;
+import com.devjoliveira.mastergymsys.dto.request.PaymentRequestDTO;
 import com.devjoliveira.mastergymsys.dto.response.EnrollmentResponseDTO;
 import com.devjoliveira.mastergymsys.repositoty.EnrollmentModalityRepository;
 import com.devjoliveira.mastergymsys.repositoty.EnrollmentRepository;
 import com.devjoliveira.mastergymsys.repositoty.GraduationRepository;
 import com.devjoliveira.mastergymsys.repositoty.ModalityRepository;
+import com.devjoliveira.mastergymsys.repositoty.PaymentRepository;
 import com.devjoliveira.mastergymsys.repositoty.StudentRepository;
 import com.devjoliveira.mastergymsys.repositoty.SubscriptionRepository;
 
@@ -27,6 +33,7 @@ public class EnrollmentService {
   private final EnrollmentRepository enrollmentRepository;
   private final EnrollmentModalityRepository enrollmentModalityRepository;
   private final StudentRepository studentRepository;
+  private final PaymentService paymentService;
 
   private final ModalityRepository modalityRepository;
   private final GraduationRepository graduationRepository;
@@ -38,13 +45,15 @@ public class EnrollmentService {
       StudentRepository studentRepository,
       ModalityRepository modalityRepository,
       GraduationRepository graduationRepository,
-      SubscriptionRepository subscriptionRepository) {
+      SubscriptionRepository subscriptionRepository,
+      PaymentService paymentService) {
     this.enrollmentRepository = enrollmentRepository;
     this.enrollmentModalityRepository = enrollmentModalityRepository;
     this.studentRepository = studentRepository;
     this.modalityRepository = modalityRepository;
     this.graduationRepository = graduationRepository;
     this.subscriptionRepository = subscriptionRepository;
+    this.paymentService = paymentService;
   }
 
   @Transactional(readOnly = true)
@@ -72,6 +81,9 @@ public class EnrollmentService {
     // save Enrollment in DB
     Enrollment enrollmntFromDB = enrollmentRepository.save(enrollment);
 
+    // Vars for payment
+    BigDecimal amount;
+
     // EnrollmentModality
     List<EnrollmentModality> enrollmentModalities = request.enrollmentModalities().stream().map(
         dto -> {
@@ -82,11 +94,28 @@ public class EnrollmentService {
           em.setStartDate(dto.startDate());
           em.setEndDate(dto.endDate());
           em.setEnrollment(enrollmntFromDB);
-          return em;
+
+          // get the price of this modality
+          amount = subscriptionRepository.findById(dto.subscriptionId()).get().getPrice();
+
         }).toList();
 
     // Save EnrollmentsModalities in DB
     List<EnrollmentModality> emFromDB = enrollmentModalityRepository.saveAll(enrollmentModalities);
+
+    // Generate and save the first payment
+    // =============================================================================
+    PaymentRequestDTO firstOne = new PaymentRequestDTO(
+        request.dueDay(),
+        amount,
+        amount,
+        LocalDateTime.of(request.enrollmentDate().plusMonths(1), LocalTime.now()),
+        null,
+        null,
+        enrollmntFromDB.getId());
+
+    // create and save the first payment
+    paymentService.create(firstOne);
 
     // Mount response
     EnrollmentResponseDTO response = new EnrollmentResponseDTO(enrollmntFromDB, emFromDB);

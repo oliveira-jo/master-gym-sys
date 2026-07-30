@@ -61,11 +61,20 @@ public class PaymentService {
   }
 
   @Transactional
-  public void pay(Long paymentId) {
+  public void pay(Long paymentId, PaymentRequestDTO dto) {
+
     Payment payment = searchPaymentById(paymentId);
+
     validatePayment(payment);
-    markAsPaid(payment);
-    createNextPayment(payment);
+    markAsPaidAndSave(payment, dto);
+
+    boolean exists = paymentRepository.existsByEnrollmentAndStatus(
+        payment.getEnrollment(),
+        StatusPayment.OPEN);
+
+    if (!exists)
+      createNextPayment(payment);
+
   }
 
   @Transactional
@@ -148,9 +157,12 @@ public class PaymentService {
     }
   }
 
-  private void markAsPaid(Payment payment) {
+  private void markAsPaidAndSave(Payment payment, PaymentRequestDTO dto) {
     payment.setStatus(StatusPayment.PAID);
     payment.setPaymentDate(LocalDateTime.now());
+    payment.setPaymentAmount(dto.paymentAmount());
+    payment.setObservation(dto.observation());
+    paymentRepository.save(payment);
   }
 
   private void createNextPayment(Payment currentPayment) {

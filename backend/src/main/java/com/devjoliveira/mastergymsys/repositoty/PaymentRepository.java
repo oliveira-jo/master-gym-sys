@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.NonNull;
 
+import com.devjoliveira.mastergymsys.domain.Enrollment;
 import com.devjoliveira.mastergymsys.domain.Payment;
 import com.devjoliveira.mastergymsys.domain.enums.StatusPayment;
 
@@ -33,5 +34,7 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
   // Searches only for outstanding payments that are past due
   List<Payment> findByDueDateBeforeAndStatus(LocalDate date, StatusPayment status);
+
+  boolean existsByEnrollmentAndStatus(Enrollment enrollment, StatusPayment status);
 
 }
