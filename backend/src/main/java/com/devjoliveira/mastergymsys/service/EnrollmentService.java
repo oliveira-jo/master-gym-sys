@@ -96,10 +96,14 @@ public class EnrollmentService {
     List<EnrollmentModality> emFromDB = enrollmentModalityRepository.saveAll(enrollmentModalities);
 
     // Calculate amount for first payment
-    BigDecimal amount = BigDecimal.ZERO;
-    enrollmentModalities.forEach(em -> {
-      amount.add(em.getSubscription().getPrice());
-    });
+    // BigDecimal amount = BigDecimal.ZERO;
+    // enrollmentModalities.forEach(em -> {
+    // amount.add(em.getSubscription().getPrice());
+    // });
+
+    BigDecimal amount = enrollmentModalities.stream()
+        .map(em -> em.getSubscription().getPrice())
+        .reduce(BigDecimal.ZERO, BigDecimal::add);
 
     // Generate and save the first payment
     PaymentRequestDTO firstOne = new PaymentRequestDTO(

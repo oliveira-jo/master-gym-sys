@@ -59,6 +59,7 @@
             <th>id</th>
             <th>Vencimento</th>
             <th>Valor</th>
+            <th>Valor Pago</th>
             <th>Status</th>
             <th>Ação</th>
           </tr>
@@ -69,6 +70,7 @@
             <td>{{ payment.id }}</td>
             <td>{{ payment.dueDate | date:'dd/MM/yyyy'}}</td>
             <td>{{ payment.amount | currency:'BRL' }}</td>
+            <td>{{ payment.paymentAmount | currency:'BRL' }}</td>
             <td>{{ payment.status }}</td>
             <td>
               <button class="btn btn-sm btn-success me-2" (click)="openPay(payment)">
