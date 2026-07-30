@@ -49,68 +49,23 @@ FROM enrollments en
     JOIN subscriptions sub ON sub.modalitie_id = mo.id AND sub.name = 'Mensal'
 WHERE en.student_id = 3;
 
-INSERT INTO payments(
-       enrollment_id,
-       due_date,
-       amount,
-       payment_date,
-       status
-)
-SELECT
-    en.id,
-    CURRENT_DATE - INTERVAL '60 days',
-    120.00,
-    CURRENT_TIMESTAMP - INTERVAL '58 days',
-    'OPEN'
-FROM enrollments en
-WHERE en.student_id = 2;
-
-
-INSERT INTO payments(
-    enrollment_id,
-    due_date,
-    amount,
-    payment_date,
-    status
-)
-SELECT
-    en.id,
-    CURRENT_DATE - INTERVAL '30 days',
-    120.00,
-    CURRENT_TIMESTAMP - INTERVAL '29 days',
-    'PAID'
-FROM enrollments en
-WHERE en.student_id = 2;
-
-INSERT INTO payments(
-    enrollment_id,
-    due_date,
-    amount,
-    status
-)
-SELECT
-    en.id,
-    CURRENT_DATE - INTERVAL '10 days',
-    120.00,
-    'OPEN'
-FROM enrollments en
-WHERE en.student_id = 2;
-
 
 --
 INSERT INTO payments(
     enrollment_id,
     due_date,
     amount,
+    payment_amount,
     payment_date,
     status
 )
 SELECT
     en.id,
     CURRENT_DATE - INTERVAL '30 days',
-    180.00,
-    CURRENT_TIMESTAMP - INTERVAL '28 days',
-    'PAID'
+    120.00,
+    120.00,
+    CURRENT_TIMESTAMP - INTERVAL '29 days',
+    'OPEN'
 FROM enrollments en
 WHERE en.student_id = 3;
 
@@ -118,12 +73,16 @@ INSERT INTO payments(
     enrollment_id,
     due_date,
     amount,
+    payment_amount,
+    payment_date,
     status
 )
 SELECT
     en.id,
-    CURRENT_DATE - INTERVAL '15 days',
+    CURRENT_DATE - INTERVAL '30 days',
     120.00,
+    120.00,
+    CURRENT_TIMESTAMP - INTERVAL '29 days',
     'OPEN'
 FROM enrollments en
 WHERE en.student_id = 2;

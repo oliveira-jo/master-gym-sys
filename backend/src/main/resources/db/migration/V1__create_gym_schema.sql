@@ -67,11 +67,26 @@ CREATE TABLE payments (
     enrollment_id BIGINT NOT NULL REFERENCES enrollments(id),
     due_date DATE NOT NULL,
     amount NUMERIC(10, 2) NOT NULL CHECK(amount >= 0),
+    payment_amount NUMERIC(10,2),
     payment_date TIMESTAMP,
     canceled_date DATE,
+    observation VARCHAR(300),
     status VARCHAR(20) NOT NULL DEFAULT 'OPEN',
     CHECK (status IN ('OPEN', 'PAID', 'CANCELED', 'OVERDUE')),
     UNIQUE (enrollment_id, due_date)
+);
+
+ALTER TABLE payments
+ADD CONSTRAINT chk_payment_amount_positive
+CHECK (
+    payment_amount IS NULL OR payment_amount >= 0
+);
+
+ALTER TABLE payments
+ADD CONSTRAINT chk_payment_paid
+CHECK (
+    status <> 'PAID'
+    OR payment_amount IS NOT NULL
 );
 
 
