@@ -25,17 +25,17 @@ public class ReportController implements ReportControllerDoc {
     this.reportRepository = reportRepository;
   }
 
-  @GetMapping("/monthlyBilling")
+  @GetMapping("/monthly-billing")
   public ResponseEntity<List<MonthlyBillingProjection>> monthlyBilling() {
     return ResponseEntity.ok().body(reportRepository.monthlyBilling());
   }
 
-  @GetMapping("/studentsByCity")
+  @GetMapping("/students-by-city")
   public ResponseEntity<List<StudentsByCityProjection>> studentsByCity() {
     return ResponseEntity.ok().body(reportRepository.studentsByCity());
   }
 
-  @GetMapping("/outstandingInvoices")
+  @GetMapping("/outstanding-invoices")
   public ResponseEntity<List<OutstandingInvoicesProjection>> outstandingInvoices() {
     return ResponseEntity.ok().body(reportRepository.outstandingInvoices());
   }
