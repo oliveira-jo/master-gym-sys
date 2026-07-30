@@ -2,6 +2,7 @@ package com.devjoliveira.mastergymsys.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -66,14 +67,24 @@ public class PaymentService {
     Payment payment = searchPaymentById(paymentId);
 
     validatePayment(payment);
+
     markAsPaidAndSave(payment, dto);
 
-    boolean exists = paymentRepository.existsByEnrollmentAndStatus(
+    boolean existsOpenPayment = paymentRepository.existsByEnrollmentAndStatus(
         payment.getEnrollment(),
         StatusPayment.OPEN);
 
-    if (!exists)
+    boolean existsOverDuwPayment = paymentRepository.existsByEnrollmentAndStatus(
+        payment.getEnrollment(),
+        StatusPayment.OVERDUE);
+
+    if (!existsOpenPayment || existsOverDuwPayment)
       createNextPayment(payment);
+
+    // Payment payment = searchPaymentById(paymentId);
+    // validatePayment(payment);
+    // markAsPaid(payment, dto);
+    // createNextPayment(payment);
 
   }
 
@@ -152,8 +163,12 @@ public class PaymentService {
   }
 
   private void validatePayment(Payment payment) {
-    if (payment.getStatus() != StatusPayment.OPEN) {
-      throw new BusinessException("Pagamento já processado.");
+    if (payment.getStatus() == StatusPayment.PAID) {
+      throw new BusinessException("Este pagamento já foi processado");
+    }
+
+    if (payment.getStatus() == StatusPayment.CANCELED) {
+      throw new BusinessException("Este pagamento foi cancelado");
     }
   }
 
@@ -172,6 +187,13 @@ public class PaymentService {
     next.setStatus(StatusPayment.OPEN);
     next.setDueDate(currentPayment.getDueDate().plusMonths(1));
     paymentRepository.save(next);
+  }
+
+  @Transactional
+  public void updateOverduePayments() {
+    LocalDate today = LocalDate.now();
+    List<Payment> payments = paymentRepository.findByDueDateBeforeAndStatus(today, StatusPayment.OPEN);
+    payments.forEach(payment -> payment.setStatus(StatusPayment.OVERDUE));
   }
 
 }
