@@ -19,19 +19,19 @@ export class ReportService {
 
   getMonthlyBilling(): Observable<MonthlyBilling[]> {
     return this.http.get<MonthlyBilling[]>(
-      `${this.apiUrl}/monthlyBilling`
+      `${this.apiUrl}/monthly-billing`
     );
   }
 
   getStudentsByCity(): Observable<StudentsByCity[]> {
     return this.http.get<StudentsByCity[]>(
-      `${this.apiUrl}/studentsByCity`
+      `${this.apiUrl}/students-by-city`
     );
   }
 
   getOutstandingInvoices(): Observable<OutstandingInvoices[]> {
     return this.http.get<OutstandingInvoices[]>(
-      `${this.apiUrl}/outstandingInvoices`
+      `${this.apiUrl}/outstanding-invoices`
     );
   }
 
