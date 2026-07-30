@@ -20,8 +20,8 @@ public class PaymentScheduler {
    * how we use transaction don't need to save, jpa manage this
    */
   // For Test
-  @Scheduled(fixedRate = 10000)
-  // @Scheduled(cron = "0 5 0 * * *")
+  // @Scheduled(fixedRate = 10000)
+  @Scheduled(cron = "0 5 0 * * *")
   @Transactional
   public void updateOverduePayments() {
     paymentService.updateOverduePayments();

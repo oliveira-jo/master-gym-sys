@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.devjoliveira.mastergymsys.domain.Enrollment;
+import com.devjoliveira.mastergymsys.domain.enums.StatusEnrollment;
 
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 
@@ -23,5 +24,7 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
         CAST(e.id AS string) = :search
       """)
   Page<Enrollment> search(String search, Pageable pageable);
+
+  long countByStatus(StatusEnrollment status);
 
 }

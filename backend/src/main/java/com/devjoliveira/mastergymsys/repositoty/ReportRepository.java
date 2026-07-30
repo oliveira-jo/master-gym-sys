@@ -13,13 +13,14 @@ import com.devjoliveira.mastergymsys.projection.StudentsByCityProjection;
 public interface ReportRepository extends Repository<Payment, Long> {
 
   @Query(value = """
-        SELECT
-          TO_CHAR(due_date, 'YYYY-MM') AS month,
-          SUM(amount) AS total
-        FROM payments
-        WHERE status = 'PAID'
-        GROUP BY TO_CHAR(due_date, 'YYYY-MM')
-        ORDER BY month
+          SELECT
+            TO_CHAR(payment_date, 'YYYY-MM') AS month,
+            SUM(COALESCE(payment_amount, amount)) AS total
+          FROM payments
+          WHERE status = 'PAID'
+            AND payment_date IS NOT NULL
+          GROUP BY TO_CHAR(payment_date, 'YYYY-MM')
+          ORDER BY month
       """, nativeQuery = true)
   List<MonthlyBillingProjection> monthlyBilling();
 
