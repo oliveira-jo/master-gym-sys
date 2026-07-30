@@ -21,8 +21,8 @@ export class TokenService {
     localStorage.removeItem(this.TOKEN);
   }
 
-  isAuthenticated() {
-    return !!this.getToken();
+  isAuthenticated(): boolean {
+    return !this.isTokenExpired();
   }
 
   getPayload(): JwtPayload | null {
@@ -32,17 +32,45 @@ export class TokenService {
       return null;
     }
 
-    return jwtDecode<JwtPayload>(token);
+    try {
+      return jwtDecode<JwtPayload>(token);
+    } catch {
+      return null;
+    }
+
   }
 
-  isExpired(): boolean {
-    const payload = this.getPayload();
+  // isExpired(): boolean {
+  //   const payload = this.getPayload();
 
-    if (!payload) {
+  //   if (!payload) {
+  //     return true;
+  //   }
+
+  //   return payload.exp * 1000 < Date.now();
+  // }
+
+  isTokenExpired(): boolean {
+
+    const token = this.getToken();
+
+    if (!token) {
       return true;
     }
 
-    return payload.exp * 1000 < Date.now();
+    try {
+      const decoded = jwtDecode<JwtPayload>(token);
+      if (!decoded.exp) {
+        return true;
+      }
+      const now = Math.floor(Date.now() / 1000);
+      return decoded.exp <= now;
+
+    } catch {
+      return true;
+
+    }
+
   }
 
   getAuthorities(): string[] {
