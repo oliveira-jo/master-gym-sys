@@ -46,6 +46,9 @@ public class Enrollment {
   @JoinColumn(name = "student_id")
   private Student student;
 
+  @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Payment> payments = new ArrayList<>();
+
   @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
   private List<EnrollmentModality> enrollmentModalities = new ArrayList<>();
 
@@ -106,6 +109,10 @@ public class Enrollment {
 
   public List<EnrollmentModality> getEnrollmentModalities() {
     return this.enrollmentModalities;
+  }
+
+  public List<Payment> getPayments() {
+    return this.payments;
   }
 
   @Override
