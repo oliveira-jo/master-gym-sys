@@ -1,7 +1,6 @@
 package com.devjoliveira.mastergymsys.service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -23,7 +22,6 @@ import com.devjoliveira.mastergymsys.repositoty.EnrollmentModalityRepository;
 import com.devjoliveira.mastergymsys.repositoty.EnrollmentRepository;
 import com.devjoliveira.mastergymsys.repositoty.GraduationRepository;
 import com.devjoliveira.mastergymsys.repositoty.ModalityRepository;
-import com.devjoliveira.mastergymsys.repositoty.PaymentRepository;
 import com.devjoliveira.mastergymsys.repositoty.StudentRepository;
 import com.devjoliveira.mastergymsys.repositoty.SubscriptionRepository;
 
@@ -81,12 +79,9 @@ public class EnrollmentService {
     // save Enrollment in DB
     Enrollment enrollmntFromDB = enrollmentRepository.save(enrollment);
 
-    // Vars for payment
-    BigDecimal amount;
-
     // EnrollmentModality
-    List<EnrollmentModality> enrollmentModalities = request.enrollmentModalities().stream().map(
-        dto -> {
+    List<EnrollmentModality> enrollmentModalities = request.enrollmentModalities()
+        .stream().map(dto -> {
           EnrollmentModality em = new EnrollmentModality();
           em.setModality(modalityRepository.findById(dto.modalityId()).get());
           em.setGraduation(graduationRepository.findById(dto.graduationId()).get());
@@ -94,17 +89,19 @@ public class EnrollmentService {
           em.setStartDate(dto.startDate());
           em.setEndDate(dto.endDate());
           em.setEnrollment(enrollmntFromDB);
-
-          // get the price of this modality
-          amount = subscriptionRepository.findById(dto.subscriptionId()).get().getPrice();
-
+          return em;
         }).toList();
 
     // Save EnrollmentsModalities in DB
     List<EnrollmentModality> emFromDB = enrollmentModalityRepository.saveAll(enrollmentModalities);
 
+    // Calculate amount for first payment
+    BigDecimal amount = BigDecimal.ZERO;
+    enrollmentModalities.forEach(em -> {
+      amount.add(em.getSubscription().getPrice());
+    });
+
     // Generate and save the first payment
-    // =============================================================================
     PaymentRequestDTO firstOne = new PaymentRequestDTO(
         request.dueDay(),
         amount,
