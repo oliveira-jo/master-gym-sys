@@ -34,6 +34,8 @@ export class SubscriptionFormComponent {
   modalities: ModalityResponse[] = [];
   page = new PageableRequest(0, 100, 'name');
 
+  errorMessage = '';
+
   ngOnInit() {
 
     if (this.subscription) {
@@ -71,15 +73,28 @@ export class SubscriptionFormComponent {
     const request: SubscriptionRequest = this.form.getRawValue();
 
     if (this.subscription) {
-      this.subscriptionService
-        .update(this.subscription.id, request)
-        .subscribe(() => this.close.emit(true));
+      this.subscriptionService.update(this.subscription.id, request)
+        .subscribe({
+          next: () => {
+            this.close.emit(true)
+          },
+          error: (error) => {
+            console.error('Erro ao editar:', error);
+            this.errorMessage = error.error?.message || 'Não foi possível editar o plano.';
+          }
+        });
 
     } else {
-      this.subscriptionService
-        .create(request)
-        .subscribe(() => this.close.emit(true));
-
+      this.subscriptionService.create(request)
+        .subscribe({
+          next: () => {
+            this.close.emit(true)
+          },
+          error: (error) => {
+            console.error('Erro ao salvar:', error);
+            this.errorMessage = error.error?.message || 'Não foi possível salvar o plano.';
+          }
+        });
     }
 
   }

@@ -54,6 +54,8 @@ export class UserFormComponent {
     }
   );
 
+  errorMessage = '';
+
   ngOnInit() {
     if (this.user) {
       this.form.patchValue({
@@ -85,13 +87,29 @@ export class UserFormComponent {
     // console.table(request);
 
     if (this.user) {
-      this.userService
-        .update(this.user.id, request)
-        .subscribe(() => this.close.emit(true));
+      this.userService.update(this.user.id, request)
+        .subscribe({
+          next: () => {
+            this.close.emit(true)
+          },
+          error: (error) => {
+            console.error('Erro ao editar:', error);
+            this.errorMessage = error.error?.message || 'Não foi possível editar o usuário.';
+          }
+        });
+
     } else {
-      this.userService
-        .create(request)
-        .subscribe(() => this.close.emit(true));
+
+      this.userService.create(request)
+        .subscribe({
+          next: () => {
+            this.close.emit(true)
+          },
+          error: (error) => {
+            console.error('Erro ao salvar:', error);
+            this.errorMessage = error.error?.message || 'Não foi possível salvar o usuário.';
+          }
+        });
     }
 
   }

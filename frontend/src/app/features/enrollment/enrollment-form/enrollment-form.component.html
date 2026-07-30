@@ -21,6 +21,13 @@
 
     <div class="card-body">
       <form [formGroup]="form">
+
+        @if (errorMessage) {
+        <div class="alert alert-danger" role="alert">
+          {{ errorMessage }}
+        </div>
+        }
+
         <div class="row g-3">
           <div class="col-md-2">
             <label class="form-label">

@@ -24,6 +24,8 @@ export class ModalityFormComponent {
 
   });
 
+  errorMessage = '';
+
   ngOnInit() {
     if (this.modality) {
       this.form.patchValue({
@@ -42,15 +44,28 @@ export class ModalityFormComponent {
 
 
     if (this.modality) {
-      this.modalityService
-        .update(this.modality.id, request)
-        .subscribe(() => this.close.emit(true));
+      this.modalityService.update(this.modality.id, request)
+        .subscribe({
+          next: () => {
+            this.close.emit(true)
+          },
+          error: (error) => {
+            console.error('Erro ao editar:', error);
+            this.errorMessage = error.error?.message || 'Não foi possível editar a modalidade.';
+          }
+        });
 
     } else {
-      this.modalityService
-        .create(request)
-        .subscribe(() => this.close.emit(true));
-
+      this.modalityService.create(request)
+        .subscribe({
+          next: () => {
+            this.close.emit(true)
+          },
+          error: (error) => {
+            console.error('Erro ao salvar:', error);
+            this.errorMessage = error.error?.message || 'Não foi possível salvar a modalidade.';
+          }
+        });
     }
 
   }

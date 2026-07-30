@@ -14,6 +14,13 @@
       <div class="modal-body">
 
         <form [formGroup]="form">
+
+          @if (errorMessage) {
+          <div class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+          }
+
           <input class="form-control mb-2" placeholder="Nome" formControlName="name">
           <input class="form-control mb-2" placeholder="Data Nascimento - 01/01/1900" formControlName="birthdate">
 

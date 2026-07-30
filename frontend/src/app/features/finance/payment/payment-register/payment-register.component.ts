@@ -28,6 +28,8 @@ export class PaymentRegisterComponent {
     observation: ['']
   });
 
+  errorMessage = '';
+
   ngOnInit() {
     if (this.payment) {
       this.form.patchValue({
@@ -40,7 +42,6 @@ export class PaymentRegisterComponent {
     if (!this.payment) {
       return;
     }
-
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -49,9 +50,15 @@ export class PaymentRegisterComponent {
     const request = this.form.getRawValue();
 
     this.paymentService.pay(this.payment.id, request)
-      .subscribe(() =>
-        this.close.emit(true)
-      );
+      .subscribe({
+        next: () => {
+          this.close.emit(true)
+        },
+        error: (error) => {
+          console.error('Erro ao salvar:', error);
+          this.errorMessage = error.error?.message || 'Não foi possível salvar o pagamento.';
+        }
+      });
   }
 
 

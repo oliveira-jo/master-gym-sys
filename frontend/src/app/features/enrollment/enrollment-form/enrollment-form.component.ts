@@ -61,6 +61,8 @@ export class EnrollmentFormComponent {
     studentId: this.fb.control<number | null>(null, Validators.required),
   });
 
+  errorMessage = '';
+
   ngOnInit() {
 
     this.loadStudents();
@@ -155,17 +157,27 @@ export class EnrollmentFormComponent {
     // console.log(" Enrollment Modality data ", request.enrollmentModalities);
 
     if (this.isEdit) {
-      this.enrollmentService
-        .update(this.enrollment!.id, request)
-        .subscribe(() => {
-          this.router.navigate(['/matriculas']);
+      this.enrollmentService.update(this.enrollment!.id, request)
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/matriculas']);
+          },
+          error: (error) => {
+            console.error('Erro ao editar:', error);
+            this.errorMessage = error.error?.message || 'Não foi possível editar.';
+          }
         });
 
     } else {
-      this.enrollmentService
-        .create(request)
-        .subscribe(() => {
-          this.router.navigate(['/matriculas']);
+      this.enrollmentService.create(request)
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/matriculas']);
+          },
+          error: (error) => {
+            console.error('Erro ao salvar:', error);
+            this.errorMessage = error.error?.message || 'Não foi possível salvar a matricula.';
+          }
         });
     }
 

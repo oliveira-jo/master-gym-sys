@@ -43,6 +43,8 @@ export class StudentFormComponent {
     observations: ['']
   });
 
+  errorMessage = '';
+
   ngOnInit() {
     if (this.student) {
       this.form.patchValue({
@@ -59,6 +61,7 @@ export class StudentFormComponent {
       return;
     }
 
+    this.errorMessage = '';
 
     const request: StudentRequest = this.form.getRawValue();
 
@@ -76,18 +79,29 @@ export class StudentFormComponent {
 
     if (this.student) {
 
-      this.studentService
-        .update(this.student.id, request)
-        .subscribe(() => this.close.emit(true));
+      this.studentService.update(this.student.id, request)
+        .subscribe({
+          next: () => {
+            this.close.emit(true)
+          },
+          error: (error) => {
+            console.error('Erro ao editar:', error);
+            this.errorMessage = error.error?.message || 'Não foi possível editar o aluno.';
+          }
+        });
 
     } else {
 
-      this.studentService
-        .create(request)
-        .subscribe(() => this.close.emit(true));
-
+      this.studentService.create(request).subscribe({
+        next: () => {
+          this.close.emit(true)
+        },
+        error: (error) => {
+          console.error('Erro ao salvar:', error);
+          this.errorMessage = error.error?.message || 'Não foi possível salvar o aluno.';
+        }
+      });
     }
-
   }
 
   ngOnChanges(): void {
