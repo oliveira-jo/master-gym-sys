@@ -4,6 +4,7 @@ import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angula
 import { ModalityResponse } from '../../../core/model/response/modality-response.model';
 import { ModalityService } from '../../../core/service/modality.service';
 import { ModalityRequest } from '../../../core/model/request/modality-request.model';
+import { ToastService } from '../../../core/service/toast.service';
 
 @Component({
   selector: 'app-modality-form',
@@ -17,6 +18,7 @@ export class ModalityFormComponent {
 
   private fb = inject(NonNullableFormBuilder);
   private modalityService = inject(ModalityService);
+  private toastService = inject(ToastService);
 
   form = this.fb.group({
     // Data
@@ -50,8 +52,9 @@ export class ModalityFormComponent {
             this.close.emit(true)
           },
           error: (error) => {
-            console.error('Erro ao editar:', error);
-            this.errorMessage = error.error?.message || 'Não foi possível editar a modalidade.';
+            // console.error('Erro ao editar:', error);
+            // this.errorMessage = error.error?.message;
+            this.toastService.error('Não foi possível editar a modalidade.')
           }
         });
 
@@ -62,8 +65,9 @@ export class ModalityFormComponent {
             this.close.emit(true)
           },
           error: (error) => {
-            console.error('Erro ao salvar:', error);
-            this.errorMessage = error.error?.message || 'Não foi possível salvar a modalidade.';
+            // console.error('Erro ao salvar:', error);
+            // this.errorMessage = error.error?.message;
+            this.toastService.error('Não foi possível salvar a modalidade.')
           }
         });
     }

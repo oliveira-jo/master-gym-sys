@@ -9,6 +9,7 @@ import { PhoneUtils } from '../../../core/utils/PhoneUtils';
 import { STATES } from '../../../core/constant/states';
 import { DateUtils } from '../../../core/utils/DateUtils';
 import { passwordMatchValidator } from '../../../core/validators/password-match';
+import { ToastService } from '../../../core/service/toast.service';
 
 @Component({
   selector: 'app-user-form',
@@ -23,6 +24,8 @@ export class UserFormComponent {
 
   private fb = inject(NonNullableFormBuilder);
   private userService = inject(UserService);
+  private toastService = inject(ToastService);
+
   states = STATES;
 
   form = this.fb.group({
@@ -93,8 +96,9 @@ export class UserFormComponent {
             this.close.emit(true)
           },
           error: (error) => {
-            console.error('Erro ao editar:', error);
-            this.errorMessage = error.error?.message || 'Não foi possível editar o usuário.';
+            // console.error('Erro ao editar:', error);
+            // this.errorMessage = error.error?.message || 'Não foi possível editar o usuário.';
+            this.toastService.error('Não foi possível editar o usuário.');
           }
         });
 
@@ -106,8 +110,9 @@ export class UserFormComponent {
             this.close.emit(true)
           },
           error: (error) => {
-            console.error('Erro ao salvar:', error);
-            this.errorMessage = error.error?.message || 'Não foi possível salvar o usuário.';
+            // console.error('Erro ao salvar:', error);
+            // this.errorMessage = error.error?.message;
+            this.toastService.error('Não foi possível salvar o usuário.');
           }
         });
     }

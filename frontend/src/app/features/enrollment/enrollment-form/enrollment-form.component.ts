@@ -14,6 +14,7 @@ import { EnrollmentModalityResponse } from "../../../core/model/response/enrollm
 
 import { ActivatedRoute, Router } from "@angular/router";
 import { EnrollmentRequest } from "../../../core/model/request/enrollment-request.model";
+import { ToastService } from "../../../core/service/toast.service";
 
 @Component({
   selector: 'app-enrollment-form',
@@ -34,6 +35,7 @@ export class EnrollmentFormComponent {
   private studentService = inject(StudentService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private toastService = inject(ToastService);
 
   enrollmentModalitiesResponse: EnrollmentModalityResponse[] = [];
 
@@ -163,8 +165,9 @@ export class EnrollmentFormComponent {
             this.router.navigate(['/matriculas']);
           },
           error: (error) => {
-            console.error('Erro ao editar:', error);
-            this.errorMessage = error.error?.message || 'Não foi possível editar.';
+            // console.error('Erro ao editar:', error);
+            // this.errorMessage = error.error?.message;
+            this.toastService.error('Não foi possível editar.');
           }
         });
 
@@ -175,8 +178,9 @@ export class EnrollmentFormComponent {
             this.router.navigate(['/matriculas']);
           },
           error: (error) => {
-            console.error('Erro ao salvar:', error);
-            this.errorMessage = error.error?.message || 'Não foi possível salvar a matricula.';
+            // console.error('Erro ao salvar:', error);
+            // this.errorMessage = error.error?.message;
+            this.toastService.error('Não foi possível salvar a matricula.');
           }
         });
     }

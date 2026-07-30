@@ -3,6 +3,7 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PaymentResponse } from '../../../../core/model/response/payment-response-model';
 import { PaymentService } from '../../../../core/service/payment.service';
+import { ToastService } from '../../../../core/service/toast.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class PaymentRegisterComponent {
 
   private fb = inject(NonNullableFormBuilder);
   private paymentService = inject(PaymentService);
+  private toastService = inject(ToastService);
 
   form = this.fb.group({
     paymentAmount: [0, Validators.required],
@@ -55,8 +57,9 @@ export class PaymentRegisterComponent {
           this.close.emit(true)
         },
         error: (error) => {
-          console.error('Erro ao salvar:', error);
-          this.errorMessage = error.error?.message || 'Não foi possível salvar o pagamento.';
+          // console.error('Erro ao salvar:', error);
+          // this.errorMessage = error.error?.message;
+          this.toastService.error('Não foi possível salvar o pagamento.');
         }
       });
   }

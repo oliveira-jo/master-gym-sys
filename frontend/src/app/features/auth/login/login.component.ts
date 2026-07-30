@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../../core/service/auth.service';
 import { TokenService } from '../../../core/service/token.service';
+import { ToastService } from '../../../core/service/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private tokenService = inject(TokenService);
   private router = inject(Router);
+  private toastService = inject(ToastService);
 
   loading = false;
   errorMessage = '';
@@ -52,6 +54,7 @@ export class LoginComponent {
         error: () => {
           this.loading = false;
           this.errorMessage = 'Usuário ou senha inválidos.';
+          this.toastService.error('Usuário ou senha inválidos.');
         },
         complete: () => {
           this.loading = false;

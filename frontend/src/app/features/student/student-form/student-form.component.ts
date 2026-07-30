@@ -8,6 +8,7 @@ import { DateUtils } from '../../../core/utils/DateUtils';
 import { DocumentUtils } from '../../../core/utils/DocumentUtils';
 import { PhoneUtils } from '../../../core/utils/PhoneUtils';
 import { STATES } from '../../../core/constant/states';
+import { ToastService } from '../../../core/service/toast.service';
 
 @Component({
   selector: 'app-student-form',
@@ -22,6 +23,8 @@ export class StudentFormComponent {
 
   private fb = inject(NonNullableFormBuilder);
   private studentService = inject(StudentService);
+  private toastService = inject(ToastService);
+
   states = STATES;
 
   form = this.fb.group({
@@ -85,8 +88,10 @@ export class StudentFormComponent {
             this.close.emit(true)
           },
           error: (error) => {
-            console.error('Erro ao editar:', error);
-            this.errorMessage = error.error?.message || 'Não foi possível editar o aluno.';
+            // console.error('Erro ao editar:', error);
+            // this.errorMessage = error.error?.message;
+            this.toastService.error('Não foi possível editar o aluno.');
+
           }
         });
 
@@ -97,8 +102,9 @@ export class StudentFormComponent {
           this.close.emit(true)
         },
         error: (error) => {
-          console.error('Erro ao salvar:', error);
-          this.errorMessage = error.error?.message || 'Não foi possível salvar o aluno.';
+          // console.error('Erro ao salvar:', error);
+          // this.errorMessage = error.error?.message;
+          this.toastService.error('Não foi possível salvar o aluno.');
         }
       });
     }

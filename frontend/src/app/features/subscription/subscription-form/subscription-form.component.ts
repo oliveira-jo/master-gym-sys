@@ -7,6 +7,7 @@ import { SubscriptionRequest } from '../../../core/model/request/subscription-re
 import { ModalityResponse } from '../../../core/model/response/modality-response.model';
 import { ModalityService } from '../../../core/service/modality.service';
 import { PageableRequest } from '../../../core/model/page/pageable-request.model';
+import { ToastService } from '../../../core/service/toast.service';
 
 @Component({
   selector: 'app-subscription-form',
@@ -21,6 +22,7 @@ export class SubscriptionFormComponent {
 
   private fb = inject(NonNullableFormBuilder);
   private subscriptionService = inject(SubscriptionService);
+  private toastService = inject(ToastService);
 
   form = this.fb.group({
     name: ['', Validators.required],
@@ -79,8 +81,10 @@ export class SubscriptionFormComponent {
             this.close.emit(true)
           },
           error: (error) => {
-            console.error('Erro ao editar:', error);
-            this.errorMessage = error.error?.message || 'Não foi possível editar o plano.';
+            // console.error('Erro ao editar:', error);
+            // this.errorMessage = error.error?.message;
+            this.toastService.error('Não foi possível editar o plano.');
+
           }
         });
 
@@ -91,8 +95,9 @@ export class SubscriptionFormComponent {
             this.close.emit(true)
           },
           error: (error) => {
-            console.error('Erro ao salvar:', error);
-            this.errorMessage = error.error?.message || 'Não foi possível salvar o plano.';
+            // console.error('Erro ao salvar:', error);
+            // this.errorMessage = error.error?.message;
+            this.toastService.error('Não foi possível salvar o plano.');
           }
         });
     }
