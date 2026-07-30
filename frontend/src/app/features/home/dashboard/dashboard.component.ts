@@ -1,26 +1,47 @@
-import { Component, inject } from '@angular/core';
-import { JsonPipe } from '@angular/common';
-import { StudentService } from '../../../core/service/student.service';
-
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReportService } from '../../../core/service/report.service';
+import { Dashboard } from '../../../core/model/response/dashboard.response.model';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [JsonPipe],
+  standalone: true,
+  imports: [
+    CommonModule
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
-  private studentService = inject(StudentService);
+  private readonly reportService = inject(ReportService);
 
-  students: any[] = [];
+  dashboard?: Dashboard;
 
-  ngOnInit() {
-    this.studentService.getAll().subscribe({
-      next: (data) => {
-        this.students = data;
-        // console.log('Students:', data);
-      }
-    });
+  loading = true;
+
+  error?: string;
+
+  ngOnInit(): void {
+    this.loadDashboard();
+  }
+
+  loadDashboard(): void {
+
+    this.loading = true;
+
+    this.reportService
+      .getDashboard().subscribe({
+        next: (response) => {
+          this.dashboard = response;
+          this.loading = false;
+        },
+        error: (error) => {
+          console.error('Erro ao carregar dashboard:', error);
+          this.error = 'Não foi possível carregar o dashboard.';
+          this.loading = false;
+        }
+      });
+
   }
 }

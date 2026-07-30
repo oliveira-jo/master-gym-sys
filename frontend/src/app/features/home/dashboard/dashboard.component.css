@@ -1,0 +1,48 @@
+.dashboard-card {
+  border-radius: 0.75rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 0.5rem 1rem rgba(0, 0, 0, 0.12) !important;
+}
+
+.dashboard-card-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+}
+
+.dashboard-card-value {
+  margin-top: 0.4rem;
+
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.dashboard-icon {
+  font-size: 2.4rem;
+
+  opacity: 0.25;
+}
+
+.dashboard-loading {
+  min-height: 350px;
+}
+
+.chart-placeholder {
+  min-height: 320px;
+}
+
+.card-header {
+  padding:
+    1rem 1.25rem;
+
+  border-bottom:
+    1px solid rgba(0, 0, 0, 0.08);
+}
