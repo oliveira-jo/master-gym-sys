@@ -783,7 +783,22 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{url-lgym-local}}/reports/monthlyBilling"
+						"url": "{{url-lgym-local}}/reports/monthly-billing"
+					},
+					"response": []
+				},
+				{
+					"name": "dashboard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url-lgym-local}}/reports/dashboard"
 					},
 					"response": []
 				},
@@ -798,7 +813,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{url-lgym-local}}/reports/studentsByCity"
+						"url": "{{url-lgym-local}}/reports/students-by-city"
 					},
 					"response": []
 				},
@@ -813,7 +828,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{url-lgym-local}}/reports/outstandingInvoices"
+						"url": "{{url-lgym-local}}/reports/outstanding-invoices"
 					},
 					"response": []
 				}
@@ -926,6 +941,140 @@
 							}
 						},
 						"url": "{{url-lgym-local}}/auth"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Open",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url-lgym-local}}/payments/open"
+					},
+					"response": []
+				},
+				{
+					"name": "All Payments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url-lgym-local}}/payments"
+					},
+					"response": []
+				},
+				{
+					"name": "Payments by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url-lgym-local}}/payments/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Payments by Enrollment id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url-lgym-local}}/payments/enrollment/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Overdue",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url-lgym-local}}/payments/overdue"
+					},
+					"response": []
+				},
+				{
+					"name": "Save",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dueDate\": 5,\n    \"amount\": 120.0,\n    \"paymentAmount\": 110.0,\n    \"paymentDate\": \"2026-08-11T00:00:00\",\n    \"canceledDate\": \"\",\n    \"observation\": \"Pagamento com desconto de 10 reais\",\n    \"enrollmentId\": 1\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url-lgym-local}}/payments"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": "{{url-lgym-local}}/payments/5/cancel"
+					},
+					"response": []
+				},
+				{
+					"name": "Pay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": "{{url-lgym-local}}/payments/1/pay"
 					},
 					"response": []
 				}
