@@ -18,16 +18,16 @@ public class StudentMapper {
     Student student = new Student();
     student.setName(studentRequestDTO.name());
     student.setBirthdate(studentRequestDTO.birthdate());
-    student.setGenre(studentRequestDTO.genre());
+    student.setgender(studentRequestDTO.gender());
     student.setPhone(studentRequestDTO.phone());
     student.setEmail(studentRequestDTO.email());
     student.setCpf(studentRequestDTO.cpf());
-    student.setObservations(studentRequestDTO.observations());
+    student.setObservation(studentRequestDTO.observation());
     student.setAddress(studentRequestDTO.address());
-    student.setNumber(studentRequestDTO.number());
+    student.setAddressNumber(studentRequestDTO.addressNumber());
     student.setComplement(studentRequestDTO.complement());
     student.setCity(studentRequestDTO.city());
-    student.setState(studentRequestDTO.state());
+    student.setStateCode(studentRequestDTO.stateCode());
     student.setZipCode(studentRequestDTO.zipCode());
 
     return student;

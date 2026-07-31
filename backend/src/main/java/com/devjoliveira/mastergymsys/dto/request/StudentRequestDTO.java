@@ -18,7 +18,7 @@ public record StudentRequestDTO(
 
     @Past(message = "Birthdate need to be in past") LocalDate birthdate,
 
-    @NotBlank(message = "Genre is required") @Size(max = 1, message = "The genre must have a maximum of 1 caracter") String genre,
+    @NotBlank(message = "Genre is required") @Size(max = 1, message = "The genre must have a maximum of 1 caracter") String gender,
 
     @NotBlank(message = "Phone is required")
 
@@ -28,17 +28,17 @@ public record StudentRequestDTO(
 
     @NotBlank(message = "CPF is required") @CPF(message = "Invalid CPF number!") String cpf,
 
-    String observations,
+    String observation,
 
     @NotBlank(message = "Name is required") @Size(max = 150, message = "The addres must have a maximum of 150 caracteres") String address,
 
-    @NotBlank(message = "Number is required") @Size(max = 20, message = "The number must have a maximum of 20 caracteres") String number,
+    @NotBlank(message = "Number is required") @Size(max = 20, message = "The number must have a maximum of 20 caracteres") String addressNumber,
 
     @Size(max = 20, message = "The addres must have a maximum of 20 caracteres") String complement,
 
     @NotBlank(message = "City is required") @Size(max = 100, message = "The city must have a maximum of 100 caracteres") String city,
 
-    @NotBlank(message = "State is required") @Size(max = 2, message = "The state must have a maximum of 2 caracteres") String state,
+    @NotBlank(message = "State is required") @Size(max = 2, message = "The state must have a maximum of 2 caracteres") String stateCode,
 
     @NotBlank(message = "Zip code is required") @Size(max = 20, message = "The cep must have a maximum of 20 caracteres") String zipCode) {
 
@@ -46,16 +46,16 @@ public record StudentRequestDTO(
     this(
         student.getName(),
         student.getBirthdate() != null ? student.getBirthdate() : null,
-        student.getGenre(),
+        student.getgender(),
         student.getPhone(),
         student.getEmail(),
         student.getCpf(),
-        student.getObservations(),
+        student.getObservation(),
         student.getAddress(),
-        student.getNumber(),
+        student.getAddressNumber(),
         student.getComplement(),
         student.getCity(),
-        student.getState(),
+        student.getStateCode(),
         student.getZipCode());
   }
 

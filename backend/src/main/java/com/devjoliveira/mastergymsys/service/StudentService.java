@@ -71,16 +71,16 @@ public class StudentService {
 
     fromDB.setName(studentRequestDTO.name());
     fromDB.setBirthdate(studentRequestDTO.birthdate());
-    fromDB.setGenre(studentRequestDTO.genre());
+    fromDB.setgender(studentRequestDTO.gender());
     fromDB.setPhone(studentRequestDTO.phone());
     fromDB.setEmail(studentRequestDTO.email());
     // cpf can't be update
-    fromDB.setObservations(studentRequestDTO.observations());
+    fromDB.setObservation(studentRequestDTO.observation());
     fromDB.setAddress(studentRequestDTO.address());
-    fromDB.setNumber(studentRequestDTO.number());
+    fromDB.setAddressNumber(studentRequestDTO.addressNumber());
     fromDB.setComplement(studentRequestDTO.complement());
     fromDB.setCity(studentRequestDTO.city());
-    fromDB.setState(studentRequestDTO.state());
+    fromDB.setStateCode(studentRequestDTO.stateCode());
     fromDB.setZipCode(studentRequestDTO.zipCode());
 
     return new StudentResponseDTO(

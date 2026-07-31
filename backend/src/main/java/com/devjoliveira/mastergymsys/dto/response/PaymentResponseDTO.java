@@ -11,7 +11,7 @@ public record PaymentResponseDTO(
     BigDecimal amount,
     BigDecimal paymentAmount,
     String paymentDate,
-    String canceledDate,
+    String canceledAt,
     String status,
     String observation,
     Long enrollmentId
@@ -25,7 +25,7 @@ public record PaymentResponseDTO(
         payment.getAmount(),
         payment.getPaymentAmount(),
         payment.getPaymentDate() != null ? payment.getPaymentDate().toString() : "0000-00-00T00:00:00",
-        payment.getCanceledDate() != null ? payment.getCanceledDate().toString() : "0000-00-00T00:00:00",
+        payment.getCanceledAt() != null ? payment.getCanceledAt().toString() : "0000-00-00T00:00:00",
         payment.getStatus().toString(),
         payment.getObservation(),
         payment.getEnrollment().getId());

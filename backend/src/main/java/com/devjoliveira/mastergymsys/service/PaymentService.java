@@ -46,7 +46,7 @@ public class PaymentService {
     newPayment.setAmount(request.amount());
     newPayment.setPaymentAmount(request.paymentAmount());
     newPayment.setPaymentDate(request.paymentDate());
-    newPayment.setCanceledDate(request.canceledDate());
+    newPayment.setCanceledAt(request.canceledAt());
     newPayment.setObservation(request.observation());
 
     // verify if exists enrollment id

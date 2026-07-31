@@ -22,7 +22,9 @@ public class Student {
 
   private String name;
   private LocalDate birthdate;
-  private String genre;
+
+  // gener -> gender
+  private String gender;
   private String phone;
 
   @Column(unique = true)
@@ -31,14 +33,18 @@ public class Student {
   @Column(unique = true)
   private String cpf;
 
-  private String observations;
+  // observations -> observation
+  private String observation;
   private String address;
-  private String number;
+
+  // number -> addressNumber
+  private String addressNumber;
   private String complement;
   private String city;
 
-  @Column(name = "state", length = 2)
-  private String state;
+  // state -> state_code
+  @Column(name = "state_code", length = 2)
+  private String stateCode;
 
   @Column(name = "zip_code")
   private String zipCode;
@@ -83,12 +89,12 @@ public class Student {
     this.birthdate = birthdate;
   }
 
-  public String getGenre() {
-    return genre;
+  public String getgender() {
+    return gender;
   }
 
-  public void setGenre(String genre) {
-    this.genre = genre;
+  public void setgender(String gender) {
+    this.gender = gender;
   }
 
   public String getPhone() {
@@ -115,12 +121,12 @@ public class Student {
     this.cpf = cpf;
   }
 
-  public String getObservations() {
-    return observations;
+  public String getObservation() {
+    return observation;
   }
 
-  public void setObservations(String observations) {
-    this.observations = observations;
+  public void setObservation(String observation) {
+    this.observation = observation;
   }
 
   public String getAddress() {
@@ -131,12 +137,12 @@ public class Student {
     this.address = address;
   }
 
-  public String getNumber() {
-    return number;
+  public String getAddressNumber() {
+    return addressNumber;
   }
 
-  public void setNumber(String number) {
-    this.number = number;
+  public void setAddressNumber(String addressNumber) {
+    this.addressNumber = addressNumber;
   }
 
   public String getComplement() {
@@ -155,12 +161,12 @@ public class Student {
     this.city = city;
   }
 
-  public String getState() {
-    return state;
+  public String getStateCode() {
+    return stateCode;
   }
 
-  public void setState(String state) {
-    this.state = state;
+  public void setStateCode(String state) {
+    this.stateCode = state;
   }
 
   public String getZipCode() {

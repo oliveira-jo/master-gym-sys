@@ -23,10 +23,10 @@ public class UserMapper {
     user.setPassword(passwordEncode);
     user.setBirthdate(userRequestDTO.birthdate());
     user.setAddress(userRequestDTO.address());
-    user.setNumber(userRequestDTO.number());
+    user.setAddressNumber(userRequestDTO.addressNumber());
     user.setComplement(userRequestDTO.complement());
     user.setCity(userRequestDTO.city());
-    user.setState(userRequestDTO.state());
+    user.setStateCode(userRequestDTO.stateCode());
     user.setZipCode(userRequestDTO.zipCode());
 
     return user;

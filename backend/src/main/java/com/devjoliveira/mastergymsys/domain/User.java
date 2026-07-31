@@ -38,19 +38,22 @@ public class User implements UserDetails {
   @Column(unique = true)
   private String email;
 
+  @Column(name = "password_hash")
   private String password;
 
   private LocalDate birthdate;
 
   private String address;
 
-  private String number;
+  @Column(name = "address_number")
+  private String addressNumber;
 
   private String complement;
 
   private String city;
 
-  private String state;
+  @Column(name = "state_code")
+  private String stateCode;
 
   @Column(name = "zip_code")
   private String zipCode;
@@ -62,7 +65,7 @@ public class User implements UserDetails {
   private LocalDateTime updatedAt;
 
   @ManyToMany
-  @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+  @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
 
   public User() {
@@ -142,12 +145,12 @@ public class User implements UserDetails {
     this.address = address;
   }
 
-  public String getNumber() {
-    return number;
+  public String getAddressNumber() {
+    return addressNumber;
   }
 
-  public void setNumber(String number) {
-    this.number = number;
+  public void setAddressNumber(String number) {
+    this.addressNumber = number;
   }
 
   public String getComplement() {
@@ -166,12 +169,12 @@ public class User implements UserDetails {
     this.city = city;
   }
 
-  public String getState() {
-    return state;
+  public String getStateCode() {
+    return stateCode;
   }
 
-  public void setState(String state) {
-    this.state = state;
+  public void setStateCode(String state) {
+    this.stateCode = state;
   }
 
   public String getZipCode() {

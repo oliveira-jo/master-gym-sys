@@ -119,10 +119,10 @@ public class UserService implements UserDetailsService {
 
     fromDB.setBirthdate(userRequestDTO.birthdate());
     fromDB.setAddress(userRequestDTO.address());
-    fromDB.setNumber(userRequestDTO.number());
+    fromDB.setAddressNumber(userRequestDTO.addressNumber());
     fromDB.setComplement(userRequestDTO.complement());
     fromDB.setCity(userRequestDTO.city());
-    fromDB.setState(userRequestDTO.state());
+    fromDB.setStateCode(userRequestDTO.stateCode());
     fromDB.setZipCode(userRequestDTO.zipCode());
 
     return new UserResponseDTO(

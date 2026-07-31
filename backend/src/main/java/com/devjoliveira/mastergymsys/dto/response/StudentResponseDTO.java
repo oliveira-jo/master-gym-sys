@@ -6,16 +6,16 @@ public record StudentResponseDTO(
     Long id,
     String name,
     String birthdate,
-    String genre,
+    String gender,
     String phone,
     String email,
     String cpf,
-    String observations,
+    String observation,
     String address,
-    String number,
+    String addressNumber,
     String complement,
     String city,
-    String state,
+    String stateCode,
     String zipCode) {
 
   public StudentResponseDTO(Student student) {
@@ -23,16 +23,16 @@ public record StudentResponseDTO(
         student.getId(),
         student.getName(),
         student.getBirthdate() != null ? student.getBirthdate().toString() : null,
-        student.getGenre(),
+        student.getgender(),
         student.getPhone(),
         student.getEmail(),
         student.getCpf(),
-        student.getObservations(),
+        student.getObservation(),
         student.getAddress(),
-        student.getNumber(),
+        student.getAddressNumber(),
         student.getComplement(),
         student.getCity(),
-        student.getState(),
+        student.getStateCode(),
         student.getZipCode());
   }
 

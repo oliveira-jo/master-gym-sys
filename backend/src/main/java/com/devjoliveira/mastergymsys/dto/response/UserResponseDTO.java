@@ -10,10 +10,10 @@ public record UserResponseDTO(
     String email,
     String birthdate,
     String address,
-    String number,
+    String addressNumber,
     String complement,
     String city,
-    String state,
+    String stateCode,
     String zipCode) {
 
   public UserResponseDTO(User user) {
@@ -25,10 +25,10 @@ public record UserResponseDTO(
         user.getEmail(),
         user.getBirthdate() != null ? user.getBirthdate().toString() : null,
         user.getAddress(),
-        user.getNumber(),
+        user.getAddressNumber(),
         user.getComplement(),
         user.getCity(),
-        user.getState(),
+        user.getStateCode(),
         user.getZipCode());
   }
 

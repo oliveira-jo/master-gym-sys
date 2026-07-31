@@ -59,7 +59,7 @@ public interface ReportRepository extends Repository<Payment, Long> {
           SELECT
             m.name AS modalityName,
             COUNT(DISTINCT e.student_id) AS quantity
-          FROM enrollment_modalities em
+          FROM enrollments_modalities em
           JOIN enrollments e
             ON e.id = em.enrollment_id
           JOIN modalities m

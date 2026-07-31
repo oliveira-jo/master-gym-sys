@@ -39,8 +39,9 @@ public class Payment {
   @Column(name = "payment_date")
   private LocalDateTime paymentDate;
 
-  @Column(name = "canceled_date")
-  private LocalDate canceledDate;
+  // canceled_date -> cancelled_at
+  @Column(name = "cancelled_at")
+  private LocalDate canceledAt;
 
   @Enumerated(EnumType.STRING)
   @Column(length = 20)
@@ -85,12 +86,12 @@ public class Payment {
     this.paymentDate = paymentDate;
   }
 
-  public LocalDate getCanceledDate() {
-    return canceledDate;
+  public LocalDate getCanceledAt() {
+    return canceledAt;
   }
 
-  public void setCanceledDate(LocalDate canceledDate) {
-    this.canceledDate = canceledDate;
+  public void setCanceledAt(LocalDate canceledDate) {
+    this.canceledAt = canceledDate;
   }
 
   public StatusPayment getStatus() {

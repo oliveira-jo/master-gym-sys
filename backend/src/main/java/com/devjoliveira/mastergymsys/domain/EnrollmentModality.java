@@ -32,7 +32,7 @@ public class EnrollmentModality {
   private Enrollment enrollment;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "modalitie_id")
+  @JoinColumn(name = "modality_id")
   private Modality modality;
 
   @ManyToOne(fetch = FetchType.LAZY)

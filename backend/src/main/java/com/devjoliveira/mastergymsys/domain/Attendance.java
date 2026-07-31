@@ -24,8 +24,8 @@ public class Attendance {
   @Column(name = "attendance_date")
   private LocalDateTime attendanceDate;
 
-  @Column(name = "end_date")
-  private LocalDateTime endDate;
+  @Column(name = "checkout_date")
+  private LocalDateTime checkout_date;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "enrollment_id")
@@ -54,12 +54,12 @@ public class Attendance {
     this.attendanceDate = attendanceDate;
   }
 
-  public LocalDateTime getEndDate() {
-    return endDate;
+  public LocalDateTime getCheckout_date() {
+    return checkout_date;
   }
 
-  public void setEndDate(LocalDateTime endDate) {
-    this.endDate = endDate;
+  public void setCheckout_date(LocalDateTime endDate) {
+    this.checkout_date = endDate;
   }
 
   public Enrollment getEnrollment() {
