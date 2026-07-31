@@ -51,18 +51,16 @@
         <table class="table table-hover mb-0">
           <thead>
             <tr>
-              <th>Mês</th>
-              <th>Ano</th>
+              <th>Data</th>
               <th class="text-end"> Faturamento </th>
             </tr>
           </thead>
           <tbody>
             @for(report of monthlyBilling; track $index) {
             <tr>
-              <td> {{ report.month }} </td>
-              <td> {{ report.year }} </td>
+              <td> {{ report.month | date:'MM/yyyy' }} </td>
               <td class="text-end">
-                {{ report.totalBilling | currency: 'BRL': 'symbol': '1.2-2' }}
+                {{ report.total | currency: 'BRL': 'symbol': '1.2-2' }}
               </td>
             </tr>
             }
