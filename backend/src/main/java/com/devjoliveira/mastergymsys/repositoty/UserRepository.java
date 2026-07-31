@@ -16,10 +16,10 @@ import com.devjoliveira.mastergymsys.projection.UserDetailsProjection;
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
 	@Query(nativeQuery = true, value = """
-				SELECT users.email AS username, users.password, roles.id AS roleId, roles.authority
+				SELECT users.email AS username, users.password_hash AS password, roles.id AS roleId, roles.authority
 				FROM users
-				INNER JOIN user_role ON users.id = user_role.user_id
-				INNER JOIN roles ON roles.id = user_role.role_id
+				INNER JOIN user_roles ON users.id = user_roles.user_id
+				INNER JOIN roles ON roles.id = user_roles.role_id
 				WHERE users.email = :email
 			""")
 	List<UserDetailsProjection> searchUserAndRolesByEmail(String email);

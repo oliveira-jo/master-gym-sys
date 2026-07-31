@@ -45,7 +45,7 @@ public class UserService implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     List<UserDetailsProjection> result = userRepository.searchUserAndRolesByEmail(username);
     if (result.isEmpty()) {
-      throw new UsernameNotFoundException("Email not found");
+      throw new UsernameNotFoundException("*** Email not found ***");
     }
 
     User user = new User();
@@ -54,9 +54,7 @@ public class UserService implements UserDetailsService {
 
     result.forEach(
         role -> user.getRoles().add(new Role(role.getRoleId(), role.getAuthority())));
-
     return user;
-
   }
 
   @Transactional(readOnly = true)
