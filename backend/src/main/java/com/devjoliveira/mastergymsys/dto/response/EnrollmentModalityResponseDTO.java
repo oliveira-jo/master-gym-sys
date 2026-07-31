@@ -17,10 +17,10 @@ public record EnrollmentModalityResponseDTO(
                                                 enrollmentModality.getModality() != null
                                                                 ? enrollmentModality.getModality()
                                                                 : null),
-                                new GraduationResponseDTO(
-                                                enrollmentModality.getGraduation() != null
-                                                                ? enrollmentModality.getGraduation()
-                                                                : null),
+                                enrollmentModality.getGraduation() != null
+                                                ? new GraduationResponseDTO(
+                                                                enrollmentModality.getGraduation())
+                                                : null,
                                 new SubscriptionResponseDTO(
                                                 enrollmentModality.getSubscription() != null
                                                                 ? enrollmentModality.getSubscription()
