@@ -135,7 +135,7 @@
             <tr>
               <td> {{ invoice.studentName }} </td>
               <td> {{invoice.dueDate | date:'dd/MM/yyyy'}} </td>
-              <td class="text-end"> {{invoice.amount | currency:'BRL'}} </td>
+              <td class="text-end"> {{ invoice.amount | currency:'BRL' }} </td>
             </tr>
             }
             @if (outstandingInvoices.length === 0) {
