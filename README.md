@@ -116,29 +116,29 @@ Master Gym Sys é um sistema completo para gerenciamento de academias desenvolvi
  
  Visão geral dos principais indicadores da academia, incluindo alunos ativos, matrículas, pagamentos, faturamento e dados apresentados por meio de gráficos.
 
- ![dashboard](/doc/imgs/1-dashboad.jpg)
+ ![dashboard-1](/doc/imgs/1-dashboad.png)
  
- ![dashboard](/doc/imgs/2-dashboad.jpg)
+ ![dashboard-2](/doc/imgs/2-dashboad.png)
 
  ### Gestão de Estudantes
 
  Tela para gerenciamento dos estudantes do sistema, com seus vinculos com matriculas e planos.
 
- ![student](/doc/imgs/3-student.jpg)
+ ![student-1](/doc/imgs/3-student.png)
  
  ### Gestão de Matrículas
  
  Tela para cadastro, consulta e gerenciamento das matrículas dos alunos, incluindo planos e modalidades vinculadas.
 
- ![enrollment](/doc/imgs/4-enrollment.png)
+ ![enrollment-1](/doc/imgs/4-enrollment.png)
  
- ![enrollment](/doc/imgs/5-enrollment.png)
+ ![enrollment-2](/doc/imgs/5-enrollment.png)
 
  ### Relatórios
 
  Área destinada à consulta e análise de informações financeiras e administrativas do sistema.
 
- ![report](/doc/imgs/6-report.png)
+ ![report-1](/doc/imgs/6.report.png)
 
 ---
 
