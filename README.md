@@ -134,7 +134,7 @@ Master Gym Sys é um sistema completo para gerenciamento de academias desenvolvi
 
  Área destinada à consulta e análise de informações financeiras e administrativas do sistema.
 
- ![report](/doc/imgs/3-enrollment.png)
+ ![report](/doc/imgs/4-report.png)
 
 ---
 
