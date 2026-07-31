@@ -6,8 +6,8 @@ export interface UserResponse {
   email: string;
   birthdate: string;
   address: string;
-  number: string;
-  state: string;
+  addressNumber: string;
+  stateCode: string;
   complement: string;
   city: string;
   zipCode: string;

@@ -2,16 +2,16 @@ export class StudentRequest {
 
   name = '';
   birthdate = '';
-  genre = '';// 1 char
+  gender = '';
   phone = '';
   email = '';
   cpf = '';
   address = '';
-  number = '';
+  addressNumber = '';
   complement = '';
   city = '';
-  state = '';
+  stateCode = '';
   zipCode = '';
-  observations = '';
+  observation = '';
 
 }

@@ -46,8 +46,8 @@ export class UserFormComponent {
     birthdate: ['', Validators.required],
     // Adress
     address: ['', Validators.required],
-    number: ['', Validators.required],
-    state: ['', Validators.required],
+    addressNumber: ['', Validators.required],
+    stateCode: ['', Validators.required],
     complement: [''],
     city: ['', Validators.required],
     zipCode: ['', Validators.required],
@@ -135,10 +135,10 @@ export class UserFormComponent {
       birthdate: this.user.birthdate,
       //adress
       address: this.user.address,
-      number: this.user.number,
+      addressNumber: this.user.addressNumber,
       complement: this.user.complement,
       city: this.user.city,
-      state: this.user.state,
+      stateCode: this.user.stateCode,
       zipCode: this.user.zipCode,
 
     });

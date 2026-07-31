@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ReportService } from '../../../core/service/report.service';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartData, ChartOptions, ChartConfiguration } from 'chart.js';
-import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -13,7 +12,7 @@ import { RouterLink } from '@angular/router';
   imports: [
     CommonModule,
     BaseChartDirective,
-    RouterLink
+    // RouterLink
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'

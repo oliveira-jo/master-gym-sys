@@ -6,8 +6,8 @@ export class UserRequest {
   password = '';
   birthdate = '';
   address = '';
-  number = '';
-  state = '';
+  addressNumber = '';
+  stateCode = '';
   complement = '';
   city = '';
   zipCode = '';

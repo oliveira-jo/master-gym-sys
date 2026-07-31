@@ -31,19 +31,19 @@ export class StudentFormComponent {
     // Princiapl Data
     name: ['', Validators.required],
     birthdate: ['', Validators.required],
-    genre: ['', Validators.required],
+    gender: ['', Validators.required],
     cpf: ['', Validators.required],
     phone: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     // Adress
     zipCode: ['', Validators.required],
-    state: ['', Validators.required],
+    stateCode: ['', Validators.required],
     city: ['', Validators.required],
     address: ['', Validators.required],
-    number: ['', Validators.required],
+    addressNumber: ['', Validators.required],
     complement: [''],
     // Others
-    observations: ['']
+    observation: ['']
   });
 
   errorMessage = '';
@@ -120,17 +120,17 @@ export class StudentFormComponent {
     this.form.patchValue({
       name: this.student.name,
       birthdate: this.student.birthdate,
-      genre: this.student.genre,
+      gender: this.student.gender,
       cpf: this.student.cpf,
       phone: this.student.phone,
       email: this.student.email,
       zipCode: this.student.zipCode,
-      state: this.student.state,
+      stateCode: this.student.stateCode,
       city: this.student.city,
       address: this.student.address,
-      number: this.student.number,
+      addressNumber: this.student.addressNumber,
       complement: this.student.complement,
-      observations: this.student.observations
+      observation: this.student.observation
     });
   }
 

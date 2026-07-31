@@ -7,7 +7,7 @@ export interface PaymentResponse {
   amount: number,
   paymentAmount: number,
   paymentDate: '',
-  canceledDate: '',
+  canceledAt: '',
   status: '',
   observation: '',
   enrollmentId: number

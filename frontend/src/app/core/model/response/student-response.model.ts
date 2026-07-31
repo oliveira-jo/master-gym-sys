@@ -2,15 +2,15 @@ export interface StudentResponse {
   id: number;
   name: string;
   birthdate: string;
-  genre: string;
+  gender: string;
   phone: string;
   email: string;
   cpf: string;
-  observations: string;
+  observation: string;
   address: string;
-  number: string;
+  addressNumber: string;
   complement: string;
   city: string;
-  state: string;
+  stateCode: string;
   zipCode: string;
 }
