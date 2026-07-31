@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AuthorizationGrantAuthenticationToken;
 
+@SuppressWarnings("null")
 public class CustomPasswordAuthenticationToken extends OAuth2AuthorizationGrantAuthenticationToken {
 
   private static final long serialVersionUID = 1L;
@@ -19,7 +20,7 @@ public class CustomPasswordAuthenticationToken extends OAuth2AuthorizationGrantA
   private final Set<String> scopes;
 
   public CustomPasswordAuthenticationToken(Authentication clientPrincipal,
-      @Nullable Set<String> scopes, @Nullable Map<String, Object> additionalParameters) {
+      Set<String> scopes, @Nullable Map<String, Object> additionalParameters) {
 
     super(new AuthorizationGrantType("password"), clientPrincipal, additionalParameters);
 
