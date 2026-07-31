@@ -1,5 +1,6 @@
 package com.devjoliveira.mastergymsys.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -10,9 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.devjoliveira.mastergymsys.doc.ReportControllerDoc;
 import com.devjoliveira.mastergymsys.dto.response.DashboardResponseDTO;
+import com.devjoliveira.mastergymsys.projection.EnrollmentsByStatusProjection;
+import com.devjoliveira.mastergymsys.projection.ExpiringEnrollmentProjection;
 import com.devjoliveira.mastergymsys.projection.MonthlyBillingProjection;
+import com.devjoliveira.mastergymsys.projection.NewStudentsByMonthProjection;
 import com.devjoliveira.mastergymsys.projection.OutstandingInvoicesProjection;
+import com.devjoliveira.mastergymsys.projection.PaymentsByStatusProjection;
 import com.devjoliveira.mastergymsys.projection.StudentsByCityProjection;
+import com.devjoliveira.mastergymsys.projection.StudentsByModalityProjection;
 import com.devjoliveira.mastergymsys.repositoty.ReportRepository;
 import com.devjoliveira.mastergymsys.service.ReportService;
 
@@ -47,6 +53,33 @@ public class ReportController implements ReportControllerDoc {
   @GetMapping("/outstanding-invoices")
   public ResponseEntity<List<OutstandingInvoicesProjection>> outstandingInvoices() {
     return ResponseEntity.ok().body(reportRepository.outstandingInvoices());
+  }
+
+  @GetMapping("/students-by-modality")
+  public ResponseEntity<List<StudentsByModalityProjection>> studentsByModality() {
+    return ResponseEntity.ok().body(reportRepository.studentsByModality());
+  }
+
+  @GetMapping("/enrollments-by-status")
+  public ResponseEntity<List<EnrollmentsByStatusProjection>> enrollmentsByStatus() {
+    return ResponseEntity.ok().body(reportRepository.enrollmentsByStatus());
+  }
+
+  @GetMapping("/payments-by-status")
+  public ResponseEntity<List<PaymentsByStatusProjection>> paymentsByStatus() {
+    return ResponseEntity.ok().body(reportRepository.paymentsByStatus());
+  }
+
+  @GetMapping("/new-students-by-month")
+  public ResponseEntity<List<NewStudentsByMonthProjection>> newStudentsByMonth() {
+    return ResponseEntity.ok().body(reportRepository.newStudentsByMonth());
+  }
+
+  @GetMapping("/expiring-enrollments")
+  public ResponseEntity<List<ExpiringEnrollmentProjection>> expiringEnrollments() {
+    LocalDate today = LocalDate.now();
+    LocalDate limit = today.plusDays(30);
+    return ResponseEntity.ok().body(reportRepository.expiringEnrollments(today, limit));
   }
 
 }
