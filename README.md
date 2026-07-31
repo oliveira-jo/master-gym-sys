@@ -54,7 +54,7 @@ Master Gym Sys é um sistema completo para gerenciamento de academias desenvolvi
 
 - Java 21
 - Spring Boot
-<!-- - Spring Security JWT -->
+- Spring Security JWT
 - Spring Data JPA
 - Hibernate
 - PostgreSQL
@@ -80,12 +80,14 @@ Master Gym Sys é um sistema completo para gerenciamento de academias desenvolvi
 - [x] Matrículas
 - [x] Autenticação JWT
 - [x] Gestão de usuários (ADMIN, RECEPCIONISTA)
-- [ ] Financeiro
-- [ ] Dashboard
-- [ ] Relatórios
+- [x] Financeiro
+- [x] Dashboard
+- [x] Relatórios
+<!-- 
 - [ ] Notificações
 - [ ] Auditoria e Logs
-- [ ] Docker Compose
+- [ ] Docker Compose 
+-->
 
 ---
 
@@ -97,12 +99,42 @@ Master Gym Sys é um sistema completo para gerenciamento de academias desenvolvi
 - Gestão de planos
 - Gestão de modalidades
 - Gestão de graduações
-<!-- - Matrículas -->
-<!-- - Controle financeiro -->
-<!-- - Pagamento de mensalidades -->
-<!-- - Relatórios -->
+- Matrículas
+- Controle financeiro
+- Pagamento de mensalidades
+- Relatórios
 - Documentação da API
 - Tratamento global de exceções
+
+---
+
+ ## Visão Geral do Sistema
+
+ A seguir, algumas das principais telas do Master Gym Sys, incluindo o dashboard, a gestão de usuários, as matrículas e os relatórios.
+
+ ### Dashboard
+ 
+ Visão geral dos principais indicadores da academia, incluindo alunos ativos, matrículas, pagamentos, faturamento e dados apresentados por meio de gráficos.
+
+ ![dashboard](/doc/imgs/1-dashboad.jpg)
+
+ ### Gestão de Estudantes
+
+ Tela para gerenciamento dos estudantes do sistema, com seus vinculos com matriculas e planos.
+
+ ![student](/doc/imgs/2-student.jpg)
+ 
+ ### Gestão de Matrículas
+ 
+ Tela para cadastro, consulta e gerenciamento das matrículas dos alunos, incluindo planos e modalidades vinculadas.
+
+ ![enrollment](/doc/imgs/3-enrollment.png)
+
+ ### Relatórios
+
+ Área destinada à consulta e análise de informações financeiras e administrativas do sistema.
+
+ ![report](/doc/imgs/3-enrollment.png)
 
 ---
 
@@ -110,7 +142,7 @@ Master Gym Sys é um sistema completo para gerenciamento de academias desenvolvi
 
 O projeto segue uma arquitetura em camadas:
 
-![diagram](../mastergymsys/frontend/public/leyers-diagran.jpg)
+![diagram](/doc/imgs/leyers-diagran.jpg)
 
 ---
 
