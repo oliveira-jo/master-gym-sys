@@ -18,8 +18,7 @@ export interface OutstandingInvoices {
 
 export interface MonthlyBilling {
   month: string;
-  year: number;
-  totalBilling: number;
+  total: number;
 }
 
 export interface StudentsByCity {

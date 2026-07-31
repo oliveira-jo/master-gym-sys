@@ -151,7 +151,7 @@ export class DashboardComponent implements OnInit {
       datasets: [
         {
           data:
-            history.map(item => item.totalBilling),
+            history.map(item => item.total),
           label: 'Faturamento mensal',
           fill: true,
           tension: 0.4
