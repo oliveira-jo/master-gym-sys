@@ -201,5 +201,187 @@
       </div>
     </div>
   </div>
+
+  <!-- GRAPHICS -->
+  <!-- ----------------------------------------------------------------------------------------------------------------- -->
+  <div class="row">
+    <!-- Alunos por modalidade -->
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h2 class="h5 mb-0">
+            <i class="fas fa-dumbbell me-2"> </i>
+            Alunos por modalidade
+          </h2>
+        </div>
+
+        <div class="card-body">
+          @if (studentsByModality.length > 0) {
+
+          <div class="chart-container">
+            <canvas baseChart [data]="studentsByModalityChartData" [options]="doughnutChartOptions"
+              [type]="'doughnut'"></canvas>
+          </div>
+
+          } @else {
+
+          <div class="empty-chart">
+            Nenhuma modalidade encontrada.
+          </div>
+
+          }
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Matrículas por status -->
+
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h2 class="h5 mb-0">
+            <i class="fas fa-id-card  me-2"> </i>
+            Matrículas por status
+          </h2>
+        </div>
+        <div class="card-body">
+
+          @if (enrollmentsByStatus.length > 0) {
+
+          <div class="chart-container">
+            <canvas baseChart [data]="enrollmentsStatusChartData" [options]="doughnutChartOptions"
+              [type]="'doughnut'"></canvas>
+          </div>
+
+          } @else {
+
+          <div class="empty-chart">
+            Nenhuma matrícula encontrada.
+          </div>
+
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Pagamentos por status -->
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h2 class="h5 mb-0">
+            <i class="fas fa-money-bill-wave me-2"></i>
+            Pagamentos por status
+          </h2>
+        </div>
+        <div class="card-body">
+
+          @if (paymentsByStatus.length > 0) {
+
+          <div class="chart-container">
+            <canvas baseChart [data]="paymentsStatusChartData" [options]="barChartOptions" [type]="'bar'"></canvas>
+          </div>
+
+          } @else {
+
+          <div class="empty-chart">
+            Nenhum pagamento encontrado.
+          </div>
+
+          }
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Novos alunos por mês -->
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h2 class="h5 mb-0">
+            <i class="fas  fa-user-plus me-2"> </i>
+            Novos alunos por mês
+          </h2>
+        </div>
+        <div class="card-body">
+
+          @if ( newStudentsByMonth.length > 0 ) {
+
+          <div class="chart-container">
+            <canvas baseChart [data]="newStudentsChartData" [options]="barChartOptions" [type]="'bar'"></canvas>
+          </div>
+
+          } @else {
+
+          <div class="empty-chart">
+            Nenhum aluno encontrado.
+          </div>
+
+          }
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <!-- -------------------------------------------------------------------------------------------------------------------- -->
+  <div class="row">
+    <div class="col-12 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h2 class="h5 mb-0">
+            <i class="fas fa-calendar-exclamation  me-2"></i>
+            Matrículas próximas do encerramento
+          </h2>
+          <span class="text-muted small">
+            Próximos 30 dias
+          </span>
+        </div>
+        <div class="card-body p-0">
+
+          @if (expiringEnrollments.length > 0) {
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Aluno</th>
+                  <th>Data de encerramento</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                @for (enrollment of expiringEnrollments; track enrollment.enrollmentId) {
+                <tr>
+                  <td>
+                    <strong>
+                      {{enrollment.studentName}}
+                    </strong>
+                  </td>
+                  <td>
+                    {{ enrollment.closingDate | date:'dd/MM/yyyy' }}
+                  </td>
+                </tr>
+                }
+
+              </tbody>
+            </table>
+          </div>
+
+          } @else {
+
+          <div class="text-center text-muted py-5">
+            <i class="fas fa-check-circle fa-3x mb-3"> </i>
+            <p class="mb-0"> Nenhuma matrícula próximado encerramento. </p>
+          </div>
+
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
   }
 </div>

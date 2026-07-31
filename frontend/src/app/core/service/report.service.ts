@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MonthlyBilling } from '../model/report/monthly-billing.model';
-import { StudentsByCity } from '../model/report/students-by-city.model';
-import { OutstandingInvoices } from '../model/report/outstanding-invoices.model';
 import { environment } from '../../../environments/environment';
-import { Dashboard } from '../model/response/dashboard.response.model';
+import { Dashboard, EnrollmentsByStatus, ExpiringEnrollment, MonthlyBilling, NewStudentsByMonth, OutstandingInvoices, PaymentsByStatus, StudentsByCity, StudentsByModality } from '../model/response/dashboard.response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +37,26 @@ export class ReportService {
     return this.http.get<Dashboard>(
       `${this.apiUrl}/dashboard`
     );
+  }
+
+  getStudentsByModality(): Observable<StudentsByModality[]> {
+    return this.http.get<StudentsByModality[]>(`${this.apiUrl}/students-by-modality`);
+  }
+
+  getEnrollmentsByStatus(): Observable<EnrollmentsByStatus[]> {
+    return this.http.get<EnrollmentsByStatus[]>(`${this.apiUrl}/enrollments-by-status`);
+  }
+
+  getPaymentsByStatus(): Observable<PaymentsByStatus[]> {
+    return this.http.get<PaymentsByStatus[]>(`${this.apiUrl}/payments-by-status`);
+  }
+
+  getNewStudentsByMonth(): Observable<NewStudentsByMonth[]> {
+    return this.http.get<NewStudentsByMonth[]>(`${this.apiUrl}/new-students-by-month`);
+  }
+
+  getExpiringEnrollments(): Observable<ExpiringEnrollment[]> {
+    return this.http.get<ExpiringEnrollment[]>(`${this.apiUrl}/expiring-enrollments`);
   }
 
 }

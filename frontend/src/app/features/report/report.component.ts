@@ -1,8 +1,6 @@
+import { MonthlyBilling, OutstandingInvoices, StudentsByCity } from "../../core/model/response/dashboard.response.model";
 import { CommonModule, CurrencyPipe, DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { MonthlyBilling } from "../../core/model/report/monthly-billing.model";
-import { StudentsByCity } from "../../core/model/report/students-by-city.model";
-import { OutstandingInvoices } from "../../core/model/report/outstanding-invoices.model";
 import { ReportService } from "../../core/service/report.service";
 import { ToastService } from "../../core/service/toast.service";
 import { forkJoin } from "rxjs";

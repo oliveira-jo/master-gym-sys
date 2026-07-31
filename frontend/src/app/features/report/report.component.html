@@ -98,7 +98,7 @@
             @for (report of studentsByCity; track $index) {
             <tr>
               <td> {{ report.city }} </td>
-              <td class="text-end"> {{ report.totalStudents }} </td>
+              <td class="text-end"> {{ report.quantity }} </td>
             </tr>
             }
             @if (studentsByCity.length === 0) {
@@ -131,7 +131,8 @@
           </thead>
 
           <tbody>
-            @for (invoice of outstandingInvoices; track invoice.id) {
+            <!-- ---------------------------------------------------------------------------------------------------------  -->
+            @for (invoice of outstandingInvoices; track $index) {
             <tr>
               <td> {{ invoice.studentName }} </td>
               <td> {{invoice.dueDate | date:'dd/MM/yyyy'}} </td>
